@@ -3,11 +3,11 @@
 ___
 #### Cosméticos
 
-- [🟢] - Sistema de sugestões
+- [] - Sistema de sugestões
 - [ ] - Contador de membros
 - [ ] - Mensagem de boas vindas
-- [ ] - Cargos de call
-- [ ] - Cargos de call de vento
+- [X] - Cargos de call
+- [X] - Cargos de call de vento
 - [ ] - Topfeed
 - [ ] - Cargos de categorias
 - [ ] - Sistema de cargos e mensagem de aniversariantes
