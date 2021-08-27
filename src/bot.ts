@@ -26,7 +26,7 @@ export class Bot extends Client {
       dir: path.join(__dirname, './events'),
     });
     
-    logs(this, { debug: true });
+    logs(this);
   }
 };
 

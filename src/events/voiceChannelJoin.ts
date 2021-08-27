@@ -9,9 +9,15 @@ export const event: EventOptions = {
   run: (bot: Bot, member: GuildMember, channel: VoiceChannel) => {
 
     if(bot.config.voice.vcRoleChannels.includes(channel.id)) {
-      member.roles.add(bot.config.voice.vcRole)
+      member.roles.add(bot.config.voice.vcRoles)
       .then(() => print(`Cargos de canal de voz adicionado a ${member.user.tag}`))
-      .catch(() => print(`Houve um erro ao adicionar cargos de canal de voz em ${member.user.tag}`));
+      .catch(() => print(`Houve um erro ao adicionar cargos de canal de voz de ${member.user.tag}`));
+    }
+
+    if(bot.config.voice.eventChannels.includes(channel.id)) {
+      member.roles.add(bot.config.voice.eventRoles)
+      .then(() => print(`Cargos de evento foram adicionados à ${member.user.tag}`))
+      .catch(() => print(`Houve um erro ao adicionar cargos de evento de ${member.user.tag}`));
     }
 
   }
