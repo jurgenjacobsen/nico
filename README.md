@@ -15,7 +15,7 @@ ___
 
 - [ ] - Sistema de sugestões
 - [ ] - Contador de membros
-- [ ] - Mensagem de boas vindas
+- [X] - Mensagem de boas vindas
 - [X] - Cargos de call
 - [X] - Cargos de call de vento
 - [ ] - Topfeed
@@ -32,7 +32,7 @@ ___
 
 #### Níveis
 
-- [ ] - Dar XP por mensagens 
+- [X] - Dar XP por mensagens 
 - [ ] - Cargos por nível de texto e voz
 - [ ] - Opções de cargos e canais que darão XP em dobro
 

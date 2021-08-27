@@ -25,6 +25,7 @@
   "dependencies": {
     "@discordjs/voice": "^0.6.0",
     "axios": "^0.21.1",
+    "canvas": "^2.8.0",
     "colors": "^1.4.0",
     "discord-logs": "^2.0.1",
     "discord.js": "^13.1.0",

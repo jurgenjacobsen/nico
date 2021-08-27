@@ -1,7 +1,7 @@
 import { GuildMember, VoiceChannel } from "discord.js";
 import { EventOptions } from "dsc.events";
 import { Bot } from "../bot";
-import { print } from "../utils";
+import { print } from "../utils/utils";
 
 export const event: EventOptions = {
   name: 'voiceChannelJoin',

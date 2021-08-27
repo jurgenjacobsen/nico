@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import { EventOptions } from "dsc.events";
 import { Util } from "dsc.levels";
 import { Bot } from "../bot";
-import { AntiInvite, suggestion } from "../utils";
+import { AntiInvite, suggestion } from "../utils/utils";
 
 let cmdregex = /^[%*!?$-+]/;
 let cooldowns = new Set();
@@ -12,11 +12,15 @@ export const event: EventOptions = {
   once: false,
   run: (bot: Bot, message: Message) => {
 
-    /** Checks if the author is a bot and if the message was sent inside a guild or not */
+    /** 
+     * Checks if the author is a bot and if the message was sent inside a guild or not 
+     */
     if(message.author.bot) return;
     if(!message.guild || !message.member) return;
 
-    /** Checks if the message content has any kind of not allowed discord invite */
+    /**
+     *  Checks if the message content has any kind of not allowed discord invite 
+     */
     AntiInvite(bot, message);
 
     /** If in a suggestion channel it'll format the message as a suggestion */
@@ -26,7 +30,7 @@ export const event: EventOptions = {
     
     /** 
      * Adds XP and a random small amount of money to the user
-     * */
+     */
     if(bot.config.text.allowedXPChannels.includes(message.channelId) && !cmdregex.test(message.content)) {
       let ckey = `MSG_${message.author.id}`;
       cooldowns.add(ckey);
@@ -48,6 +52,12 @@ export const event: EventOptions = {
       };
     };
 
+    /**
+     *  Adds stats to the user and guild 
+     */
+    if(bot.config.text.allowedStatsChannels.includes(message.channelId)) {
+      // Soon
+    }
 
   }
 }

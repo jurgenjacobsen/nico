@@ -6,6 +6,7 @@ dotenv.config();
 export const config: Config = {
   token: process.env.DISCORD_TOKEN,
   suggestionChannels: ['840045583028715541'],
+  welcomeChannel: '840045583028715541',
   color: '#2F3136',
   voice: {
     vcRoles: ['793123005555146782'],
@@ -15,6 +16,7 @@ export const config: Config = {
   },
   text: {
     allowedXPChannels: [],
+    allowedStatsChannels: [],
     DXPRoles: [],
     DXPChannels: [],
   },
@@ -33,6 +35,7 @@ export const mongo = {
 export interface Config {
   token: string | undefined,
   suggestionChannels: Snowflake[],
+  welcomeChannel: Snowflake,
   color: ColorResolvable,
   voice: {
     vcRoles: Snowflake[],
@@ -42,6 +45,7 @@ export interface Config {
   },
   text: {
     allowedXPChannels: Snowflake[],
+    allowedStatsChannels: Snowflake[],
     DXPRoles: Snowflake[],
     DXPChannels: Snowflake[],
   },
