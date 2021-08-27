@@ -1,4 +1,6 @@
 # Nico Bot
+[![wakatime](https://wakatime.com/badge/github/jurgenjacobsen/nico.svg)](https://wakatime.com/badge/github/jurgenjacobsen/nico)
+
 A discord.js bot for a Twenty One Pilots' fangroup.
 
 It is a project that is taking me some months to develop with feedback of great bughunters to enhance it more as possible.

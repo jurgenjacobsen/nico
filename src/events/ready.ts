@@ -6,6 +6,6 @@ export const event: EventOptions = {
   name: 'ready',
   once: true,
   run: async (bot: Bot) => {
-    print('Pronto! 😋')
+    print('Pronto! 😋');
   }
 }
