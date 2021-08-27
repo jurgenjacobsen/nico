@@ -3,7 +3,7 @@
 ___
 #### Cosméticos
 
-- [ ] - Sistema de sugestões
+- [🟢] - Sistema de sugestões
 - [ ] - Contador de membros
 - [ ] - Mensagem de boas vindas
 - [ ] - Cargos de call
