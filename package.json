@@ -22,6 +22,12 @@
   },
   "homepage": "https://github.com/jurgenjacobsen/nico#readme",
   "dependencies": {
-    "discord.js": "^13.1.0"
+    "colors": "^1.4.0",
+    "discord-logs": "^2.0.1",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "dsc.cmds": "^2.0.2",
+    "dsc.events": "^2.0.0",
+    "path": "^0.12.7"
   }
 }
