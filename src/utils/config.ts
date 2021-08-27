@@ -7,7 +7,7 @@ export const config: Config = {
   token: process.env.DISCORD_TOKEN,
   voice: {
     vcRole: ['793123005555146782'],
-    vcRoleChannels: []
+    vcRoleChannels: ['880911883299860511']
   }
 };
 

@@ -4,7 +4,8 @@
   "description": "A discord.js bot for a Twenty One Pilots' fangroup.",
   "main": "lib/bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "tsc",
+    "bot": "npm run tsc && node ."
   },
   "repository": {
     "type": "git",
