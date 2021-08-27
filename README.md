@@ -32,6 +32,7 @@ ___
 
 #### Níveis
 
+- [ ] - Dar XP por mensagens 
 - [ ] - Cargos por nível de texto e voz
 - [ ] - Opções de cargos e canais que darão XP em dobro
 
@@ -41,4 +42,4 @@ ___
 - [ ] - Servidor
 
 #### Segurança
-- [ ] - Anti-Invite
+- [X] - Anti-Invite

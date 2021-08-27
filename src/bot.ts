@@ -1,14 +1,18 @@
 import { Client, ClientOptions, Intents } from "discord.js";
 import { Commands } from "dsc.cmds";
 import { EventHandler } from "dsc.events";
-import { Config, config } from "./utils/config";
+import { Config, config, mongo } from "./utils/config";
 import path from "path";
 import logs from 'discord-logs';
+import { Levels } from "dsc.levels";
+import { Economy } from "dsc.eco";
 
 export class Bot extends Client {
   public config: Config;
   public commands: Commands;
   public events: EventHandler;
+  public levels: Levels;
+  public eco: Economy;
   constructor(options: ClientOptions) {
     super(options);
     this.login(config.token);
@@ -25,7 +29,18 @@ export class Bot extends Client {
       bot: this,
       dir: path.join(__dirname, './events'),
     });
-    
+
+    this.levels = new Levels({
+      ...mongo,
+    });
+
+    this.eco = new Economy({
+      db: {
+        ...mongo,
+        collection: 'economy'
+      },
+    });
+
     logs(this);
   }
 };

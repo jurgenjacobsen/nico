@@ -24,12 +24,15 @@
   "homepage": "https://github.com/jurgenjacobsen/nico#readme",
   "dependencies": {
     "@discordjs/voice": "^0.6.0",
+    "axios": "^0.21.1",
     "colors": "^1.4.0",
     "discord-logs": "^2.0.1",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
     "dsc.cmds": "^2.0.2",
+    "dsc.eco": "^2.0.0",
     "dsc.events": "^2.0.0",
+    "dsc.levels": "^2.0.0",
     "libsodium-wrappers": "^0.7.9",
     "path": "^0.12.7"
   }
