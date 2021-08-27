@@ -13,7 +13,7 @@ ___
 ### Todo List
 #### Cosméticos
 
-- [ ] - Sistema de sugestões
+- [X] - Sistema de sugestões
 - [ ] - Contador de membros
 - [X] - Mensagem de boas vindas
 - [X] - Cargos de call

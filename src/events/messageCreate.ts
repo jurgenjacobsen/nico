@@ -24,7 +24,7 @@ export const event: EventOptions = {
     AntiInvite(bot, message);
 
     /** If in a suggestion channel it'll format the message as a suggestion */
-    if(bot.config.suggestionChannels.includes(message.channelId)) {
+    if(bot.config.suggestion.channelIds.includes(message.channelId)) {
       suggestion(bot, message);
     }
     

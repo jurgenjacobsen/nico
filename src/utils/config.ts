@@ -5,9 +5,16 @@ dotenv.config();
 
 export const config: Config = {
   token: process.env.DISCORD_TOKEN,
-  suggestionChannels: ['840045583028715541'],
   welcomeChannel: '840045583028715541',
   color: '#2F3136',
+  suggestion: {
+    perms: ['466235743367331862', '709450575640789083', '466073653692334080', '739183741515071539'],
+    channelIds: ['840045583028715541'],
+    up: '835948756649377832',
+    down: '835948681588244530',
+    approve: '678281143396859962',
+    minLength: 1,
+  },
   voice: {
     vcRoles: ['793123005555146782'],
     vcRoleChannels: ['880911883299860511'],
@@ -25,18 +32,18 @@ export const config: Config = {
   }
 };
 
-export const mongo = {
-  uri: process.env.MONGO_URI as string,
-  name: process.env.MONGO_DB as string,
-  user: process.env.MONGO_USER as string,
-  pass: process.env.MONGO_PASS as string,
-}
-
 export interface Config {
   token: string | undefined,
-  suggestionChannels: Snowflake[],
   welcomeChannel: Snowflake,
   color: ColorResolvable,
+  suggestion: {
+    perms: Snowflake[],
+    channelIds: Snowflake[],
+    up: Snowflake,
+    down: Snowflake,
+    approve: Snowflake,
+    minLength: number,
+  },
   voice: {
     vcRoles: Snowflake[],
     vcRoleChannels: Snowflake[],
@@ -52,4 +59,11 @@ export interface Config {
   logs: {
     invites: Snowflake,
   }
+}
+
+export const mongo = {
+  uri: process.env.MONGO_URI as string,
+  name: process.env.MONGO_DB as string,
+  user: process.env.MONGO_USER as string,
+  pass: process.env.MONGO_PASS as string,
 }

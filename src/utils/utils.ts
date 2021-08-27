@@ -1,5 +1,5 @@
 import colors from 'colors';
-import { Message, MessageEmbed, TextChannel } from 'discord.js';
+import { Message, MessageAttachment, MessageEmbed, TextChannel } from 'discord.js';
 import { Bot } from '../bot';
 import axios from 'axios'
 
@@ -12,8 +12,33 @@ export function print(value: string | number) {
   return console.log(`${colors.gray(`[${dd > 9 ? dd : `0${dd}`}/${m > 9 ? m : `0${m}`}/${d.getFullYear()}@${h > 9 ? h : `0${h}`}:${min > 9 ? min : `0${min}`}]`)} ${value}`);
 }
 
-export const suggestion = async (bot: Bot, message: Message) => {
-  
+export const suggestion = async (bot: Bot, message: Message): Promise<Message | null> => {
+  if(message.content.length < bot.config.suggestion.minLength) return null;
+
+  let embeds: MessageEmbed[] = [];
+  let image = '';
+
+  if(message.attachments.first()) {
+    let msg = await (bot.channels.cache.get('852689648681353250') as TextChannel).send({
+      files: [message.attachments.first() as MessageAttachment],
+    });
+    image = msg.attachments.first()?.url as string;
+  }
+
+  embeds.push(
+    new MessageEmbed()
+    .setColor(bot.config.color)
+    .setDescription(message.content)
+    .setImage(image ?? '')
+    .setAuthor(message.author.username, message.author.displayAvatarURL({size: 128, dynamic: true}))
+  );
+
+  message.channel.send({ embeds })
+  .then((msg) => {
+    msg.react(bot.config.suggestion.up).then(() => msg.react(bot.config.suggestion.down));
+    if(message.deletable) message.delete();
+  });
+  return message;
 }
 
 export const AntiInvite = async (bot: Bot, message: Message) => {
