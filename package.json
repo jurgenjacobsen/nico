@@ -1,0 +1,27 @@
+{
+  "name": "nico",
+  "version": "1.0.0",
+  "description": "A discord.js bot for a Twenty One Pilots' fangroup.",
+  "main": "lib/bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jurgenjacobsen/nico.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "discord.js"
+  ],
+  "author": "jurgenjacobsen",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/jurgenjacobsen/nico/issues"
+  },
+  "homepage": "https://github.com/jurgenjacobsen/nico#readme",
+  "dependencies": {
+    "discord.js": "^13.1.0"
+  }
+}
