@@ -5,7 +5,7 @@ import { Config, config, mongo } from './utils/config'
 import path from 'path'
 import logs from 'discord-logs'
 import { Levels } from 'dsc.levels'
-import { Economy } from 'dsc.eco'
+import { Economy, Item } from 'dsc.eco'
 
 export class Bot extends Client {
   public config: Config
@@ -23,6 +23,7 @@ export class Bot extends Client {
       bot: this,
       dir: path.join(__dirname, './cmds'),
       debug: true,
+      devs: this.config.devs.ids,
     })
 
     this.events = new EventHandler({
@@ -39,6 +40,7 @@ export class Bot extends Client {
         ...mongo,
         collection: 'economy',
       },
+      items: [new Item({ id: '1', name: '2', price: 100 }), new Item({ id: '2', name: 'Bah', price: 21323 })],
     })
 
     logs(this)

@@ -1,11 +1,4 @@
-import {
-  createCanvas,
-  loadImage,
-  CanvasRenderingContext2D as ctx2D,
-  Canvas,
-  Image,
-  registerFont,
-} from 'canvas'
+import { createCanvas, loadImage, CanvasRenderingContext2D as ctx2D, Canvas, Image, registerFont } from 'canvas'
 import { join } from 'path'
 
 registerFont(join(__dirname, '../../assets') + '/Busorama.ttf', {
@@ -80,10 +73,7 @@ export class Gradient {
   colors: { offset: number; color: string }[]
   grad!: CanvasGradient
 
-  constructor(
-    type: 'linear' | 'radial' = 'linear',
-    ...colors: { offset: number; color: string }[]
-  ) {
+  constructor(type: 'linear' | 'radial' = 'linear', ...colors: { offset: number; color: string }[]) {
     this.type = type
     this.colors = colors ?? []
   }
@@ -96,14 +86,7 @@ export class Gradient {
     var grad =
       this.type === 'linear'
         ? ctx.createLinearGradient(0, 0, ctx.w, ctx.h)
-        : ctx.createRadialGradient(
-            ctx.w / 2,
-            ctx.h / 2,
-            ctx.w / 2,
-            ctx.w / 2,
-            ctx.h / 2,
-            ctx.w / 2,
-          )
+        : ctx.createRadialGradient(ctx.w / 2, ctx.h / 2, ctx.w / 2, ctx.w / 2, ctx.h / 2, ctx.w / 2)
 
     for (const v of this.colors) grad.addColorStop(v.offset, v.color)
 
@@ -163,8 +146,7 @@ export async function DrawCard(options: CardOptions): Promise<Buffer> {
 
   if (typeof theme === 'string') {
     theme = themes[theme]
-    if (!theme)
-      throw new Error('Invalid theme, use: ' + Object.keys(themes).join(' | '))
+    if (!theme) throw new Error('Invalid theme, use: ' + Object.keys(themes).join(' | '))
     background = await loadImage(theme.image)
   } else {
     try {
@@ -219,23 +201,12 @@ export async function DrawCard(options: CardOptions): Promise<Buffer> {
   ctx.strokeStyle = theme.color.toString(ctx)
   ctx.font = '132px ' + (theme.font ? theme.font : 'sans-serif')
   ctx.fillStyle = '#EE88AF'
-  ctx
-    .changeFontSize('110px')
-    .fillText(options.title ?? '', ctx.width / 2.7, ctx.height / 3.5)
+  ctx.changeFontSize('110px').fillText(options.title ?? '', ctx.width / 2.7, ctx.height / 3.5)
   ctx.fillStyle = 'white'
   ctx.font = '90px Bebas Neue'
-  ctx
-    .changeFontSize('90px')
-    .fillText(
-      options.text ?? '',
-      ctx.width / 2.7,
-      ctx.height / 1.8,
-      (ctx.w * 3) / 5,
-    )
+  ctx.changeFontSize('90px').fillText(options.text ?? '', ctx.width / 2.7, ctx.height / 1.8, (ctx.w * 3) / 5)
   ctx.fillStyle = 'rgba(255, 255, 255, .5)'
-  ctx
-    .changeFontSize('58px')
-    .fillText(options.subtitle ?? '', ctx.width / 2.7, ctx.height / 1.3)
+  ctx.changeFontSize('58px').fillText(options.subtitle ?? '', ctx.width / 2.7, ctx.height / 1.3)
   const radius = h / 2.5
   ctx.lineWidth = 6
   ctx.beginPath()
@@ -244,25 +215,9 @@ export async function DrawCard(options: CardOptions): Promise<Buffer> {
   ctx.clip()
 
   if (options.avatar) {
-    if (options.avatar instanceof Canvas || options.avatar instanceof Image)
-      ctx.drawImage(
-        options.avatar,
-        radius / 4,
-        radius / 4,
-        radius * 2,
-        radius * 2,
-      )
-    else if (
-      typeof options.avatar === 'string' ||
-      options.avatar instanceof Buffer
-    )
-      ctx.drawImage(
-        await loadImage(options.avatar),
-        radius / 4,
-        radius / 4,
-        radius * 2,
-        radius * 2,
-      )
+    if (options.avatar instanceof Canvas || options.avatar instanceof Image) ctx.drawImage(options.avatar, radius / 4, radius / 4, radius * 2, radius * 2)
+    else if (typeof options.avatar === 'string' || options.avatar instanceof Buffer)
+      ctx.drawImage(await loadImage(options.avatar), radius / 4, radius / 4, radius * 2, radius * 2)
     else throw new Error('Invalid Avatar Argument')
   }
 

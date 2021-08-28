@@ -15,30 +15,21 @@ export const event: EventOptions = {
     let registercat = roles.get('744359067363049533') as Role
     let rolescat = roles.get('730452396504907876') as Role
 
-    if (
-      registercat.position > role.position &&
-      topfeedcat.position < role.position
-    ) {
+    if (registercat.position > role.position && topfeedcat.position < role.position) {
       // Registro
       member.roles.add(registercat)
 
       print(`Categoria ${registercat.name} adicionada!`)
     }
 
-    if (
-      topfeedcat.position > role.position &&
-      levelcat.position < role.position
-    ) {
+    if (topfeedcat.position > role.position && levelcat.position < role.position) {
       // Top feed
       member.roles.add(topfeedcat)
 
       print(`Categoria ${topfeedcat.name} adicionada!`)
     }
 
-    if (
-      levelcat.position > role.position &&
-      rolescat.position < role.position
-    ) {
+    if (levelcat.position > role.position && rolescat.position < role.position) {
       // Nivel
       member.roles.add(levelcat)
 

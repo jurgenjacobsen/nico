@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/jurgenjacobsen/nico#readme",
   "dependencies": {
+    "@discordjs/builders": "^0.6.0",
     "@discordjs/voice": "^0.6.0",
     "axios": "^0.21.1",
     "canvas": "^2.8.0",
@@ -42,6 +43,6 @@
     "trailingComma": "all",
     "semi": false,
     "singleQuote": true,
-    "printWidth": 80
+    "printWidth": 160
   }
 }

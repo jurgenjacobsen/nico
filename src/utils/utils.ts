@@ -1,11 +1,5 @@
 import colors from 'colors'
-import {
-  Guild,
-  Message,
-  MessageAttachment,
-  MessageEmbed,
-  TextChannel,
-} from 'discord.js'
+import { Guild, GuildMember, Message, MessageAttachment, MessageEmbed, Snowflake, TextChannel, VoiceChannel } from 'discord.js'
 import { Bot } from '../bot'
 import axios from 'axios'
 
@@ -17,28 +11,19 @@ export function print(value: string | number) {
   let h = d.getHours()
   let min = d.getMinutes()
   return console.log(
-    `${colors.gray(
-      `[${dd > 9 ? dd : `0${dd}`}/${m > 9 ? m : `0${m}`}/${d.getFullYear()}@${
-        h > 9 ? h : `0${h}`
-      }:${min > 9 ? min : `0${min}`}]`,
-    )} ${value}`,
+    `${colors.gray(`[${dd > 9 ? dd : `0${dd}`}/${m > 9 ? m : `0${m}`}/${d.getFullYear()}@${h > 9 ? h : `0${h}`}:${min > 9 ? min : `0${min}`}]`)} ${value}`,
   )
 }
 
 /** Parses a message into a suggestion format */
-export const suggestion = async (
-  bot: Bot,
-  message: Message,
-): Promise<Message | null> => {
+export const suggestion = async (bot: Bot, message: Message): Promise<Message | null> => {
   if (message.content.length < bot.config.suggestion.minLength) return null
 
   let embeds: MessageEmbed[] = []
   let image = ''
 
   if (message.attachments.first()) {
-    let msg = await (
-      bot.channels.cache.get('852689648681353250') as TextChannel
-    ).send({
+    let msg = await (bot.channels.cache.get('852689648681353250') as TextChannel).send({
       files: [message.attachments.first() as MessageAttachment],
     })
     image = msg.attachments.first()?.url as string
@@ -49,16 +34,11 @@ export const suggestion = async (
       .setColor(bot.config.color)
       .setDescription(message.content)
       .setImage(image ?? '')
-      .setAuthor(
-        message.author.username,
-        message.author.displayAvatarURL({ size: 128, dynamic: true }),
-      ),
+      .setAuthor(message.author.username, message.author.displayAvatarURL({ size: 128, dynamic: true })),
   )
 
   message.channel.send({ embeds }).then((msg) => {
-    msg
-      .react(bot.config.suggestion.up)
-      .then(() => msg.react(bot.config.suggestion.down))
+    msg.react(bot.config.suggestion.up).then(() => msg.react(bot.config.suggestion.down))
     if (message.deletable) message.delete()
   })
   return message
@@ -69,10 +49,7 @@ export const AntiInvite = async (bot: Bot, message: Message) => {
   let content = message.content
   let links = ['discord.gg/', 'discord.com/invite/']
   for (let link of links) {
-    if (
-      content.includes(link) &&
-      !message.member?.permissions.has('MANAGE_MESSAGES')
-    ) {
+    if (content.includes(link) && !message.member?.permissions.has('MANAGE_MESSAGES')) {
       try {
         let code = content.split(link)[1].split(' ')[0]
         let invites = await message.guild?.invites.fetch()
@@ -82,46 +59,30 @@ export const AntiInvite = async (bot: Bot, message: Message) => {
           if (message.deletable) message.delete()
           message
             .reply({
-              content:
-                'Não envie convites de outros servidores aqui! Isso pode resultar em punições.',
+              content: 'Não envie convites de outros servidores aqui! Isso pode resultar em punições.',
             })
             .catch(() => {})
 
-          let { data } = await axios.get(
-            `https://discord.com/api/v9/invites/${code}?with_counts=true&with_expiration=true`,
-          )
+          let { data } = await axios.get(`https://discord.com/api/v9/invites/${code}?with_counts=true&with_expiration=true`)
           if (data) {
             let log = bot.channels.cache.get(bot.config.logs.invites)
             let embed = new MessageEmbed()
               .setColor(bot.config.color)
               .setAuthor(
-                `${message.author.username} ${
-                  message.member?.nickname ? `(${message.member.nickname})` : ``
-                }`,
+                `${message.author.username} ${message.member?.nickname ? `(${message.member.nickname})` : ``}`,
                 message.author.displayAvatarURL({ dynamic: true }),
               )
-              .setThumbnail(
-                `https://cdn.discordapp.com/icons/${data.guild.id}/${data.guild.icon}.webp?size=512`,
-              )
-              .setFooter(
-                `${message.author.tag} enviou um convite de outro servidor!`,
-              ).setDescription(`
+              .setThumbnail(`https://cdn.discordapp.com/icons/${data.guild.id}/${data.guild.icon}.webp?size=512`)
+              .setFooter(`${message.author.tag} enviou um convite de outro servidor!`).setDescription(`
               **${data.guild.name}**
               ${data.guild.description}
               
-              ${data.approximate_member_count} Membros / ${
-              data.approximate_presence_count
-            } Online
+              ${data.approximate_member_count} Membros / ${data.approximate_presence_count} Online
               \n
-              Convite criado por: ${
-                message.guild?.members.cache.get(data.inviter.id) ??
-                data.inviter.username + '#' + data.inviter.discriminator
-              }
+              Convite criado por: ${message.guild?.members.cache.get(data.inviter.id) ?? data.inviter.username + '#' + data.inviter.discriminator}
               `)
             if (data.guild.banner) {
-              embed.setImage(
-                `https://cdn.discordapp.com/banners/${data.guild.id}/${data.guild.banner}.jpg?size=1024`,
-              )
+              embed.setImage(`https://cdn.discordapp.com/banners/${data.guild.id}/${data.guild.banner}.jpg?size=1024`)
             }
 
             ;(log as TextChannel).send({ embeds: [embed] })
@@ -167,3 +128,56 @@ export const toWord = (num: number | string) => {
   }
   return n[num]
 }
+
+export const epoch = (time: Date | string | number) => {
+  return (new Date(time).getTime() / 1000 + 900 + 330 * 60).toString().split('.')[0]
+}
+
+export const VoiceRoles = (bot: Bot, member: GuildMember, channel: VoiceChannel | {id: Snowflake}) => {
+  let vconfig = bot.config.voice;
+  let roles = member.roles.cache.map((r) => r.id);
+
+  if(vconfig.vcRoleChannels.includes(channel.id) && roles.filter((r) => vconfig.vcRoles.includes(r)).length === 0) {
+
+    member.roles.add(vconfig.vcRoles)
+    .then(() => print(`Cargos de call adicionados em ${member.user.tag}`))
+    .catch((err) => {
+      print(`Erro ao adicionar cargos de call em ${member.user.tag}`);
+      console.error(err);
+    });
+
+  }
+
+  if(!vconfig.vcRoleChannels.includes(channel.id) && roles.filter((r) => vconfig.vcRoles.includes(r)).length > 0) {
+  
+    member.roles.remove(vconfig.vcRoles)
+    .then(() => print(`Cargos de call removido de ${member.user.tag}`))
+    .catch((err) => {
+      print(`Erro ao remover cargos de call de ${member.user.tag}`);
+      console.error(err);
+    });
+
+  };
+
+  if(vconfig.eventChannels.includes(channel.id) && roles.filter((r) => vconfig.eventRoles.includes(r)).length === 0) {
+
+    member.roles.add(vconfig.eventRoles)
+    .then(() => print(`Cargos de call adicionados em ${member.user.tag}`))
+    .catch((err) => {
+      print(`Erro ao adicionar cargos de evento em ${member.user.tag}`);
+      console.error(err);
+    });
+
+  }
+
+  if(!vconfig.eventChannels.includes(channel.id) && roles.filter((r) => vconfig.eventRoles.includes(r)).length !== 0) {
+
+    member.roles.remove(vconfig.eventRoles)
+    .then(() => print(`Cargos de evento removido de ${member.user.tag}`))
+    .catch((err) => {
+      print(`Erro ao remover cargos de eventos de ${member.user.tag}`);
+      console.error(err);
+    });
+
+  }
+};

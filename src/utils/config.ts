@@ -9,13 +9,11 @@ export const config: Config = {
   color: '#2F3136',
   memberCounterChannels: ['727641717188198523', '465945316596645889'],
   memberCounterText: 'Estamos com {{counter}} clikkies!',
+  devs: {
+    ids: ['292065674338107393'],
+  },
   suggestion: {
-    perms: [
-      '466235743367331862',
-      '709450575640789083',
-      '466073653692334080',
-      '739183741515071539',
-    ],
+    perms: ['466235743367331862', '709450575640789083', '466073653692334080', '739183741515071539'],
     channelIds: ['1'],
     up: '835948756649377832',
     down: '835948681588244530',
@@ -25,14 +23,17 @@ export const config: Config = {
   voice: {
     vcRoles: ['793123005555146782'],
     vcRoleChannels: ['880911883299860511'],
-    eventRoles: [],
-    eventChannels: [],
+    eventRoles: ['842597067187683338'],
+    eventChannels: ['828323204099080212'],
   },
   text: {
     allowedXPChannels: [],
     allowedStatsChannels: [],
     DXPRoles: [],
     DXPChannels: [],
+  },
+  economy: {
+    resetDate: new Date('11/10/2021'),
   },
   logs: {
     invites: '840045583028715541',
@@ -45,6 +46,9 @@ export interface Config {
   color: ColorResolvable
   memberCounterChannels: Snowflake[]
   memberCounterText: string
+  devs: {
+    ids: Snowflake[]
+  }
   suggestion: {
     perms: Snowflake[]
     channelIds: Snowflake[]
@@ -64,6 +68,9 @@ export interface Config {
     allowedStatsChannels: Snowflake[]
     DXPRoles: Snowflake[]
     DXPChannels: Snowflake[]
+  }
+  economy: {
+    resetDate: Date
   }
   logs: {
     invites: Snowflake
