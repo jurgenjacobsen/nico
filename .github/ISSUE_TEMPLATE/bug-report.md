@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Crie um relatório para nos ajudar a melhorar
-title: "[BUG]"
+title: "[BUG] *TAG* - *Titulo do seu bug*"
 labels: bug
 assignees: ''
 
