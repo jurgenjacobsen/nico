@@ -27,7 +27,7 @@ export const config: Config = {
     eventChannels: ['828323204099080212'],
   },
   text: {
-    allowedXPChannels: [],
+    allowedXPChannels: ['850815477064007760', '840045583028715541'],
     allowedStatsChannels: [],
     DXPRoles: [],
     DXPChannels: [],

@@ -7,6 +7,8 @@ import logs from 'discord-logs'
 import { Levels } from 'dsc.levels'
 import { Economy, Item } from 'dsc.eco'
 import { UserStats } from 'dsc.stats'
+import { User } from 'dsc.levels/lib/Levels'
+import { print } from './utils/utils'
 
 export class Bot extends Client {
   public config: Config;
@@ -75,3 +77,13 @@ export const bot = new Bot({
     Intents.FLAGS.GUILD_WEBHOOKS,
   ]
 });
+
+bot.levels.on('textLevelUp', (user: User) => {
+  let u = bot.users.cache.get(user.userID);
+  print(`[TEXTO] ${u?.tag} subiu para o nível ${user.textLevel}!`);
+});
+
+bot.levels.on('voiceLevelUp', (user: User) => {
+  let u = bot.users.cache.get(user.userID);
+  print(`[VOZ] ${u?.tag} subiu para o nível ${user.voiceLevel}!`);
+})

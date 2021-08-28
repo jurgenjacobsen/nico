@@ -33,8 +33,8 @@ export const event: EventOptions = {
      */
     if (bot.config.text.allowedXPChannels.includes(message.channelId) && !cmdregex.test(message.content)) {
       let ckey = `MSG_${message.author.id}`
-      cooldowns.add(ckey)
       if (!cooldowns.has(ckey)) {
+        cooldowns.add(ckey);
         let xp = Math.floor(Util.random(15, 25))
         if (bot.config.text.DXPChannels.includes(message.channelId)) {
           xp = xp * 2
