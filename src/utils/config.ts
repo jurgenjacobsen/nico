@@ -1,7 +1,7 @@
-import { ColorResolvable, Snowflake } from 'discord.js';
-import dotenv from 'dotenv';
+import { ColorResolvable, Snowflake } from 'discord.js'
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
 export const config: Config = {
   token: process.env.DISCORD_TOKEN,
@@ -10,7 +10,12 @@ export const config: Config = {
   memberCounterChannels: ['727641717188198523', '465945316596645889'],
   memberCounterText: 'Estamos com {{counter}} clikkies!',
   suggestion: {
-    perms: ['466235743367331862', '709450575640789083', '466073653692334080', '739183741515071539'],
+    perms: [
+      '466235743367331862',
+      '709450575640789083',
+      '466073653692334080',
+      '739183741515071539',
+    ],
     channelIds: ['1'],
     up: '835948756649377832',
     down: '835948681588244530',
@@ -30,38 +35,38 @@ export const config: Config = {
     DXPChannels: [],
   },
   logs: {
-    invites: '840045583028715541'
-  }
-};
+    invites: '840045583028715541',
+  },
+}
 
 export interface Config {
-  token: string | undefined,
-  welcomeChannel: Snowflake,
-  color: ColorResolvable,
-  memberCounterChannels: Snowflake[],
-  memberCounterText: string,
+  token: string | undefined
+  welcomeChannel: Snowflake
+  color: ColorResolvable
+  memberCounterChannels: Snowflake[]
+  memberCounterText: string
   suggestion: {
-    perms: Snowflake[],
-    channelIds: Snowflake[],
-    up: Snowflake,
-    down: Snowflake,
-    approve: Snowflake,
-    minLength: number,
-  },
+    perms: Snowflake[]
+    channelIds: Snowflake[]
+    up: Snowflake
+    down: Snowflake
+    approve: Snowflake
+    minLength: number
+  }
   voice: {
-    vcRoles: Snowflake[],
-    vcRoleChannels: Snowflake[],
-    eventRoles: Snowflake[],
-    eventChannels: Snowflake[],
-  },
+    vcRoles: Snowflake[]
+    vcRoleChannels: Snowflake[]
+    eventRoles: Snowflake[]
+    eventChannels: Snowflake[]
+  }
   text: {
-    allowedXPChannels: Snowflake[],
-    allowedStatsChannels: Snowflake[],
-    DXPRoles: Snowflake[],
-    DXPChannels: Snowflake[],
-  },
+    allowedXPChannels: Snowflake[]
+    allowedStatsChannels: Snowflake[]
+    DXPRoles: Snowflake[]
+    DXPChannels: Snowflake[]
+  }
   logs: {
-    invites: Snowflake,
+    invites: Snowflake
   }
 }
 

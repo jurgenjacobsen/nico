@@ -10,7 +10,7 @@ It is a project that is taking me some months to develop with feedback of great 
 Developed by [dema.city](https://dema.city/join)
 
 ___
-### Todo List
+### Todo List (9/18)
 #### Cosméticos
 
 - [X] - Sistema de sugestões

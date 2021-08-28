@@ -5,6 +5,7 @@
   "main": "lib/bot.js",
   "scripts": {
     "tsc": "tsc",
+    "p": "prettier --config package.json \"./src/**/*.ts\" --write",
     "bot": "npm run tsc && node ."
   },
   "repository": {
@@ -36,5 +37,11 @@
     "dsc.levels": "^2.0.0",
     "libsodium-wrappers": "^0.7.9",
     "path": "^0.12.7"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 80
   }
 }

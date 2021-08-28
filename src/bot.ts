@@ -1,52 +1,52 @@
-import { Client, ClientOptions, Intents } from "discord.js";
-import { Commands } from "dsc.cmds";
-import { EventHandler } from "dsc.events";
-import { Config, config, mongo } from "./utils/config";
-import path from "path";
-import logs from 'discord-logs';
-import { Levels } from "dsc.levels";
-import { Economy } from "dsc.eco";
+import { Client, ClientOptions, Intents } from 'discord.js'
+import { Commands } from 'dsc.cmds'
+import { EventHandler } from 'dsc.events'
+import { Config, config, mongo } from './utils/config'
+import path from 'path'
+import logs from 'discord-logs'
+import { Levels } from 'dsc.levels'
+import { Economy } from 'dsc.eco'
 
 export class Bot extends Client {
-  public config: Config;
-  public commands: Commands;
-  public events: EventHandler;
-  public levels: Levels;
-  public eco: Economy;
+  public config: Config
+  public commands: Commands
+  public events: EventHandler
+  public levels: Levels
+  public eco: Economy
   constructor(options: ClientOptions) {
-    super(options);
-    this.login(config.token);
-    
-    this.config = config;
-    
+    super(options)
+    this.login(config.token)
+
+    this.config = config
+
     this.commands = new Commands({
       bot: this,
       dir: path.join(__dirname, './cmds'),
       debug: true,
-    });
+    })
 
     this.events = new EventHandler({
       bot: this,
       dir: path.join(__dirname, './events'),
-    });
+    })
 
     this.levels = new Levels({
       ...mongo,
-    });
+    })
 
     this.eco = new Economy({
       db: {
         ...mongo,
-        collection: 'economy'
+        collection: 'economy',
       },
-    });
+    })
 
-    logs(this);
+    logs(this)
   }
-};
+}
 
 export const bot = new Bot({
-  partials: ['CHANNEL', 'GUILD_MEMBER', 'MESSAGE',  'REACTION', 'USER'],
+  partials: ['CHANNEL', 'GUILD_MEMBER', 'MESSAGE', 'REACTION', 'USER'],
   intents: [
     Intents.FLAGS.DIRECT_MESSAGES,
     Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
@@ -66,7 +66,7 @@ export const bot = new Bot({
   ],
   ws: {
     properties: {
-      $browser: 'Discord iOS'
-    }
-  }
-});
+      $browser: 'Discord iOS',
+    },
+  },
+})
