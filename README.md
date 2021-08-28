@@ -27,7 +27,7 @@ ___
 
 - [ ] - Loja
 - [ ] - Comandos para ganhar dinheiro (Work, Fabric)
-- [ ] - Receber dinheiro por mensagem enviada a cada minuto
+- [X] - Receber dinheiro por mensagem enviada a cada minuto
 - [ ] - Comando de informações sobre a economia do servidor
 
 #### Níveis
