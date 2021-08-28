@@ -21,7 +21,7 @@ ___
 - [ ] - Topfeed
 - [X] - Cargos de categorias
 - [ ] - Sistema de cargos e mensagem de aniversariantes
-- [ ] - Comando de informações de cada usuário (Economia, Níveis, Estatísticas, etc)
+- [X] - Comando de informações de cada usuário (Economia, Níveis, Estatísticas, etc)
 
 #### Economia
 

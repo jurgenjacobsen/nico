@@ -38,7 +38,9 @@
     "dsc.levels": "^2.0.0",
     "dsc.stats": "^3.0.0",
     "libsodium-wrappers": "^0.7.9",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "chart.js": "^2.9.4",
+    "chartjs-node-canvas": "^3.0.6"
   },
   "prettier": {
     "trailingComma": "all",

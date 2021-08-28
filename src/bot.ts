@@ -73,10 +73,5 @@ export const bot = new Bot({
     Intents.FLAGS.GUILD_PRESENCES,
     Intents.FLAGS.GUILD_VOICE_STATES,
     Intents.FLAGS.GUILD_WEBHOOKS,
-  ],
-  ws: {
-    properties: {
-      $browser: 'Discord iOS',
-    },
-  },
+  ]
 });
