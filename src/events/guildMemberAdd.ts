@@ -2,6 +2,7 @@ import { GuildMember, MessageAttachment, TextChannel } from "discord.js";
 import { EventOptions } from "dsc.events";
 import { Bot } from "../bot";
 import { DrawCard } from "../utils/card";
+import { MemberCounter } from "../utils/utils";
 
 export const event: EventOptions = {
   name: 'guildMemberAdd',
@@ -26,5 +27,7 @@ export const event: EventOptions = {
       content: welcomeText,
       files: [new MessageAttachment(WelcomeCardBuffer, `${member.id}.png`)]
     });
+
+    MemberCounter(bot, member.guild);
   }
 }

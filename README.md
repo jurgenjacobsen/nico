@@ -14,7 +14,7 @@ ___
 #### Cosméticos
 
 - [X] - Sistema de sugestões
-- [ ] - Contador de membros
+- [X] - Contador de membros
 - [X] - Mensagem de boas vindas
 - [X] - Cargos de call
 - [X] - Cargos de call de vento

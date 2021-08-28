@@ -1,8 +1,10 @@
 import colors from 'colors';
-import { Message, MessageAttachment, MessageEmbed, TextChannel } from 'discord.js';
+import { Guild, Message, MessageAttachment, MessageEmbed, TextChannel } from 'discord.js';
 import { Bot } from '../bot';
-import axios from 'axios'
+import axios from 'axios';
 
+
+/** Prints as in the console but if the time */
 export function print(value: string | number) {
   let d = new Date();
   let m = d.getMonth() + 1;
@@ -12,6 +14,7 @@ export function print(value: string | number) {
   return console.log(`${colors.gray(`[${dd > 9 ? dd : `0${dd}`}/${m > 9 ? m : `0${m}`}/${d.getFullYear()}@${h > 9 ? h : `0${h}`}:${min > 9 ? min : `0${min}`}]`)} ${value}`);
 }
 
+/** Parses a message into a suggestion format */
 export const suggestion = async (bot: Bot, message: Message): Promise<Message | null> => {
   if(message.content.length < bot.config.suggestion.minLength) return null;
 
@@ -41,6 +44,7 @@ export const suggestion = async (bot: Bot, message: Message): Promise<Message | 
   return message;
 }
 
+/** Look on message content for not allowed discord invites */
 export const AntiInvite = async (bot: Bot, message: Message) => {
   let content = message.content;
   let links = ['discord.gg/', 'discord.com/invite/'];
@@ -85,4 +89,39 @@ export const AntiInvite = async (bot: Bot, message: Message) => {
         } catch {}
       }
     }
+}
+
+/** Updates the entire MemberCounter channels */
+export const MemberCounter = (bot: Bot, guild: Guild) => {
+  let count = guild.memberCount ?? guild.members.cache.size;
+  
+  let nm: string[] = [];
+  for (const n of count.toLocaleString().split('')) {
+    if (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(n)) {
+      nm.push(`:${toWord(n)}:`);
+    }
+  }
+  let text = bot.config.memberCounterText.replace('{{counter}}', nm.join(''));
+  for(let channelId of bot.config.memberCounterChannels) {
+    let channel = bot.channels.cache.get(channelId) as TextChannel;
+    channel.setTopic(text);
+  }
+}
+
+/** Turns numbers into their names */
+export const toWord = (num: number | string) => {
+  num = Number(num);
+  let n: {[key: number]: string} = {
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six',
+    7: 'seven',
+    8: 'eight',
+    9: 'nine',
+    0: 'zero'
+  };
+  return n[num];
 }

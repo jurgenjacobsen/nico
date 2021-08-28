@@ -7,9 +7,11 @@ export const config: Config = {
   token: process.env.DISCORD_TOKEN,
   welcomeChannel: '840045583028715541',
   color: '#2F3136',
+  memberCounterChannels: ['727641717188198523', '465945316596645889'],
+  memberCounterText: 'Estamos com {{counter}} clikkies!',
   suggestion: {
     perms: ['466235743367331862', '709450575640789083', '466073653692334080', '739183741515071539'],
-    channelIds: ['840045583028715541'],
+    channelIds: ['1'],
     up: '835948756649377832',
     down: '835948681588244530',
     approve: '678281143396859962',
@@ -36,6 +38,8 @@ export interface Config {
   token: string | undefined,
   welcomeChannel: Snowflake,
   color: ColorResolvable,
+  memberCounterChannels: Snowflake[],
+  memberCounterText: string,
   suggestion: {
     perms: Snowflake[],
     channelIds: Snowflake[],
