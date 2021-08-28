@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import { EventOptions } from "dsc.events";
 import { Util } from "dsc.levels";
 import { Bot } from "../bot";
-import { AntiInvite, suggestion } from "../utils/utils";
+import { AntiInvite, print, suggestion } from "../utils/utils";
 
 let cmdregex = /^[%*!?$-+]/;
 let cooldowns = new Set();
@@ -46,6 +46,7 @@ export const event: EventOptions = {
             embeds: [new MessageEmbed().setColor(bot.config.color).setDescription(`🎉 | Você subiu para o nível **${user.textLevel}**!`)],
             reply: { messageReference: message },
           });
+          print(`${message.author.tag} subiu para o nível de texto ${user.textLevel}!`);
         });
         bot.eco.addMoney(Math.floor(Util.random(1, 5)), message.author.id, message.guild.id);
         setTimeout(() => cooldowns.delete(ckey), 60 * 1000);

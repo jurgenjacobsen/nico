@@ -13,9 +13,11 @@ export const event: EventOptions = {
       .then(() => print(`Cargo(s) de canal de voz adicionado a ${member.user.tag}`))
       .catch(() => print(`Houve um erro ao adicionar cargos de canal de voz em ${member.user.tag}`));
     } else {
-      member.roles.remove(bot.config.voice.vcRoles)
-      .then(() => print(`Cargo(s) de canal de voz removido de ${member.user.tag}`))
-      .catch(() => print(`Houve um erro ao remover cargos de canal de voz de ${member.user.tag}`));
+      if(member.roles.cache.find((r) => bot.config.voice.vcRoles.includes(r.id))) {
+        member.roles.remove(bot.config.voice.vcRoles)
+        .then(() => print(`Cargo(s) de canal de voz removido de ${member.user.tag}`))
+        .catch(() => print(`Houve um erro ao remover cargos de canal de voz de ${member.user.tag}`));
+      }
     };
 
     if(bot.config.voice.eventChannels.includes(newChannel.id)) {
@@ -23,9 +25,11 @@ export const event: EventOptions = {
       .then(() => print(`Cargos de evento foram adicionados à ${member.user.tag}`))
       .catch(() => print(`Houve um erro ao adicionar cargos de evento de ${member.user.tag}`));
     } else {
-      member.roles.remove(bot.config.voice.eventRoles)
-      .then(() => print(`Cargos de evento foram removidos de ${member.user.tag}`))
-      .catch(() => print(`Houve um erro ao remover cargos de evento de ${member.user.tag}`));;
+      if(member.roles.cache.find((r) => bot.config.voice.eventRoles.includes(r.id))) {
+        member.roles.remove(bot.config.voice.eventRoles)
+        .then(() => print(`Cargos de evento foram removidos de ${member.user.tag}`))
+        .catch(() => print(`Houve um erro ao remover cargos de evento de ${member.user.tag}`));
+      }
     }
     
   }

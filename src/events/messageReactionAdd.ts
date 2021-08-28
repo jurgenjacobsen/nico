@@ -32,6 +32,8 @@ export const event: EventOptions = {
         });
 
         reaction.remove();
+
+        print('Sugestão aprovada!');
       };
     }
   }

@@ -2,7 +2,7 @@ import { GuildMember, MessageAttachment, TextChannel } from "discord.js";
 import { EventOptions } from "dsc.events";
 import { Bot } from "../bot";
 import { DrawCard } from "../utils/card";
-import { MemberCounter } from "../utils/utils";
+import { MemberCounter, print } from "../utils/utils";
 
 export const event: EventOptions = {
   name: 'guildMemberAdd',
@@ -29,5 +29,7 @@ export const event: EventOptions = {
     });
 
     MemberCounter(bot, member.guild);
+
+    print(`Novo membro ${member.user.tag}!`);
   }
 }

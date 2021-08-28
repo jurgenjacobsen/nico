@@ -19,7 +19,7 @@ ___
 - [X] - Cargos de call
 - [X] - Cargos de call de vento
 - [ ] - Topfeed
-- [ ] - Cargos de categorias
+- [X] - Cargos de categorias
 - [ ] - Sistema de cargos e mensagem de aniversariantes
 - [ ] - Comando de informações de cada usuário (Economia, Níveis, Estatísticas, etc)
 
