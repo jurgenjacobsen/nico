@@ -36,6 +36,7 @@
     "dsc.eco": "^2.0.0",
     "dsc.events": "^2.0.0",
     "dsc.levels": "^2.0.0",
+    "dsc.stats": "^3.0.0",
     "libsodium-wrappers": "^0.7.9",
     "path": "^0.12.7"
   },
