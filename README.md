@@ -11,7 +11,7 @@ It is a project that is taking me some months to develop with feedback of great 
 > **DISCLAIMER** - __DO NOT__ use this project for personal nor comercial use. Only with permission from the project developers!
 
 ___
-### Todo List (11/19)
+### Todo List (14/19)
 #### Cosméticos
 
 - [X] - Sistema de sugestões
@@ -29,7 +29,7 @@ ___
 - [ ] - Loja
 - [ ] - Comandos para ganhar dinheiro (Work, Fabric)
 - [X] - Receber dinheiro por mensagem enviada a cada minuto
-- [ ] - Comando de informações sobre a economia do servidor
+- [X] - Comando de informações sobre a economia do servidor
 
 #### Níveis
 
@@ -39,8 +39,8 @@ ___
 
 #### Estatísticas
 
-- [ ] - Usuários
-- [ ] - Servidor
+- [X] - Usuários
+- [X] - Servidor
 
 #### Segurança
 - [X] - Anti-Invite
