@@ -46,5 +46,52 @@ export const data: ApplicationCommandData[] = [
         required: true
       }
     ]
+  },
+  {
+    name: 'profile',
+    description: 'Funções de perfis',
+    defaultPermission: true,
+    options: [
+      {
+        name: 'show',
+        description: 'Veja o perfil de um membro do servidor',
+        type: 'SUB_COMMAND',
+        options: [
+          {
+            required: false,
+            name: 'membro',
+            description: 'Membro pelo qual você deseja ver o perfil',
+            type: 'USER'
+          }
+        ]
+      },
+      {
+        name: 'create',
+        description: 'Crie seu perfil caso não possua um',
+        type: 'SUB_COMMAND',
+        options: [
+          { name: 'nome', description: 'Seu nome', required: false, type: 'STRING' },
+          { name: 'sobre', description: 'Fale um pouco sobre você', required: false, type: 'STRING' },
+          { name: 'aniversário', description: 'Quando você nasceu?', required: false, type: 'STRING' },
+          { name: 'localização', description: 'De onde você é?', required: false, type: 'STRING' },
+          { name: 'pronome', description: 'Qual seu pronome?', required: false, type: 'STRING' },
+          { name: 'gênero', description: 'Qual seu gênero?', required: false, type: 'STRING' },
+          { name: 'orientação', description: 'Qual sua orientação?', required: false, type: 'STRING' },
+        ]
+      },
+      {
+        name: 'edit',
+        description: 'Edite alguma informação do seu perfil',
+        type: 'SUB_COMMAND',
+        options: [
+          { name: 'nome', description: 'Seu nome', required: false, type: 'STRING' },
+          { name: 'sobre', description: 'Fale um pouco sobre você', required: false, type: 'STRING' },
+          { name: 'localização', description: 'De onde você é?', required: false, type: 'STRING' },
+          { name: 'pronome', description: 'Qual seu pronome?', required: false, type: 'STRING' },
+          { name: 'gênero', description: 'Qual seu gênero?', required: false, type: 'STRING' },
+          { name: 'orientação', description: 'Qual sua orientação?', required: false, type: 'STRING' },
+        ]
+      }
+    ],
   }
 ]

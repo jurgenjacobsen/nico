@@ -8,7 +8,8 @@ import { Levels } from 'dsc.levels'
 import { Economy, Item } from 'dsc.eco'
 import { UserStats } from 'dsc.stats'
 import { User } from 'dsc.levels/lib/Levels'
-import { print } from './utils/utils'
+import { print } from './utils/utils';
+import { Database } from 'dsc.db'
 
 export class Bot extends Client {
   public config: Config;
@@ -18,6 +19,9 @@ export class Bot extends Client {
   public eco: Economy;
   public stats: {
     users: UserStats;
+  }
+  public db: {
+    members: Database;
   }
   constructor(options: ClientOptions) {
     super(options)
@@ -53,7 +57,12 @@ export class Bot extends Client {
       users: new UserStats({db: mongo, dateFormat: 'DD/MM/YYYY'})
     }
 
-    logs(this)
+    this.db = {
+      members: new Database({...mongo, collection: 'members' })
+    }
+
+    logs(this);
+
   }
 }
 

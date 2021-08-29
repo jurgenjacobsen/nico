@@ -85,5 +85,13 @@ export const event: EventOptions = {
       if (cmd) return print('Comando já existente!')
       message.guild.commands.create(cmd_data)
     }
+
+    if (message.content.startsWith('+delete')) {
+      let comando = message.content.replace('+delete ', '').trim().toLowerCase()
+      let cmds = await message.guild.commands.fetch()
+
+      let cmd = cmds.find((c) => c.name === comando)
+      cmd?.delete();
+    }
   },
 }

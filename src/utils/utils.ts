@@ -1,5 +1,5 @@
 import colors from 'colors'
-import { Guild, GuildMember, Message, MessageAttachment, MessageEmbed, Snowflake, TextChannel, VoiceChannel } from 'discord.js'
+import { ColorResolvable, Guild, GuildMember, Message, MessageAttachment, MessageEmbed, Snowflake, TextChannel, VoiceChannel } from 'discord.js'
 import { Bot } from '../bot'
 import axios from 'axios'
 
@@ -180,3 +180,21 @@ export const VoiceRoles = (bot: Bot, member: GuildMember, channel: VoiceChannel 
 
   }
 };
+
+
+export interface NicoUser {
+  name: string | null;
+  about: string | null;
+  birthday: Date | null;
+  location: string | null;
+  pronoun: string | null;
+  gender: string | null;
+  orientation: string | null;
+
+  bdaynotified: Date | null;
+  verified: boolean;
+  badges: string[];
+  bannerURL: string | null;
+  color: ColorResolvable | string | null;
+}
+
