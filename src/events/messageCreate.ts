@@ -59,7 +59,7 @@ export const event: EventOptions = {
     }
 
     /**
-     *  Adds stats to the user and guild
+     *  Adds stats to the user
      */
     if (bot.config.text.allowedStatsChannels.includes(message.channelId)) {
       if(cmdregex.test(message.content)) {
@@ -68,6 +68,15 @@ export const event: EventOptions = {
         bot.stats.users.update(message.author.id, 'messages', 1);
       };
     };
+
+    /**
+     * Adds stats to the guild
+     */
+    if(cmdregex.test(message.content)) {
+      bot.stats.guild.update(message.guild.id, 'commands', 1);
+    } else {
+      bot.stats.guild.update(message.author.id, 'messages', 1);
+    }
 
     /**
      * Slash commands manager - Provisory way to manage bot's commands
