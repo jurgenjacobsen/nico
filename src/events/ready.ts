@@ -15,7 +15,7 @@ export const event: EventOptions = {
       let todayStats = await bot.stats.guild.fetch('465938334791893002', 1);
       if(!todayStats) return;
       if((todayStats[0].totalMembers ?? 0) < (guild).memberCount) {
-        bot.stats.guild.update('465938334791893002', 'totalMembers', guild.memberCount).then(console.log);
+        bot.stats.guild.update('465938334791893002', 'totalMembers', guild.memberCount);
       }
     }, 30 * 60 * 1000);
   },
