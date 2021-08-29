@@ -3,13 +3,15 @@ import { ApplicationCommandData } from 'discord.js'
 export const data: ApplicationCommandData[] = [
   {
     name: 'economy',
-    description: 'Informações sobre a economia do servidor.',
+    description: 'Informações sobre a economia do servidor',
+    type: 'CHAT_INPUT',
     defaultPermission: true,
     options: [],
   },
   {
     name: 'nico',
     description: 'Informações sobre mim',
+    type: 'CHAT_INPUT',
     defaultPermission: true,
     options: [],
   },
@@ -30,6 +32,7 @@ export const data: ApplicationCommandData[] = [
   {
     name: 'together',
     description: 'Discord together',
+    type: 'CHAT_INPUT',
     defaultPermission: true,
     options: [
       {
@@ -50,6 +53,7 @@ export const data: ApplicationCommandData[] = [
   {
     name: 'profile',
     description: 'Funções de perfis',
+    type: 'CHAT_INPUT',
     defaultPermission: true,
     options: [
       {
@@ -93,5 +97,24 @@ export const data: ApplicationCommandData[] = [
         ]
       }
     ],
+  },
+  {
+    name: 'leaderboard',
+    description: 'Mostra o top 10 de usuários de alguns sistemas do servidor',
+    type: 'CHAT_INPUT',
+    defaultPermission: true,
+    options: [
+      {
+        name: 'tipo',
+        description: 'Qual dos leaderboards você deseja buscar',
+        type: 'STRING',
+        required: true,
+        choices: [
+          { name: 'economia', value: 'ECONOMY' },
+          { name: 'níveis de voz', value: 'VOICE_LEVEL' },
+          { name: 'níveis de texto', value: 'TEXT_LEVEL' }
+        ]
+      }
+    ]
   }
 ]
