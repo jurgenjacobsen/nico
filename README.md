@@ -10,7 +10,7 @@ A discord.js bot for a Twenty One Pilots' fangroup.
 It is a project that is taking me some months to develop with feedback of great bughunters to enhance it more as possible.
 
 ___
-### Todo List (10/18)
+### Todo List (11/19)
 #### Cosméticos
 
 - [X] - Sistema de sugestões
@@ -20,7 +20,7 @@ ___
 - [X] - Cargos de call de vento
 - [ ] - Topfeed
 - [X] - Cargos de categorias
-- [ ] - Sistema de cargos e mensagem de aniversariantes
+- [X] - Sistema de cargos e mensagem de aniversariantes
 - [X] - Comando de informações de cada usuário (Economia, Níveis, Estatísticas, etc)
 
 #### Economia
