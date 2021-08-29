@@ -1,7 +1,8 @@
 ![Nico](https://raw.githubusercontent.com/jurgenjacobsen/nico/main/assets/Nico1.png)
 # Nico Bot
 [![wakatime](https://wakatime.com/badge/github/jurgenjacobsen/nico.svg)](https://wakatime.com/badge/github/jurgenjacobsen/nico)
-[![build](https://img.shields.io/github/languages/top/jurgenjacobsen/nico?style=flat-square)](#)
+[![build](https://img.shields.io/github/languages/top/jurgenjacobsen/nico?style=flat-square)](https://github.com/jurgenjacobsen/nico)
+[![patreon](https://img.shields.io/badge/donate-patreon-F96854.svg?style=flat-square)](https://patreon.com/jurgenjacobsen)
 
 A discord.js bot for a Twenty One Pilots' fangroup.
 
