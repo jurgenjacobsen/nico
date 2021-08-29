@@ -10,6 +10,7 @@ import { UserStats } from 'dsc.stats'
 import { User } from 'dsc.levels/lib/Levels'
 import { print } from './utils/utils';
 import { Database } from 'dsc.db'
+import { BirthdaysManager } from './utils/birthdays'
 
 export class Bot extends Client {
   public config: Config;
@@ -17,6 +18,7 @@ export class Bot extends Client {
   public events: EventHandler;
   public levels: Levels;
   public eco: Economy;
+  public birthdays: BirthdaysManager;
   public stats: {
     users: UserStats;
   }
@@ -61,6 +63,8 @@ export class Bot extends Client {
       members: new Database({...mongo, collection: 'members' })
     }
 
+    this.birthdays = new BirthdaysManager(this.db.members);
+
     logs(this);
 
   }
@@ -104,3 +108,17 @@ bot.levels.on('voiceLevelUp', (user: User) => {
   let u = bot.users.cache.get(user.userID);
   print(`[VOZ] ${u?.tag} subiu para o nível ${user.voiceLevel}!`);
 });
+
+bot.birthdays.on('BDAY', (user) => {
+
+  /**
+   * Aniversário do fulano
+   */
+
+});
+
+bot.birthdays.on('NON-BDAY', (user) => {
+  /**
+   * Data não é aniversário do fulano
+   */
+})

@@ -191,6 +191,7 @@ export interface NicoUser {
   gender: string | null;
   orientation: string | null;
 
+  id: string;
   bdaynotified: Date | null;
   verified: boolean;
   badges: string[];

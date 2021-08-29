@@ -62,6 +62,7 @@ export const cmd: CommandOptions = {
           orientation: interaction.options.getString('orientação') ?? user.orientation,
           birthday: user.birthday,
 
+          id: user.id,
           bdaynotified: user.bdaynotified,
           verified: user.verified,
           badges: user.badges,
@@ -94,6 +95,7 @@ export const cmd: CommandOptions = {
           orientation: interaction.options.getString('orientação'),
           birthday: bday,
 
+          id: interaction.user.id,
           bdaynotified: null,
           verified: false,
           badges: ['2'],
