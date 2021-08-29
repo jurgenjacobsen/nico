@@ -9,6 +9,8 @@ export const event: EventOptions = {
   run: (bot: Bot, member: GuildMember) => {
     MemberCounter(bot, member.guild)
 
-    print(`Membro ${member.user.tag} acabou de sair.`)
+    bot.stats.guild.update(member.guild.id, 'leftMembers', 1);
+    
+    print(`Membro ${member.user.tag} acabou de sair.`);
   },
 }

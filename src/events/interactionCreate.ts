@@ -1,4 +1,4 @@
-import { Interaction } from "discord.js";
+import { Interaction, TextChannel } from "discord.js";
 import { EventOptions } from "dsc.events";
 import { Bot } from "../bot";
 import { print } from "../utils/utils";
@@ -11,7 +11,7 @@ export const event: EventOptions = {
     if(interaction.isCommand()) {
       bot.stats.users.update(interaction.user.id, 'commands', 1);
 
-      print(`${interaction.user.tag} usou o comando /${interaction.commandName}`);
+      print(`${interaction.user.tag} usou o comando /${interaction.commandName} em #${(interaction.channel as TextChannel).name}`);
     }
 
   }

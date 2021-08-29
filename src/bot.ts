@@ -1,4 +1,4 @@
-import { Client, ClientOptions, Intents } from 'discord.js'
+import { Client, ClientOptions, Collection, Intents } from 'discord.js'
 import { Commands } from 'dsc.cmds'
 import { EventHandler } from 'dsc.events'
 import { Config, config, mongo } from './utils/config'
@@ -6,7 +6,7 @@ import path from 'path'
 import logs from 'discord-logs'
 import { Levels } from 'dsc.levels'
 import { Economy, Item } from 'dsc.eco'
-import { UserStats } from 'dsc.stats'
+import { GuildStats, UserStats } from 'dsc.stats'
 import { User } from 'dsc.levels/lib/Levels'
 import { print } from './utils/utils';
 import { Database } from 'dsc.db'
@@ -19,8 +19,10 @@ export class Bot extends Client {
   public levels: Levels;
   public eco: Economy;
   public birthdays: BirthdaysManager;
+  public voiceIntervals: Collection<string, NodeJS.Timer | null>;
   public stats: {
     users: UserStats;
+    guild: GuildStats;
   }
   public db: {
     members: Database;
@@ -55,8 +57,11 @@ export class Bot extends Client {
       items: [new Item({ id: '1', name: '2', price: 100 }), new Item({ id: '2', name: 'Bah', price: 21323 })],
     });
 
+    this.voiceIntervals = new Collection();
+
     this.stats = {
-      users: new UserStats({db: mongo, dateFormat: 'DD/MM/YYYY'})
+      users: new UserStats({db: mongo, dateFormat: 'DD/MM/YYYY'}),
+      guild: new GuildStats({db: mongo, dateFormat: 'DD/MM/YYYY'}),
     }
 
     this.db = {
@@ -121,4 +126,4 @@ bot.birthdays.on('NON-BDAY', (user) => {
   /**
    * Data não é aniversário do fulano
    */
-})
+});

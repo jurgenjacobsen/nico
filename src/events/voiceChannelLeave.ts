@@ -10,5 +10,6 @@ export const event: EventOptions = {
     
     VoiceRoles(bot, member, {id: '1'});
 
+    bot.voiceIntervals.delete(member.id);
   },
 }

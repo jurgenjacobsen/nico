@@ -126,8 +126,8 @@ export const cmd: CommandOptions = {
     \n
     `)
     .addField(`\`🏷️\` - Níveis`, `
-    Voz: ${levels.voiceLevel} - *${levels.voiceXp}xp*
-    Texto: ${levels.textLevel} - *${levels.textXp}xp*
+    Voz: LVL${levels.voiceLevel} - *${levels.voiceXp}XP*
+    Texto: LVL${levels.textLevel} - *${levels.textXp}XP*
     `)
 
     interaction.reply({

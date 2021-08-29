@@ -2,6 +2,7 @@ import colors from 'colors'
 import { ColorResolvable, Guild, GuildMember, Message, MessageAttachment, MessageEmbed, Snowflake, TextChannel, VoiceChannel } from 'discord.js'
 import { Bot } from '../bot'
 import axios from 'axios'
+import { Util } from 'dsc.levels'
 
 /** Prints as in the console but if the time */
 export function print(value: string | number) {
@@ -181,6 +182,28 @@ export const VoiceRoles = (bot: Bot, member: GuildMember, channel: VoiceChannel 
   }
 };
 
+export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChannel) => {
+  let guild = member.guild;
+  let state = guild.voiceStates.cache.get(member.id);
+
+  bot.voiceIntervals.delete(member.id);
+  
+  let interval = setInterval(() => {
+    bot.stats.guild.update(guild.id, 'voice', 10);
+    
+    if(bot.config.voice.allowedStatsChannels.includes(channel.id)) {
+      bot.stats.users.update(member.id, 'voice', 10);
+    };
+    if(bot.config.voice.allowedXPChannels.includes(channel.id)) {
+      if((state?.selfDeaf || state?.selfMute) && !state.streaming && !state.selfVideo) {
+        bot.levels.update(member.id, 'VOICE', Math.floor(Util.random(15, 35) / 2), guild.id);
+      } else {
+        bot.levels.update(member.id, 'VOICE', Math.floor(Util.random(15, 35)), guild.id);
+      }
+    };
+  }, 10 * 60 * 1000);
+  bot.voiceIntervals.set(member.id, interval);
+}
 
 export interface NicoUser {
   name: string | null;

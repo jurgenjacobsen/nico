@@ -30,6 +30,8 @@ export const event: EventOptions = {
 
     MemberCounter(bot, member.guild)
 
-    print(`Novo membro ${member.user.tag}!`)
+    bot.stats.guild.update(member.guild.id, 'newMembers', 1);
+
+    print(`Novo membro ${member.user.tag}!`);
   },
 }

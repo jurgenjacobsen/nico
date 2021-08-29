@@ -52,7 +52,6 @@ export const event: EventOptions = {
                 if (m.deletable) m.delete()
               }, 5000)
             })
-          print(`${message.author.tag} subiu para o nível de texto ${user.textLevel}!`)
         })
         bot.eco.addMoney(Math.floor(Util.random(1, 5)), message.author.id, message.guild.id)
         setTimeout(() => cooldowns.delete(ckey), 60 * 1000)
@@ -63,10 +62,17 @@ export const event: EventOptions = {
      *  Adds stats to the user and guild
      */
     if (bot.config.text.allowedStatsChannels.includes(message.channelId)) {
-      // Soon
-    }
+      if(cmdregex.test(message.content)) {
+        bot.stats.users.update(message.author.id, 'commands', 1);
+      } else {
+        bot.stats.users.update(message.author.id, 'messages', 1);
+      };
+    };
 
-    if (message.content.startsWith('+update')) {
+    /**
+     * Slash commands manager - Provisory way to manage bot's commands
+     */
+    if (message.content.startsWith('+update') && bot.config.devs.ids.includes(message.author.id)) {
       let comando = message.content.replace('+update ', '').trim().toLowerCase()
       let cmds = await message.guild.commands.fetch()
 
@@ -76,7 +82,7 @@ export const event: EventOptions = {
       cmd?.edit(cmd_data)
     }
 
-    if (message.content.startsWith('+create')) {
+    if (message.content.startsWith('+create') && bot.config.devs.ids.includes(message.author.id)) {
       let comando = message.content.replace('+create ', '').trim().toLowerCase()
       let cmd_data = data.find((c) => c.name === comando)
       if (!cmd_data) return print('Comando não encontrado nos dados locais!')
@@ -86,7 +92,7 @@ export const event: EventOptions = {
       message.guild.commands.create(cmd_data)
     }
 
-    if (message.content.startsWith('+delete')) {
+    if (message.content.startsWith('+delete') && bot.config.devs.ids.includes(message.author.id)) {
       let comando = message.content.replace('+delete ', '').trim().toLowerCase()
       let cmds = await message.guild.commands.fetch()
 

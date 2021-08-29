@@ -25,6 +25,8 @@ export const config: Config = {
     vcRoleChannels: ['880911883299860511'],
     eventRoles: ['842597067187683338'],
     eventChannels: ['828323204099080212'],
+    allowedXPChannels: [],
+    allowedStatsChannels: [],
   },
   text: {
     allowedXPChannels: ['850815477064007760', '840045583028715541'],
@@ -62,6 +64,8 @@ export interface Config {
     vcRoleChannels: Snowflake[]
     eventRoles: Snowflake[]
     eventChannels: Snowflake[]
+    allowedXPChannels: Snowflake[],
+    allowedStatsChannels: Snowflake[],
   }
   text: {
     allowedXPChannels: Snowflake[]
