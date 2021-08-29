@@ -41,7 +41,7 @@
     "dsc.eco": "^2.0.0",
     "dsc.events": "^2.0.0",
     "dsc.levels": "^2.0.6",
-    "dsc.stats": "^3.0.0",
+    "dsc.stats": "^3.0.3",
     "libsodium-wrappers": "^0.7.9",
     "moment": "^2.29.1",
     "path": "^0.12.7"
