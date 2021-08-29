@@ -12,11 +12,11 @@ export const cmd: CommandOptions = {
     let items = bot.eco.store.items.sort((a, b) => b.price - a.price)
     let e1 = new MessageEmbed().setColor(bot.config.color).setDescription(`
     **Economia**\n
-    **Usuários**: ${users?.length}
-    **Valor total**: $${(users?.length as number) > 0 ? users?.map((u) => u.bank + u.wallet).reduce((pv, cv) => pv + cv) : 0}
-    **Reseta**: <t:${epoch(bot.config.economy.resetDate)}:R>
+    Usuários: ${users?.length}
+    Valor total: $${(users?.length as number) > 0 ? users?.map((u) => u.bank + u.wallet).reduce((pv, cv) => pv + cv) : 0}
+    Reseta: <t:${epoch(bot.config.economy.resetDate)}:R>
 
-    **Itens (${items.length})**: ${items.length > 12 ? items.map((i) => i.name).join(', ') : `\n` + items.map((i) => `> ${i.name} - $${i.price}`).join('\n')}
+    **Itens disponíveis (${items.length})**: ${items.length > 12 ? items.map((i) => i.name).join(', ') : `\n` + items.map((i) => `> ${i.name} - $${i.price}`).join('\n')}
     `)
 
     interaction.reply({
