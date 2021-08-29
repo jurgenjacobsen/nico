@@ -7,7 +7,7 @@ import { NicoUser } from "../utils/utils";
 
 export const cmd: CommandOptions = {
   name: 'profile',
-  devOnly: true,
+  devOnly: false,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     
     switch(interaction.options.getSubcommand()) {
@@ -36,7 +36,7 @@ export const cmd: CommandOptions = {
           { name: 'Badges', value: `${badges.LIST.filter((b) => data.badges.includes(b.id)).map((b) => b.emoji).join(' - ')}ㅤ`}
         ])
         .setDescription(`
-        ${data.about}\n
+        ${data.about ?? ''}\n
         `)
         .setImage(`${data.bannerURL !== null ? data.bannerURL : ''}`);
         return interaction.reply({
@@ -67,6 +67,7 @@ export const cmd: CommandOptions = {
           badges: user.badges,
           bannerURL: user.bannerURL,
           color: user.color,
+          createdAt: user.createdAt,
         };
 
         await bot.db.members.set(interaction.user.id, newData);
@@ -98,6 +99,7 @@ export const cmd: CommandOptions = {
           badges: ['2'],
           bannerURL: 'https://i.imgur.com/EbCa9W7.png',
           color: bot.config.color,
+          createdAt: new Date(),
         }
 
         await bot.db.members.set(interaction.user.id, newData);

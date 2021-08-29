@@ -196,5 +196,6 @@ export interface NicoUser {
   badges: string[];
   bannerURL: string | null;
   color: ColorResolvable | string | null;
+  createdAt: Date;
 }
 

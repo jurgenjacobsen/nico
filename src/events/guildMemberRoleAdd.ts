@@ -19,28 +19,28 @@ export const event: EventOptions = {
       // Registro
       member.roles.add(registercat)
 
-      print(`Categoria ${registercat.name} adicionada!`)
+      print(`Categoria ${registercat.name.replace(/ /g, '')} adicionada em ${member.user.tag}!`)
     }
 
     if (topfeedcat.position > role.position && levelcat.position < role.position) {
       // Top feed
       member.roles.add(topfeedcat)
 
-      print(`Categoria ${topfeedcat.name} adicionada!`)
+      print(`Categoria ${topfeedcat.name.replace(/ /g, '')} adicionada em ${member.user.tag}!`)
     }
 
     if (levelcat.position > role.position && rolescat.position < role.position) {
       // Nivel
       member.roles.add(levelcat)
 
-      print(`Categoria ${levelcat.name} adicionada!`)
+      print(`Categoria ${levelcat.name.replace(/ /g, '')} adicionada em ${member.user.tag}!`)
     }
 
     if (rolescat.position > role.position) {
       // Roles
       member.roles.add(rolescat)
 
-      print(`Categoria ${rolescat.name} adicionada!`)
+      print(`Categoria ${rolescat.name.replace(/ /g, '')} adicionada em ${member.user.tag}!`)
     }
   },
 }

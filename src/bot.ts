@@ -84,7 +84,15 @@ export const bot = new Bot({
     Intents.FLAGS.GUILD_PRESENCES,
     Intents.FLAGS.GUILD_VOICE_STATES,
     Intents.FLAGS.GUILD_WEBHOOKS,
-  ]
+  ],
+  presence: {
+    activities: [
+      {
+        name: 'Dema City',
+        type: 'WATCHING',
+      }
+    ]
+  }
 });
 
 bot.levels.on('textLevelUp', (user: User) => {
