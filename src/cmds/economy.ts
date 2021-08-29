@@ -16,7 +16,9 @@ export const cmd: CommandOptions = {
     Valor total: $${(users?.length as number) > 0 ? users?.map((u) => u.bank + u.wallet).reduce((pv, cv) => pv + cv) : 0}
     Reseta: <t:${epoch(bot.config.economy.resetDate)}:R>
 
-    **Itens disponíveis (${items.length})**: ${items.length > 12 ? items.map((i) => i.name).join(', ') : `\n` + items.map((i) => `> ${i.name} - $${i.price}`).join('\n')}
+    **Itens disponíveis (${items.length})**: ${
+      items.length > 12 ? items.map((i) => i.name).join(', ') : `\n` + items.map((i) => `> ${i.name} - $${i.price}`).join('\n')
+    }
     `)
 
     interaction.reply({

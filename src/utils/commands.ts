@@ -26,8 +26,8 @@ export const data: ApplicationCommandData[] = [
         description: 'Usuário que você deseja ver as informações',
         type: 'USER',
         required: false,
-      }
-    ]
+      },
+    ],
   },
   {
     name: 'together',
@@ -40,15 +40,15 @@ export const data: ApplicationCommandData[] = [
         description: 'Tipo de party',
         type: 'STRING',
         choices: [
-          {name: 'Youtube', value: 'youtube'},
-          {name: 'Poker', value: 'poker'},
-          {name: 'Chess', value: 'chess'},
-          {name: 'Betrayal', value: 'betrayal'},
-          {name: 'Fishing', value: 'fishing'}
+          { name: 'Youtube', value: 'youtube' },
+          { name: 'Poker', value: 'poker' },
+          { name: 'Chess', value: 'chess' },
+          { name: 'Betrayal', value: 'betrayal' },
+          { name: 'Fishing', value: 'fishing' },
         ],
-        required: true
-      }
-    ]
+        required: true,
+      },
+    ],
   },
   {
     name: 'profile',
@@ -65,9 +65,9 @@ export const data: ApplicationCommandData[] = [
             required: false,
             name: 'membro',
             description: 'Membro pelo qual você deseja ver o perfil',
-            type: 'USER'
-          }
-        ]
+            type: 'USER',
+          },
+        ],
       },
       {
         name: 'create',
@@ -81,7 +81,7 @@ export const data: ApplicationCommandData[] = [
           { name: 'pronome', description: 'Qual seu pronome?', required: false, type: 'STRING' },
           { name: 'gênero', description: 'Qual seu gênero?', required: false, type: 'STRING' },
           { name: 'orientação', description: 'Qual sua orientação?', required: false, type: 'STRING' },
-        ]
+        ],
       },
       {
         name: 'edit',
@@ -94,8 +94,8 @@ export const data: ApplicationCommandData[] = [
           { name: 'pronome', description: 'Qual seu pronome?', required: false, type: 'STRING' },
           { name: 'gênero', description: 'Qual seu gênero?', required: false, type: 'STRING' },
           { name: 'orientação', description: 'Qual sua orientação?', required: false, type: 'STRING' },
-        ]
-      }
+        ],
+      },
     ],
   },
   {
@@ -112,9 +112,9 @@ export const data: ApplicationCommandData[] = [
         choices: [
           { name: 'economia', value: 'ECONOMY' },
           { name: 'níveis de voz', value: 'VOICE_LEVEL' },
-          { name: 'níveis de texto', value: 'TEXT_LEVEL' }
-        ]
-      }
-    ]
-  }
+          { name: 'níveis de texto', value: 'TEXT_LEVEL' },
+        ],
+      },
+    ],
+  },
 ]

@@ -8,24 +8,24 @@ import { Levels } from 'dsc.levels'
 import { Economy, Item } from 'dsc.eco'
 import { GuildStats, UserStats } from 'dsc.stats'
 import { User } from 'dsc.levels/lib/Levels'
-import { print } from './utils/utils';
+import { print } from './utils/utils'
 import { Database } from 'dsc.db'
 import { BirthdaysManager } from './utils/birthdays'
 
 export class Bot extends Client {
-  public config: Config;
-  public commands: Commands;
-  public events: EventHandler;
-  public levels: Levels;
-  public eco: Economy;
-  public birthdays: BirthdaysManager;
-  public voiceIntervals: Collection<string, NodeJS.Timer | null>;
+  public config: Config
+  public commands: Commands
+  public events: EventHandler
+  public levels: Levels
+  public eco: Economy
+  public birthdays: BirthdaysManager
+  public voiceIntervals: Collection<string, NodeJS.Timer | null>
   public stats: {
-    users: UserStats;
-    guild: GuildStats;
+    users: UserStats
+    guild: GuildStats
   }
   public db: {
-    members: Database;
+    members: Database
   }
   constructor(options: ClientOptions) {
     super(options)
@@ -55,23 +55,22 @@ export class Bot extends Client {
         collection: 'economy',
       },
       items: [new Item({ id: '1', name: '2', price: 100 }), new Item({ id: '2', name: 'Bah', price: 21323 })],
-    });
+    })
 
-    this.voiceIntervals = new Collection();
+    this.voiceIntervals = new Collection()
 
     this.stats = {
-      users: new UserStats({db: mongo, dateFormat: 'DD/MM/YYYY'}),
-      guild: new GuildStats({db: mongo, dateFormat: 'DD/MM/YYYY'}),
+      users: new UserStats({ db: mongo, dateFormat: 'DD/MM/YYYY' }),
+      guild: new GuildStats({ db: mongo, dateFormat: 'DD/MM/YYYY' }),
     }
 
     this.db = {
-      members: new Database({...mongo, collection: 'members' })
+      members: new Database({ ...mongo, collection: 'members' }),
     }
 
-    this.birthdays = new BirthdaysManager(this.db.members);
+    this.birthdays = new BirthdaysManager(this.db.members)
 
-    logs(this);
-
+    logs(this)
   }
 }
 
@@ -99,31 +98,29 @@ export const bot = new Bot({
       {
         name: 'Dema City',
         type: 'WATCHING',
-      }
-    ]
-  }
-});
+      },
+    ],
+  },
+})
 
 bot.levels.on('textLevelUp', (user: User) => {
-  let u = bot.users.cache.get(user.userID);
-  print(`[TEXTO] ${u?.tag} subiu para o nível ${user.textLevel}!`);
-});
+  let u = bot.users.cache.get(user.userID)
+  print(`[TEXTO] ${u?.tag} subiu para o nível ${user.textLevel}!`)
+})
 
 bot.levels.on('voiceLevelUp', (user: User) => {
-  let u = bot.users.cache.get(user.userID);
-  print(`[VOZ] ${u?.tag} subiu para o nível ${user.voiceLevel}!`);
-});
+  let u = bot.users.cache.get(user.userID)
+  print(`[VOZ] ${u?.tag} subiu para o nível ${user.voiceLevel}!`)
+})
 
 bot.birthdays.on('BDAY', (user) => {
-
   /**
    * Aniversário do fulano
    */
-
-});
+})
 
 bot.birthdays.on('NON-BDAY', (user) => {
   /**
    * Data não é aniversário do fulano
    */
-});
+})

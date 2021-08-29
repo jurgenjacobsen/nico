@@ -28,15 +28,15 @@ export const event: EventOptions = {
       suggestion(bot, message)
     }
 
-    let voiceState = message.guild.voiceStates.cache.get(message.author.id);
+    let voiceState = message.guild.voiceStates.cache.get(message.author.id)
 
     /**
      * Adds XP and a random small amount of money to the user
      */
-    if (bot.config.text.allowedXPChannels.includes(message.channelId) && !cmdregex.test(message.content) && (voiceState ? (voiceState.selfMute) : true)) {
-      let ckey = `MSG_${message.author.id}`;
+    if (bot.config.text.allowedXPChannels.includes(message.channelId) && !cmdregex.test(message.content) && (voiceState ? voiceState.selfMute : true)) {
+      let ckey = `MSG_${message.author.id}`
       if (!cooldowns.has(ckey)) {
-        cooldowns.add(ckey);
+        cooldowns.add(ckey)
         let xp = Math.floor(Util.random(15, 25))
         if (bot.config.text.DXPChannels.includes(message.channelId)) {
           xp = xp * 2
@@ -64,20 +64,20 @@ export const event: EventOptions = {
      *  Adds stats to the user
      */
     if (bot.config.text.allowedStatsChannels.includes(message.channelId)) {
-      if(cmdregex.test(message.content)) {
-        bot.stats.users.update(message.author.id, 'commands', 1);
+      if (cmdregex.test(message.content)) {
+        bot.stats.users.update(message.author.id, 'commands', 1)
       } else {
-        bot.stats.users.update(message.author.id, 'messages', 1);
-      };
-    };
+        bot.stats.users.update(message.author.id, 'messages', 1)
+      }
+    }
 
     /**
      * Adds stats to the guild
      */
-    if(cmdregex.test(message.content)) {
-      bot.stats.guild.update(message.guild.id, 'commands', 1);
+    if (cmdregex.test(message.content)) {
+      bot.stats.guild.update(message.guild.id, 'commands', 1)
     } else {
-      bot.stats.guild.update(message.author.id, 'messages', 1);
+      bot.stats.guild.update(message.author.id, 'messages', 1)
     }
 
     /**
@@ -108,7 +108,7 @@ export const event: EventOptions = {
       let cmds = await message.guild.commands.fetch()
 
       let cmd = cmds.find((c) => c.name === comando)
-      cmd?.delete();
+      cmd?.delete()
     }
   },
 }

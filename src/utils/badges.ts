@@ -1,4 +1,4 @@
-import { EmojiResolvable } from "discord.js";
+import { EmojiResolvable } from 'discord.js'
 
 export const badges = {
   LIST: [
@@ -15,17 +15,17 @@ export const badges = {
       date: new Date('August 28, 2021'),
       emoji: '<:bughunter:859189259603542076>',
       id: '2',
-    }
+    },
   ] as Badge[],
   get: (id: string) => {
-    return badges.LIST.find((b) => b.id === b.id) ?? null;
-  }
+    return badges.LIST.find((b) => b.id === b.id) ?? null
+  },
 }
 
 export interface Badge {
-  name: string,
-  description: string,
-  date: Date,
-  emoji: EmojiResolvable,
-  id: string,
+  name: string
+  description: string
+  date: Date
+  emoji: EmojiResolvable
+  id: string
 }

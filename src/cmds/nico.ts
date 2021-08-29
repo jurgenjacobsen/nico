@@ -1,7 +1,7 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { CommandOptions } from 'dsc.cmds'
 import { Bot } from '../bot'
-import { epoch } from '../utils/utils';
+import { epoch } from '../utils/utils'
 
 export const cmd: CommandOptions = {
   name: 'nico',
@@ -23,6 +23,5 @@ export const cmd: CommandOptions = {
     interaction.reply({
       embeds: [embed],
     })
-
   },
 }

@@ -7,9 +7,8 @@ export const event: EventOptions = {
   name: 'voiceChannelJoin',
   once: false,
   run: (bot: Bot, member: GuildMember, channel: VoiceChannel) => {
-    
-    VoiceRoles(bot, member, channel);
+    VoiceRoles(bot, member, channel)
 
-    VoiceCounters(bot, member, channel);
+    VoiceCounters(bot, member, channel)
   },
 }

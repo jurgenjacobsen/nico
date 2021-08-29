@@ -134,92 +134,88 @@ export const epoch = (time: Date | string | number) => {
   return (new Date(time).getTime() / 1000 + 900 + 330 * 60).toString().split('.')[0]
 }
 
-export const VoiceRoles = (bot: Bot, member: GuildMember, channel: VoiceChannel | {id: Snowflake}) => {
-  let vconfig = bot.config.voice;
-  let roles = member.roles.cache.map((r) => r.id);
+export const VoiceRoles = (bot: Bot, member: GuildMember, channel: VoiceChannel | { id: Snowflake }) => {
+  let vconfig = bot.config.voice
+  let roles = member.roles.cache.map((r) => r.id)
 
-  if(vconfig.vcRoleChannels.includes(channel.id) && roles.filter((r) => vconfig.vcRoles.includes(r)).length === 0) {
-
-    member.roles.add(vconfig.vcRoles)
-    .then(() => print(`Cargos de call adicionados em ${member.user.tag}`))
-    .catch((err) => {
-      print(`Erro ao adicionar cargos de call em ${member.user.tag}`);
-      console.error(err);
-    });
-
+  if (vconfig.vcRoleChannels.includes(channel.id) && roles.filter((r) => vconfig.vcRoles.includes(r)).length === 0) {
+    member.roles
+      .add(vconfig.vcRoles)
+      .then(() => print(`Cargos de call adicionados em ${member.user.tag}`))
+      .catch((err) => {
+        print(`Erro ao adicionar cargos de call em ${member.user.tag}`)
+        console.error(err)
+      })
   }
 
-  if(!vconfig.vcRoleChannels.includes(channel.id) && roles.filter((r) => vconfig.vcRoles.includes(r)).length > 0) {
-    member.roles.remove(vconfig.vcRoles)
-    .then(() => print(`Cargos de call removido de ${member.user.tag}`))
-    .catch((err) => {
-      print(`Erro ao remover cargos de call de ${member.user.tag}`);
-      console.error(err);
-    });
-
-  };
-
-  if(vconfig.eventChannels.includes(channel.id) && roles.filter((r) => vconfig.eventRoles.includes(r)).length === 0) {
-
-    member.roles.add(vconfig.eventRoles)
-    .then(() => print(`Cargos de call adicionados em ${member.user.tag}`))
-    .catch((err) => {
-      print(`Erro ao adicionar cargos de evento em ${member.user.tag}`);
-      console.error(err);
-    });
-
+  if (!vconfig.vcRoleChannels.includes(channel.id) && roles.filter((r) => vconfig.vcRoles.includes(r)).length > 0) {
+    member.roles
+      .remove(vconfig.vcRoles)
+      .then(() => print(`Cargos de call removido de ${member.user.tag}`))
+      .catch((err) => {
+        print(`Erro ao remover cargos de call de ${member.user.tag}`)
+        console.error(err)
+      })
   }
 
-  if(!vconfig.eventChannels.includes(channel.id) && roles.filter((r) => vconfig.eventRoles.includes(r)).length !== 0) {
-
-    member.roles.remove(vconfig.eventRoles)
-    .then(() => print(`Cargos de evento removido de ${member.user.tag}`))
-    .catch((err) => {
-      print(`Erro ao remover cargos de eventos de ${member.user.tag}`);
-      console.error(err);
-    });
-
+  if (vconfig.eventChannels.includes(channel.id) && roles.filter((r) => vconfig.eventRoles.includes(r)).length === 0) {
+    member.roles
+      .add(vconfig.eventRoles)
+      .then(() => print(`Cargos de call adicionados em ${member.user.tag}`))
+      .catch((err) => {
+        print(`Erro ao adicionar cargos de evento em ${member.user.tag}`)
+        console.error(err)
+      })
   }
-};
+
+  if (!vconfig.eventChannels.includes(channel.id) && roles.filter((r) => vconfig.eventRoles.includes(r)).length !== 0) {
+    member.roles
+      .remove(vconfig.eventRoles)
+      .then(() => print(`Cargos de evento removido de ${member.user.tag}`))
+      .catch((err) => {
+        print(`Erro ao remover cargos de eventos de ${member.user.tag}`)
+        console.error(err)
+      })
+  }
+}
 
 export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChannel) => {
-  let guild = member.guild;
-  let state = guild.voiceStates.cache.get(member.id);
+  let guild = member.guild
+  let state = guild.voiceStates.cache.get(member.id)
 
-  bot.voiceIntervals.delete(member.id);
-  
+  bot.voiceIntervals.delete(member.id)
+
   let interval = setInterval(() => {
-    bot.stats.guild.update(guild.id, 'voice', 10);
-    
-    if(bot.config.voice.allowedStatsChannels.includes(channel.id)) {
-      bot.stats.users.update(member.id, 'voice', 10);
-    };
-    if(bot.config.voice.allowedXPChannels.includes(channel.id)) {
-      if((state?.selfDeaf || state?.selfMute) && !state.streaming && !state.selfVideo) {
-        bot.levels.update(member.id, 'VOICE', Math.floor(Util.random(15, 35) / 2), guild.id);
+    bot.stats.guild.update(guild.id, 'voice', 10)
+
+    if (bot.config.voice.allowedStatsChannels.includes(channel.id)) {
+      bot.stats.users.update(member.id, 'voice', 10)
+    }
+    if (bot.config.voice.allowedXPChannels.includes(channel.id)) {
+      if ((state?.selfDeaf || state?.selfMute) && !state.streaming && !state.selfVideo) {
+        bot.levels.update(member.id, 'VOICE', Math.floor(Util.random(15, 35) / 2), guild.id)
       } else {
-        bot.levels.update(member.id, 'VOICE', Math.floor(Util.random(15, 35)), guild.id);
+        bot.levels.update(member.id, 'VOICE', Math.floor(Util.random(15, 35)), guild.id)
       }
-    };
-  }, 10 * 60 * 1000);
-  bot.voiceIntervals.set(member.id, interval);
+    }
+  }, 10 * 60 * 1000)
+  bot.voiceIntervals.set(member.id, interval)
 }
 
 export interface NicoUser {
-  name: string | null;
-  about: string | null;
-  birthday: Date | null;
-  location: string | null;
-  pronoun: string | null;
-  gender: string | null;
-  orientation: string | null;
+  name: string | null
+  about: string | null
+  birthday: Date | null
+  location: string | null
+  pronoun: string | null
+  gender: string | null
+  orientation: string | null
 
-  id: string;
-  bdaynotified: Date | null;
-  verified: boolean;
-  badges: string[];
-  bannerURL: string | null;
-  color: ColorResolvable | string | null;
-  createdAt: Date;
+  id: string
+  bdaynotified: Date | null
+  verified: boolean
+  badges: string[]
+  bannerURL: string | null
+  color: ColorResolvable | string | null
+  createdAt: Date
 }
-
