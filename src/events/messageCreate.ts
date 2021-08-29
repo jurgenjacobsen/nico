@@ -28,11 +28,13 @@ export const event: EventOptions = {
       suggestion(bot, message)
     }
 
+    let voiceState = message.guild.voiceStates.cache.get(message.author.id);
+
     /**
      * Adds XP and a random small amount of money to the user
      */
-    if (bot.config.text.allowedXPChannels.includes(message.channelId) && !cmdregex.test(message.content)) {
-      let ckey = `MSG_${message.author.id}`
+    if (bot.config.text.allowedXPChannels.includes(message.channelId) && !cmdregex.test(message.content) && (voiceState ? (voiceState.selfMute) : true)) {
+      let ckey = `MSG_${message.author.id}`;
       if (!cooldowns.has(ckey)) {
         cooldowns.add(ckey);
         let xp = Math.floor(Util.random(15, 25))
