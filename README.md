@@ -1,3 +1,4 @@
+![Nico](https://raw.githubusercontent.com/jurgenjacobsen/nico/main/assets/Nico.png)
 # Nico Bot
 [![wakatime](https://wakatime.com/badge/github/jurgenjacobsen/nico.svg)](https://wakatime.com/badge/github/jurgenjacobsen/nico)
 [![build](https://img.shields.io/github/languages/top/jurgenjacobsen/nico?style=flat-square)](#)
