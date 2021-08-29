@@ -86,4 +86,4 @@ bot.levels.on('textLevelUp', (user: User) => {
 bot.levels.on('voiceLevelUp', (user: User) => {
   let u = bot.users.cache.get(user.userID);
   print(`[VOZ] ${u?.tag} subiu para o nível ${user.voiceLevel}!`);
-})
+});

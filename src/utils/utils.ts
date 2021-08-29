@@ -149,7 +149,6 @@ export const VoiceRoles = (bot: Bot, member: GuildMember, channel: VoiceChannel 
   }
 
   if(!vconfig.vcRoleChannels.includes(channel.id) && roles.filter((r) => vconfig.vcRoles.includes(r)).length > 0) {
-  
     member.roles.remove(vconfig.vcRoles)
     .then(() => print(`Cargos de call removido de ${member.user.tag}`))
     .catch((err) => {
