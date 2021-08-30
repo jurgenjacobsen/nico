@@ -33,7 +33,9 @@ export const config: Config = {
     eventRoles: [
       '842597067187683338'
     ],
-    /** Canais de evento */
+    /** Canais de evento
+     * 
+     */
     eventChannels: [
       '828323204099080212'
     ],
