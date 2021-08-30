@@ -4,7 +4,7 @@ import { Bot } from '../bot'
 
 export const cmd: CommandOptions = {
   name: 'withdraw',
-  devOnly: true,
+  devOnly: false,
   guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let amount = interaction.options.getNumber('quantia', true)

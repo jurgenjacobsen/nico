@@ -5,7 +5,7 @@ import { epoch } from '../utils/utils'
 
 export const cmd: CommandOptions = {
   name: 'economy',
-  devOnly: true,
+  devOnly: false,
   guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let users = await bot.eco.list(interaction.guild?.id)

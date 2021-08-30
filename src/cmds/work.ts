@@ -5,7 +5,7 @@ import { Bot } from '../bot'
 
 export const cmd: CommandOptions = {
   name: 'work',
-  devOnly: true,
+  devOnly: false,
   guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let timeout = 6 * 60 * 60 * 1000

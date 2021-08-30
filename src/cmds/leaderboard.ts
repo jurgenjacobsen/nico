@@ -5,7 +5,7 @@ import { Bot } from '../bot'
 export const cmd: CommandOptions = {
   name: 'leaderboard',
   devOnly: true,
-  guildOnly: true,
+  guildOnly: false,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let type = interaction.options.getString('tipo', true) as 'ECONOMY' | 'VOICE_LEVEL' | 'TEXT_LEVEL'
     let embed = new MessageEmbed().setColor(bot.config.color)

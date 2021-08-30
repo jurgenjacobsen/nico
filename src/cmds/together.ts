@@ -5,7 +5,7 @@ import { Bot } from '../bot'
 
 export const cmd: CommandOptions = {
   name: 'together',
-  devOnly: true,
+  devOnly: false,
   guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let together = new DiscordTogether(bot)

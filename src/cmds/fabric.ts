@@ -5,7 +5,7 @@ import { Bot } from '../bot'
 
 export const cmd: CommandOptions = {
   name: 'fabric',
-  devOnly: true,
+  devOnly: false,
   guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let user = interaction.options.getUser('membro', false) ?? interaction.user

@@ -5,7 +5,7 @@ import ms from 'ms'
 
 export const cmd: CommandOptions = {
   name: 'sorteio',
-  devOnly: true,
+  devOnly: false,
   guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let duration = interaction.options.getString('duração', true)
