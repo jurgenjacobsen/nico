@@ -23,13 +23,11 @@ export const config: Config = {
   voice: {
     /** Cargos que serão dados ao usuário quando um membro entrar em call */
     vcRoles: [],
-    /*** Canais de voz que darão cargos de call ao entrar */
+    /** Canais de voz que darão cargos de call ao entrar */
     vcRoleChannels: [],
     /** Cargos que serão adicionados quando o membro entrar em um canal de evento */
     eventRoles: ['842597067187683338'],
-    /** Canais de evento
-     *
-     */
+    /** Canais de evento */
     eventChannels: ['828323204099080212'],
     allowedXPChannels: [],
     /** ID dos canais que re */
