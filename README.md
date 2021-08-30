@@ -11,7 +11,7 @@ It is a project that is taking me some months to develop with feedback of great 
 > **DISCLAIMER**: **DO NOT** use this project for personal neither comercial use. Only with permission from the project developers!
 
 ___
-### Todo List (16/19)
+### Todo List (17/20)
 #### Cosméticos
 
 - [X] - Sistema de sugestões
@@ -19,10 +19,11 @@ ___
 - [X] - Mensagem de boas vindas
 - [X] - Cargos de call
 - [X] - Cargos de call de vento
-- [ ] - Topfeed
 - [X] - Cargos de categorias
 - [X] - Sistema de cargos e mensagem de aniversariantes
 - [X] - Comando de informações de cada usuário (Economia, Níveis, Estatísticas, etc)
+- [X] - Comando para sorteios
+- [ ] - Topfeed
 
 #### Economia
 

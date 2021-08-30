@@ -22,7 +22,7 @@ export class BirthdaysManager {
     let hour = today.getHours()
     let min = today.getMinutes()
 
-    if ((hour === 12 && [0, 1, 2, 3].includes(min)) || (hour === 0 && [0, 1, 2, 3].includes(min))) {
+    if ((hour === 12 && [0, 1].includes(min)) || (hour === 0 && [0, 1].includes(min))) {
       print(`Checando as datas de aniversário do membros!`)
       let raw = await this.members.list()
       let members = raw?.map((r) => r.data) ?? []

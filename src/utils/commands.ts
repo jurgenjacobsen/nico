@@ -165,5 +165,37 @@ export const data: ApplicationCommandData[] = [
         required: true,
       }
     ]
+  },
+  {
+    name: 'sorteio',
+    description: 'Cria um sorteio',
+    type: 'CHAT_INPUT',
+    defaultPermission: false,
+    options: [
+      {
+        name: 'duração',
+        description: 'A duração do sorteio',
+        type: 'STRING',
+        required: true,
+      },
+      {
+        name: 'vencedores',
+        description: 'Número de possíveis vencedores',
+        type: 'INTEGER',
+        required: true,
+      },
+      {
+        name: 'prêmio',
+        description: 'Qual será o prêmio do sorteio',
+        type: 'STRING',
+        required: true,
+      },
+      {
+        name: 'canal',
+        description: 'Qual será o canal em que o sorteio será enviado',
+        type: 'CHANNEL',
+        required: true,
+      }
+    ]
   }
 ]

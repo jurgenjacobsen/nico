@@ -11,7 +11,7 @@ import { User } from 'dsc.levels/lib/Levels'
 import { print } from './utils/utils'
 import { Database } from 'dsc.db'
 import { BirthdaysManager } from './utils/birthdays'
-
+import { GiveawaysManager } from 'discord-giveaways';
 export class Bot extends Client {
   public config: Config
   public commands: Commands
@@ -20,6 +20,7 @@ export class Bot extends Client {
   public eco: Economy
   public birthdays: BirthdaysManager
   public voiceIntervals: Collection<string, NodeJS.Timer | null>
+  public giveaways!: GiveawaysManager;
   public stats: {
     users: UserStats
     guild: GuildStats
@@ -57,7 +58,21 @@ export class Bot extends Client {
       items: [new Item({ id: '1', name: '2', price: 100 }), new Item({ id: '2', name: 'Bah', price: 21323 })],
     })
 
-    this.voiceIntervals = new Collection()
+    this.voiceIntervals = new Collection();
+
+    try {
+      this.giveaways = new GiveawaysManager(this, {
+        default: {
+          botsCanWin: false,
+          embedColor: this.config.color,
+          embedColorEnd: '#5865F2',
+          reaction: '🎉',
+        },
+        storage: path.join(__dirname, './giveaways.json')
+      });
+    } catch {
+      print('Erro ao carregar os sorteios');
+    }
 
     this.stats = {
       users: new UserStats({ db: mongo, dateFormat: 'DD/MM/YYYY' }),
