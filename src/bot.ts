@@ -61,7 +61,9 @@ export class Bot extends Client {
         ...mongo,
         collection: 'economy',
       },
-      items: [new Item({ id: '1', name: '2', price: 100 }), new Item({ id: '2', name: 'Bah', price: 21323 })],
+      items: [
+        
+      ],
     })
 
     this.voiceIntervals = new Collection()
@@ -74,7 +76,7 @@ export class Bot extends Client {
           embedColorEnd: '#5865F2',
           reaction: '🎉',
         },
-        storage: path.join(__dirname, './giveaways.json'),
+        storage: path.join(__dirname, './utils/giveaways.json'),
       })
     } catch {
       print('Erro ao carregar os sorteios')
