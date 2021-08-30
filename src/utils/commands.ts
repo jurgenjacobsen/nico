@@ -129,8 +129,8 @@ export const data: ApplicationCommandData[] = [
         description: 'Quantia que você deseja depositar',
         type: 'NUMBER',
         required: false,
-      }
-    ]
+      },
+    ],
   },
   {
     name: 'pix',
@@ -149,8 +149,8 @@ export const data: ApplicationCommandData[] = [
         description: 'Quantia que você deseja transferir',
         type: 'NUMBER',
         required: true,
-      }
-    ]
+      },
+    ],
   },
   {
     name: 'withdraw',
@@ -163,8 +163,8 @@ export const data: ApplicationCommandData[] = [
         description: 'Quantia que você deseja retirar',
         type: 'NUMBER',
         required: true,
-      }
-    ]
+      },
+    ],
   },
   {
     name: 'sorteio',
@@ -195,7 +195,7 @@ export const data: ApplicationCommandData[] = [
         description: 'Qual será o canal em que o sorteio será enviado',
         type: 'CHANNEL',
         required: true,
-      }
-    ]
-  }
+      },
+    ],
+  },
 ]

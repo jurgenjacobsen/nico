@@ -1,26 +1,25 @@
-import { CommandInteraction, TextChannel } from "discord.js";
-import { CommandOptions } from "dsc.cmds";
-import { Bot } from "../bot";
-import ms from 'ms';
-
+import { CommandInteraction, TextChannel } from 'discord.js'
+import { CommandOptions } from 'dsc.cmds'
+import { Bot } from '../bot'
+import ms from 'ms'
 
 export const cmd: CommandOptions = {
   name: 'sorteio',
   devOnly: true,
   guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
-    
-    let duration = interaction.options.getString('duração', true);
-    let winnerCount = interaction.options.getInteger('vencedores', true);
-    let prize = interaction.options.getString('prêmio', true);
-    let ch = interaction.options.getChannel('canal', true);
+    let duration = interaction.options.getString('duração', true)
+    let winnerCount = interaction.options.getInteger('vencedores', true)
+    let prize = interaction.options.getString('prêmio', true)
+    let ch = interaction.options.getChannel('canal', true)
 
-    let channel = interaction.guild?.channels.cache.get(ch.id) as TextChannel;
-    
-    if(!channel || !(channel instanceof TextChannel)) return interaction.reply({
-      content: `Canal inválido!`,
-      ephemeral: true,
-    });
+    let channel = interaction.guild?.channels.cache.get(ch.id) as TextChannel
+
+    if (!channel || !(channel instanceof TextChannel))
+      return interaction.reply({
+        content: `Canal inválido!`,
+        ephemeral: true,
+      })
 
     try {
       bot.giveaways.start(channel, {
@@ -37,20 +36,19 @@ export const cmd: CommandOptions = {
           noWinner: 'Sorteio cancelado, sem participantes válidos.',
           winners: 'Vencedor(es):',
           endedAt: 'Encerrado em',
-          hostedBy: 'Patrocinado por: ${this.hostedBy}'
-        }
-      });
+          hostedBy: 'Patrocinado por: ${this.hostedBy}',
+        },
+      })
     } catch {
       return interaction.reply({
         content: `Erro ao criar sorteio!`,
         ephemeral: true,
-      });
+      })
     }
 
     return interaction.reply({
       content: `Sorteio criado com sucesso!`,
       ephemeral: true,
     })
-
   },
 }
