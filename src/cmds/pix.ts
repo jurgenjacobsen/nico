@@ -28,6 +28,8 @@ export const cmd: CommandOptions = {
       });
     }
 
+    await bot.eco.ensure(to.id, interaction.guild.id);
+    
     let transfer = await bot.eco.transfer(amount, interaction.user.id, to.id, interaction.guild.id);
     if(!transfer) {
       return interaction.reply({
