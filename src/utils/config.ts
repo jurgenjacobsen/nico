@@ -21,58 +21,61 @@ export const config: Config = {
     minLength: 1,
   },
   voice: {
-    vcRoles: ['793123005555146782'],
+    /** Cargos que serão dados ao usuário quando um membro entrar em call */
+    vcRoles: [
+
+    ],
+    /*** Canais de voz que darão cargos de call ao entrar */
     vcRoleChannels: [
-      '716822059191107686',
-      '466255757289979905',
-      '724071900652896389',
-      '724425811398230046',
-      '829517101416185896',
-      '872253338534682664',
-      '698251644516958358',
+
     ],
-    eventRoles: ['842597067187683338'],
-    eventChannels: ['828323204099080212'],
-    allowedXPChannels: [
-      '716822059191107686',
-      '466255757289979905',
-      '724071900652896389',
-      '724425811398230046',
-      '829517101416185896',
-      '872253338534682664',
-      '698251644516958358',
-      '677321568791167019',
-      '718493496381669376',
-      '793550736981622844',
-      '832768823777820682',
+    /** Cargos que serão adicionados quando o membro entrar em um canal de evento */
+    eventRoles: [
+      '842597067187683338'
     ],
+    /** Canais de evento */
+    eventChannels: [
+      '828323204099080212'
+    ],
+    allowedXPChannels: [],
+    /** ID dos canais que re */
     allowedStatsChannels: [
-      '716822059191107686',
-      '466255757289979905',
-      '724071900652896389',
-      '724425811398230046',
-      '829517101416185896',
-      '872253338534682664',
-      '698251644516958358',
+
+    ],
+    /** ID dos cargos que receberão o dobro de XP */
+    DXPRoles: [
+    
+    ],
+    /** ID dos canais que receberão o dobro de XP */
+    DXPChannels: [
+      
     ],
   },
   text: {
-    allowedXPChannels: ['850815477064007760', '840045583028715541'],
-    allowedStatsChannels: [
-      '739188571667431494',
-      '466068493142458370',
-      '698246223420850227',
-      '821872371295059988',
-      '466244636621537281',
-      '816410847920259113',
-      '466242504824717315',
-      '850815477064007760',
-      '840045583028715541',
-      '691835751280803880',
-      '698317201106534460',
+    /** ID dos canais que é permitido receber XP */
+    allowedXPChannels: [
+
     ],
-    DXPRoles: [],
-    DXPChannels: [],
+    /** ID dos canais que é permitido contar estatísticas para o usuário */
+    allowedStatsChannels: [
+    
+    ],
+    /** ID das categorias que é permitido contar estatísticas para o usuário */
+    allowedStatsCats: [
+      
+    ],
+    /** ID das categorias que é permitido ao usuário receber XP */
+    allowedXPCats: [
+    
+    ],
+    /** ID dos cargos que receberão o dobro de XP */
+    DXPRoles: [
+    
+    ],
+    /** ID dos canais que receberão o dobro de XP */
+    DXPChannels: [
+      
+    ],
   },
   economy: {
     resetDate: new Date('11/10/2021'),
@@ -106,10 +109,14 @@ export interface Config {
     eventChannels: Snowflake[]
     allowedXPChannels: Snowflake[]
     allowedStatsChannels: Snowflake[]
+    DXPRoles: Snowflake[]
+    DXPChannels: Snowflake[]
   }
   text: {
     allowedXPChannels: Snowflake[]
     allowedStatsChannels: Snowflake[]
+    allowedStatsCats: Snowflake[]
+    allowedXPCats: Snowflake[]
     DXPRoles: Snowflake[]
     DXPChannels: Snowflake[]
   }

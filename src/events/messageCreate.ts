@@ -18,6 +18,9 @@ export const event: EventOptions = {
     if (message.author.bot) return
     if (!message.guild || !message.member) return
 
+    let channel = await message.guild.channels.fetch(message.channelId)
+    let category = channel?.parent
+
     /**
      *  Checks if the message content has any kind of not allowed discord invite
      */
@@ -33,7 +36,11 @@ export const event: EventOptions = {
     /**
      * Adds XP and a random small amount of money to the user
      */
-    if (bot.config.text.allowedXPChannels.includes(message.channelId) && !cmdregex.test(message.content) && (voiceState ? voiceState.selfMute : true)) {
+    if (
+      (bot.config.text.allowedXPChannels.includes(message.channelId) || bot.config.text.allowedXPCats.includes(category?.id as string)) &&
+      !cmdregex.test(message.content) &&
+      (voiceState ? voiceState.selfMute : true)
+    ) {
       let ckey = `MSG_${message.author.id}`
       if (!cooldowns.has(ckey)) {
         cooldowns.add(ckey)
@@ -63,7 +70,7 @@ export const event: EventOptions = {
     /**
      *  Adds stats to the user
      */
-    if (bot.config.text.allowedStatsChannels.includes(message.channelId)) {
+    if (bot.config.text.allowedStatsChannels.includes(message.channelId) || bot.config.text.allowedStatsCats.includes(category?.id as string)) {
       if (cmdregex.test(message.content)) {
         bot.stats.users.update(message.author.id, 'commands', 1)
       } else {

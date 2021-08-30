@@ -191,11 +191,19 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
     if (bot.config.voice.allowedStatsChannels.includes(channel.id)) {
       bot.stats.users.update(member.id, 'voice', 10)
     }
+
+    let xp = Math.floor(Util.random(15, 25))
+    if (bot.config.voice.DXPChannels.includes(channel.id)) {
+      xp = xp * 2
+    } else if (member.roles.cache.find((r) => bot.config.voice.DXPRoles.includes(r.id))) {
+      xp = xp * 2
+    }
+
     if (bot.config.voice.allowedXPChannels.includes(channel.id)) {
       if ((state?.selfDeaf || state?.selfMute) && !state.streaming && !state.selfVideo) {
-        bot.levels.update(member.id, 'VOICE', Math.floor(Util.random(15, 35) / 2), guild.id)
+        bot.levels.update(member.id, 'VOICE', xp / 2, guild.id)
       } else {
-        bot.levels.update(member.id, 'VOICE', Math.floor(Util.random(15, 35)), guild.id)
+        bot.levels.update(member.id, 'VOICE', xp, guild.id)
       }
     }
   }, 10 * 60 * 1000)
