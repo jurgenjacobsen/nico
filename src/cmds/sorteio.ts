@@ -22,23 +22,35 @@ export const cmd: CommandOptions = {
       ephemeral: true,
     });
 
-    bot.giveaways.start(channel, {
-      duration: ms(duration),
-      winnerCount: winnerCount,
-      prize: prize,
-      messages: {
-        giveaway: '🎉 | Sorteio',
-        giveawayEnded: '⏰ | Sorteio encerrado!',
-        inviteToParticipate: 'Reaja com 🎉 para participar!',
-        winMessage: 'Parabéns, {winners}! Você(s) ganharam **{this.prize}**!',
-        drawing: 'Restante: {timestamp}',
-        dropMessage: 'Seja o primeiro a reagir com 🎉!',
-        noWinner: 'Sorteio cancelado, sem participantes válidos.',
-        winners: 'Vencedor(es):',
-        endedAt: 'Encerrado em',
-        hostedBy: 'Patrocinado por: ${this.hostedBy}'
-      }
-    });
+    try {
+      bot.giveaways.start(channel, {
+        duration: ms(duration),
+        winnerCount: winnerCount,
+        prize: prize,
+        messages: {
+          giveaway: '🎉 | Sorteio',
+          giveawayEnded: '⏰ | Sorteio encerrado!',
+          inviteToParticipate: 'Reaja com 🎉 para participar!',
+          winMessage: 'Parabéns, {winners}! Você(s) ganharam **{this.prize}**!',
+          drawing: 'Restante: {timestamp}',
+          dropMessage: 'Seja o primeiro a reagir com 🎉!',
+          noWinner: 'Sorteio cancelado, sem participantes válidos.',
+          winners: 'Vencedor(es):',
+          endedAt: 'Encerrado em',
+          hostedBy: 'Patrocinado por: ${this.hostedBy}'
+        }
+      });
+    } catch {
+      return interaction.reply({
+        content: `Erro ao criar sorteio!`,
+        ephemeral: true,
+      });
+    }
+
+    return interaction.reply({
+      content: `Sorteio criado com sucesso!`,
+      ephemeral: true,
+    })
 
   },
 }
