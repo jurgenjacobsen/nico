@@ -22,62 +22,36 @@ export const config: Config = {
   },
   voice: {
     /** Cargos que serão dados ao usuário quando um membro entrar em call */
-    vcRoles: [
-
-    ],
+    vcRoles: [],
     /*** Canais de voz que darão cargos de call ao entrar */
-    vcRoleChannels: [
-
-    ],
+    vcRoleChannels: [],
     /** Cargos que serão adicionados quando o membro entrar em um canal de evento */
-    eventRoles: [
-      '842597067187683338'
-    ],
+    eventRoles: ['842597067187683338'],
     /** Canais de evento
-     * 
+     *
      */
-    eventChannels: [
-      '828323204099080212'
-    ],
+    eventChannels: ['828323204099080212'],
     allowedXPChannels: [],
     /** ID dos canais que re */
-    allowedStatsChannels: [
-
-    ],
+    allowedStatsChannels: [],
     /** ID dos cargos que receberão o dobro de XP */
-    DXPRoles: [
-    
-    ],
+    DXPRoles: [],
     /** ID dos canais que receberão o dobro de XP */
-    DXPChannels: [
-      
-    ],
+    DXPChannels: [],
   },
   text: {
     /** ID dos canais que é permitido receber XP */
-    allowedXPChannels: [
-
-    ],
+    allowedXPChannels: [],
     /** ID dos canais que é permitido contar estatísticas para o usuário */
-    allowedStatsChannels: [
-    
-    ],
+    allowedStatsChannels: [],
     /** ID das categorias que é permitido contar estatísticas para o usuário */
-    allowedStatsCats: [
-      
-    ],
+    allowedStatsCats: [],
     /** ID das categorias que é permitido ao usuário receber XP */
-    allowedXPCats: [
-    
-    ],
+    allowedXPCats: [],
     /** ID dos cargos que receberão o dobro de XP */
-    DXPRoles: [
-    
-    ],
+    DXPRoles: [],
     /** ID dos canais que receberão o dobro de XP */
-    DXPChannels: [
-      
-    ],
+    DXPChannels: [],
   },
   economy: {
     resetDate: new Date('11/10/2021'),

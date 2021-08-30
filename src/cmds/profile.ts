@@ -70,7 +70,7 @@ export const cmd: CommandOptions = {
             pronoun: interaction.options.getString('pronome') ?? user.pronoun,
             gender: interaction.options.getString('gênero') ?? user.gender,
             orientation: interaction.options.getString('orientação') ?? user.orientation,
-            birthday: user.birthday,
+            birthday: parseDate(interaction.options.getString('aniversário')) ?? user.birthday,
 
             id: user.id,
             bdaynotified: user.bdaynotified,

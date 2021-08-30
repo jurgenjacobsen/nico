@@ -90,6 +90,7 @@ export const data: ApplicationCommandData[] = [
         options: [
           { name: 'nome', description: 'Seu nome', required: false, type: 'STRING' },
           { name: 'sobre', description: 'Fale um pouco sobre você', required: false, type: 'STRING' },
+          { name: 'aniversário', description: 'Quando você nasceu?', required: false, type: 'STRING' },
           { name: 'localização', description: 'De onde você é?', required: false, type: 'STRING' },
           { name: 'pronome', description: 'Qual seu pronome?', required: false, type: 'STRING' },
           { name: 'gênero', description: 'Qual seu gênero?', required: false, type: 'STRING' },

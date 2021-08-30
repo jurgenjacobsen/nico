@@ -8,10 +8,10 @@ A discord.js bot for a Twenty One Pilots' fangroup.
 
 It is a project that is taking me some months to develop with feedback of great bughunters to enhance it more as possible.
 
-> **DISCLAIMER** - __DO NOT__ use this project for personal nor comercial use. Only with permission from the project developers!
+> **DISCLAIMER**: _DO NOT_ use this project for personal neither comercial use. Only with permission from the project developers!
 
 ___
-### Todo List (14/19)
+### Todo List (15/19)
 #### Cosméticos
 
 - [X] - Sistema de sugestões
@@ -35,7 +35,7 @@ ___
 
 - [X] - Dar XP por mensagens 
 - [ ] - Cargos por nível de texto e voz
-- [ ] - Opções de cargos e canais que darão XP em dobro
+- [X] - Opções de cargos e canais que darão XP em dobro
 
 #### Estatísticas
 
