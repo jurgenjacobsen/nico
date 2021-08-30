@@ -19,7 +19,7 @@ export class Bot extends Client {
   public levels: Levels
   public eco: Economy
   public birthdays: BirthdaysManager
-  public voiceIntervals: Collection<string, NodeJS.Timer | null>
+  public voiceIntervals: Collection<string, NodeJS.Timer | null>;
   public giveaways!: GiveawaysManager
   public stats: {
     users: UserStats
@@ -39,6 +39,12 @@ export class Bot extends Client {
       dir: path.join(__dirname, './cmds'),
       debug: true,
       devs: this.config.devs.ids,
+      msgs: {
+        cooldown: 'Você deve esperar um momento antes de usar este comando novamente!',
+        guildOnly: 'Comando somente para ser usado dentro do servidor.',
+        devOnly: 'Este comando é somente para desenvolvedores.',
+        channel: 'Canal não permitido.',
+      }
     })
 
     this.events = new EventHandler({
