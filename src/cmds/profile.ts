@@ -8,6 +8,7 @@ import { NicoUser } from '../utils/utils'
 export const cmd: CommandOptions = {
   name: 'profile',
   devOnly: false,
+  guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     switch (interaction.options.getSubcommand()) {
       case 'show':

@@ -7,6 +7,7 @@ import { print } from '../utils/utils'
 export const cmd: CommandOptions = {
   name: 'userinfo',
   devOnly: true,
+  guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let user = interaction.options.getUser('membro', false)
     if (!user) user = interaction.user

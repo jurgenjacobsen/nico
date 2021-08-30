@@ -118,4 +118,52 @@ export const data: ApplicationCommandData[] = [
       },
     ],
   },
+  {
+    name: 'deposit',
+    description: 'Deposite o dinheiro da sua carteira',
+    type: 'CHAT_INPUT',
+    defaultPermission: true,
+    options: [
+      {
+        name: 'quantia',
+        description: 'Quantia que você deseja depositar',
+        type: 'NUMBER',
+        required: false,
+      }
+    ]
+  },
+  {
+    name: 'pix',
+    description: 'Faz um pix para um usuário',
+    type: 'CHAT_INPUT',
+    defaultPermission: true,
+    options: [
+      {
+        name: 'membro',
+        description: 'Usuário que você deseja transferir o dinheiro',
+        type: 'USER',
+        required: true,
+      },
+      {
+        name: 'quantia',
+        description: 'Quantia que você deseja transferir',
+        type: 'NUMBER',
+        required: true,
+      }
+    ]
+  },
+  {
+    name: 'withdraw',
+    description: 'Retire dinheiro do banco para sua carteira',
+    type: 'CHAT_INPUT',
+    defaultPermission: true,
+    options: [
+      {
+        name: 'quantia',
+        description: 'Quantia que você deseja retirar',
+        type: 'NUMBER',
+        required: true,
+      }
+    ]
+  }
 ]
