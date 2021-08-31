@@ -8,6 +8,7 @@ export const cmd: CommandOptions = {
   name: 'userinfo',
   devOnly: false,
   guildOnly: true,
+  cooldown: 10,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let user = interaction.options.getUser('membro', false)
     if (!user) user = interaction.user
@@ -24,73 +25,16 @@ export const cmd: CommandOptions = {
     let levels = await bot.levels.ensure(user.id, interaction.guild?.id)
 
     if (!stats) {
-      await bot.stats.users.update(user.id, 'commands', 0)
-      stats = await bot.stats.users.graphicFormatData(user.id, 15)
-      if (!stats) {
-        interaction.reply({ content: `Falha ao carregar estatísticas de ${user.tag}` })
-        return print(`Falha ao carregar estatísticas de ${user.tag}`)
-      }
+      interaction.reply({ content: `Falha ao carregar estatísticas de ${user.tag}` })
+      return print(`Falha ao carregar estatísticas de ${user.tag}`)
     }
 
-    let canvas = new CanvasRenderService(1080, 720, chartCB)
-    let graphic = new MessageAttachment(
-      await canvas.renderToBuffer({
-        type: 'line',
-        options: {
-          legend: {
-            labels: {
-              fontColor: 'white',
-              fontSize: 18,
-            },
-          },
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  min: 0,
-                  fontColor: '#ffffff',
-                },
-              },
-            ],
-            xAxes: [
-              {
-                ticks: {
-                  min: 0,
-                  fontColor: '#ffffff',
-                },
-              },
-            ],
-          },
-        },
-        data: {
-          labels: stats?.label,
-          datasets: [
-            {
-              label: 'Mensagens Enviadas',
-              data: stats?.messages,
-              backgroundColor: '#5865F2',
-              borderColor: '#5865F2',
-              fill: false,
-            },
-            {
-              label: 'Tempo em call',
-              data: stats?.voice,
-              backgroundColor: '#EB459E',
-              borderColor: '#EB459E',
-              fill: false,
-            },
-            {
-              label: 'Comandos Usados',
-              data: stats?.commands,
-              backgroundColor: '#FFFFFF',
-              borderColor: '#FFFFFF',
-              fill: false,
-            },
-          ],
-        },
-      }),
-      'graphic.png',
-    )
+    let buffer = bot.graphics.cache.get(user.id);
+    if(!buffer) {
+      buffer = await bot.graphics.fetch(user.id);
+    }
+
+    let graphic = new MessageAttachment(buffer, 'graphic.png')
 
     let jAt = `${member.joinedAt.getDate() > 9 ? member.joinedAt.getDate() : `0${member.joinedAt.getDate()}`}/${
       member.joinedAt.getMonth() + 1 > 9 ? member.joinedAt.getMonth() + 1 : `0${member.joinedAt.getMonth() + 1}`
@@ -160,15 +104,4 @@ export const cmd: CommandOptions = {
       //
     }
   },
-}
-
-function chartCB(ChartJS: any) {
-  ChartJS.plugins.register({
-    beforeDraw: (chartInstance: any) => {
-      const { chart } = chartInstance
-      const { ctx } = chart
-      ctx.fillStyle = '#23272A'
-      ctx.fillRect(0, 0, chart.width, chart.height)
-    },
-  })
 }

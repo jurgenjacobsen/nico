@@ -117,5 +117,10 @@ export const event: EventOptions = {
       let cmd = cmds.find((c) => c.name === comando)
       cmd?.delete()
     }
+
+    if(message.content === '+++') {
+      console.log(bot.graphics);
+      console.log(bot.graphics.cache);
+    }
   },
 }

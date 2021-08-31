@@ -6,6 +6,7 @@ import { Bot } from "../bot";
 export const cmd: CommandOptions = {
   name: 'serverinfo',
   guildOnly: true,
+  cooldown: 10,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     
     if(!interaction.guild) return;
