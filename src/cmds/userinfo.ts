@@ -12,15 +12,16 @@ export const cmd: CommandOptions = {
     let user = interaction.options.getUser('membro', false)
     if (!user) user = interaction.user
 
-    let member = (await interaction.guild?.members.fetch(user.id)) as GuildMember
+    let member = interaction.guild?.members.cache.get(user.id) as GuildMember;
+    
     if (!member || !member.joinedAt) {
       interaction.reply({ content: `Não foi possível ver o perfil de ${user.tag} pois aparentemente ele(a) não está no meu cache de usuários!` })
       return print(`Não foi possível ver o perfil de ${user.tag} pois aparentemente ele(a) não está no meu cache de usuários!`)
     }
 
     let stats = await bot.stats.users.graphicFormatData(user.id, 15)
-    let eco = await bot.eco.ensure(interaction.user.id, interaction.guild?.id)
-    let levels = await bot.levels.ensure(interaction.user.id, interaction.guild?.id)
+    let eco = await bot.eco.ensure(user.id, interaction.guild?.id)
+    let levels = await bot.levels.ensure(user.id, interaction.guild?.id)
 
     if (!stats) {
       await bot.stats.users.update(user.id, 'commands', 0)
@@ -149,10 +150,15 @@ export const cmd: CommandOptions = {
     `,
       )
 
-    interaction.reply({
-      embeds: [embed, embed2],
-      files: [graphic],
-    })
+    try {
+      if(!interaction) return;
+      interaction.reply({
+        embeds: [embed, embed2],
+        files: [graphic],
+      });
+    } catch {
+      //
+    }
   },
 }
 

@@ -11,7 +11,7 @@ It is a project that is taking me some months to develop with feedback of great 
 > **DISCLAIMER**: **DO NOT** use this project for personal neither comercial use. Only with permission from the project developers!
 
 ___
-### Todo List (17/20)
+### Todo List (17/21)
 #### Cosméticos
 
 - [X] - Sistema de sugestões
@@ -42,6 +42,7 @@ ___
 
 - [X] - Usuários
 - [X] - Servidor
+- [ ] - Comando para ver a estatísticas do servidor
 
 #### Segurança
 - [X] - Anti-Invite

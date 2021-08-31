@@ -198,4 +198,11 @@ export const data: ApplicationCommandData[] = [
       },
     ],
   },
+  {
+    name: 'serverinfo',
+    description: 'Mostra informações do servidor',
+    type: 'CHAT_INPUT',
+    defaultPermission: true,
+    options: []
+  }
 ]

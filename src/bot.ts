@@ -62,7 +62,7 @@ export class Bot extends Client {
         collection: 'economy',
       },
       items: [
-        
+
       ],
     })
 
@@ -124,7 +124,7 @@ export const bot = new Bot({
       },
     ],
   },
-})
+});
 
 bot.levels.on('textLevelUp', (user: User) => {
   let u = bot.users.cache.get(user.userID)
