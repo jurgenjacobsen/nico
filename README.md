@@ -52,7 +52,7 @@ ___
 #### Segurança & Moderação
 - [X] - Anti-Invite
 - [ ] - Banco de dados para configurar o bot através de comandos
-
+- [ ] - Comando de mensagem que quando clicar com o direito haverá a opção de publicar o conteúdo da mensagem no #notas através de um Webhook.
 ___
 
 ### Credits
