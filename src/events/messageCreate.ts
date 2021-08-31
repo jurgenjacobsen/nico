@@ -1,4 +1,4 @@
-import { Message, MessageEmbed } from 'discord.js'
+import { Message, MessageEmbed, Role } from 'discord.js'
 import { EventOptions } from 'dsc.events'
 import { Util } from 'dsc.levels'
 import { Bot } from '../bot'
@@ -86,6 +86,14 @@ export const event: EventOptions = {
     } else {
       bot.stats.guild.update(message.guild.id, 'messages', 1)
     }
+
+    /**
+     * The bot will answer or react to the message when he's mentioned, just for fun. :D
+     */
+    if(message.mentions.members?.has(bot.user?.id as string)) {
+      message.react(`👀`);
+    }
+
 
     /**
      * Slash commands manager - Provisory way to manage bot's commands
