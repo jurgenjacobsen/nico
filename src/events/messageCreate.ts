@@ -84,7 +84,7 @@ export const event: EventOptions = {
     if (cmdregex.test(message.content)) {
       bot.stats.guild.update(message.guild.id, 'commands', 1)
     } else {
-      bot.stats.guild.update(message.author.id, 'messages', 1)
+      bot.stats.guild.update(message.guild.id, 'messages', 1)
     }
 
     /**

@@ -1,9 +1,10 @@
-import { Client, ClientOptions, Collection, Intents } from 'discord.js'
+import { Client, ClientOptions, Collection, Guild, GuildMember, Intents, Role, Snowflake } from 'discord.js'
 import { Commands } from 'dsc.cmds'
 import { EventHandler } from 'dsc.events'
 import { Config, config, mongo } from './utils/config'
 import path from 'path'
 import logs from 'discord-logs'
+import colors from 'colors'
 import { Levels } from 'dsc.levels'
 import { Economy, Item } from 'dsc.eco'
 import { GuildStats, UserStats } from 'dsc.stats'
@@ -140,23 +141,63 @@ export const bot = new Bot({
 });
 
 bot.levels.on('textLevelUp', (user: User) => {
-  let u = bot.users.cache.get(user.userID)
-  print(`[TEXTO] ${u?.tag} subiu para o nível ${user.textLevel}!`)
+  let guild = bot.guilds.cache.get(bot.config.guild) as Guild;
+  let member = guild.members.cache.get(user.userID) as GuildMember;
+
+  /*
+  let role = guild.roles.cache.find((r) => r.name.includes(`nível ${user.textLevel}`));
+  if(role) {
+    member.roles.add(role);
+  }; 
+  */
+
+  print(`${colors.gray('[TEXTO]')} ${member.user.tag} subiu para o nível ${user.textLevel}!`)
 })
 
 bot.levels.on('voiceLevelUp', (user: User) => {
-  let u = bot.users.cache.get(user.userID)
-  print(`[VOZ] ${u?.tag} subiu para o nível ${user.voiceLevel}!`)
-})
+  let guild = bot.guilds.cache.get(bot.config.guild) as Guild;
+  let member = guild.members.cache.get(user.userID) as GuildMember;
+
+  let roles: {[key: string]: Snowflake} = {
+    10: '861635332436918345',
+    20: '861635578859749437',
+    30: '795706003412746260',
+    40: '795703589300994058',
+    50: '861637124021026857'
+  }
+
+  /*
+  let role: Snowflake | undefined = roles[user.voiceLevel];
+  if(role) {
+    member.roles.add(role);
+  }*/
+
+  print(`${colors.gray('[VOZ]')} ${member.user.tag} subiu para o nível ${user.voiceLevel}!`)
+});
+
 
 bot.birthdays.on('BDAY', (user) => {
-  /**
-   * Aniversário do fulano
-   */
+  /*
+  let guild = bot.guilds.cache.get(bot.config.guild) as Guild;
+  let member = guild.members.cache.get(user.id) as GuildMember;
+  let bdayRole = guild.roles.cache.find((r) => r.name.includes(`Aniversariante do dia`));
+
+  if(bdayRole) {
+    member.roles.add(bdayRole);
+  }
+  */
 })
 
 bot.birthdays.on('NON-BDAY', (user) => {
-  /**
-   * Data não é aniversário do fulano
-   */
+  /*
+  let guild = bot.guilds.cache.get(bot.config.guild) as Guild;
+  let member = guild.members.cache.get(user.id) as GuildMember;
+  let bdayRole = guild.roles.cache.find((r) => r.name.includes(`Aniversariante do dia`));
+
+  if(bdayRole) {
+    if(member.roles.cache.has(bdayRole.id)) {
+      member.roles.remove(bdayRole.id);
+    }
+  }
+  */
 })

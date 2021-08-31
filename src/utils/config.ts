@@ -7,6 +7,7 @@ export const config: Config = {
   token: process.env.DISCORD_TOKEN,
   welcomeChannel: '840045583028715541',
   color: '#2F3136',
+  guild: '465938334791893002',
   memberCounterChannels: ['727641717188198523', '465945316596645889'],
   memberCounterText: 'Estamos com {{counter}} clikkies!',
   devs: {
@@ -63,6 +64,7 @@ export interface Config {
   token: string | undefined
   welcomeChannel: Snowflake
   color: ColorResolvable
+  guild: Snowflake,
   memberCounterChannels: Snowflake[]
   memberCounterText: string
   devs: {
