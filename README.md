@@ -28,15 +28,20 @@ ___
 #### Economia
 
 - [ ] - Loja
-- [X] - Comandos para ganhar dinheiro (Work, Fabric)
+- [X] - /work
+- [X] - /fabric
+- [ ] - /daily
+- [ ] - /weekly
 - [X] - Receber dinheiro por mensagem enviada a cada minuto
 - [X] - Comando de informações sobre a economia do servidor
+- [ ] - Adicionar item que permitirão a customização de: Opacidade do card, o banner do card e profile, a cor da barra de progresso e nivel do card, cor do embed do profile.
 
 #### Níveis
 
 - [X] - Dar XP por mensagens 
 - [ ] - Cargos por nível de texto e voz
 - [X] - Opções de cargos e canais que darão XP em dobro
+- [ ] - Customização do card de níveis
 
 #### Estatísticas
 
@@ -44,8 +49,9 @@ ___
 - [X] - Servidor
 - [X] - Comando para ver a estatísticas do servidor
 
-#### Segurança
+#### Segurança & Moderação
 - [X] - Anti-Invite
+- [ ] - Banco de dados para configurar o bot através de comandos
 
 ___
 
