@@ -5,7 +5,7 @@ import { epoch } from '../utils/utils'
 
 export const cmd: CommandOptions = {
   name: 'nico',
-  devOnly: true,
+  devOnly: false,
   guildOnly: false,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let uptime = bot.eco.ms(new Date().getTime() - (bot.readyAt as Date).getTime())

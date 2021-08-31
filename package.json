@@ -37,7 +37,7 @@
     "discord-together": "^1.1.62",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
-    "dsc.cmds": "^2.0.3",
+    "dsc.cmds": "^2.0.5",
     "dsc.db": "^3.0.4",
     "dsc.eco": "^2.0.2",
     "dsc.events": "^2.0.0",
