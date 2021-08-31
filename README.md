@@ -42,7 +42,7 @@ ___
 
 - [X] - Usuários
 - [X] - Servidor
-- [ ] - Comando para ver a estatísticas do servidor
+- [X] - Comando para ver a estatísticas do servidor
 
 #### Segurança
 - [X] - Anti-Invite
