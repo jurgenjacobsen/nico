@@ -44,7 +44,7 @@ export const event: EventOptions = {
       let ckey = `MSG_${message.author.id}`
       if (!cooldowns.has(ckey)) {
         cooldowns.add(ckey)
-        let xp = Math.floor(Util.random(15, 25))
+        let xp = Math.floor(Util.random(10, 20))
         if (bot.config.text.DXPChannels.includes(message.channelId)) {
           xp = xp * 2
         } else if (message.member.roles.cache.find((r) => bot.config.text.DXPRoles.includes(r.id))) {
@@ -118,9 +118,73 @@ export const event: EventOptions = {
       cmd?.delete()
     }
 
-    if(message.content === '+++') {
-      console.log(bot.graphics);
-      console.log(bot.graphics.cache);
+    if (message.content === '+config' && (bot.config.devs.ids.includes(message.author.id) || message.member.roles.cache.has('739183741515071539'))) {
+      let voice = bot.config.voice
+      let text = bot.config.text
+
+      let VOICE_FIELD = `ㅤ
+      **VOZ**
+      - Cargos que serão dados ao usuário quando um membro entrar em call (${voice.vcRoles.length})
+      ${voice.vcRoles.map((r) => `<@&${r}>`).join(`, `)}
+
+      - Canais de voz que darão cargos de call ao entrar (${voice.vcRoleChannels.length})
+      ${voice.vcRoleChannels.map((c) => `<#${c}>`).join(`, `)}
+
+      - Cargos que serão adicionados quando o membro entrar em um canal de evento (${voice.eventRoles.length})
+      ${voice.eventRoles.map((r) => `<@&${r}>`).join(', ')}
+
+      - Canais de evento (${voice.eventChannels.length})
+      ${voice.eventChannels.map((c) => `<#${c}>`).join(', ')}
+
+      - Os canais que é permitido contar estatísticas para o usuário (${voice.allowedXPChannels.length})
+      ${voice.allowedXPChannels.map((c) => `<#${c}>`).join(', ')}
+
+      - Os canais que é permitido contar estatísticas para o usuário (${voice.allowedStatsChannels.length})
+      ${voice.allowedStatsChannels.map((c) => `<#${c}>`).join(', ')}
+      
+      - As categorias que é permitido contar estatísticas para o usuário (${voice.allowedStatsCats.length})
+      ${voice.allowedStatsCats.map((c) => `<#${c}>`).join(', ')}
+
+      - As categorias que é permitido ao usuário receber XP (${voice.allowedXPCats.length})
+      ${voice.allowedXPCats.map((c) => `<#${c}>`).join(', ')}
+
+      - Os cargos que receberão o dobro de XP (${voice.DXPRoles.length})
+      ${voice.DXPRoles.map((r) => `<@&${r}>`).join(', ')}
+
+      - Os canais que receberão o dobro de XP (${voice.DXPChannels.length})
+      ${voice.DXPChannels.map((c) => `<#${c}>`).join(', ')}
+      `
+
+      let TEXT_FIELD = `ㅤ
+      **TEXTO**
+      - Os canais que é permitido receber XP (${text.allowedXPChannels.length})
+      ${text.allowedXPChannels.map((c) => `<#${c}>`).join(', ')}
+
+      - Os canais que é permitido contar estatísticas para o usuário (${text.allowedStatsChannels.length})
+      ${text.allowedStatsChannels.map((c) => `<#${c}>`).join(`, `)}
+
+      - As categorias que é permitido contar estatísticas para o usuário (${text.allowedStatsCats.length})
+      ${text.allowedStatsCats.map((c) => `<#${c}>`).join(', ')}
+
+      - As categorias que é permitido ao usuário receber XP (${text.allowedXPCats.length})
+      ${text.allowedXPCats.map((c) => `<#${c}>`).join(', ')}
+      
+      - Os cargos que receberão o dobro de XP (${text.DXPRoles.length})
+      ${text.DXPRoles.map((r) => `<@&${r}>`).join(', ')}
+
+      - Os canais que receberão o dobro de XP (${text.DXPChannels.length})
+      ${text.DXPChannels.map((c) => `<#${c}>`).join(', ')}
+      `
+
+      let content = VOICE_FIELD + '\n' + TEXT_FIELD
+
+      return message.reply({
+        content: content,
+        allowedMentions: {
+          parse: [],
+          repliedUser: false,
+        },
+      })
     }
   },
 }

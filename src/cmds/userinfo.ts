@@ -13,8 +13,8 @@ export const cmd: CommandOptions = {
     let user = interaction.options.getUser('membro', false)
     if (!user) user = interaction.user
 
-    let member = interaction.guild?.members.cache.get(user.id) as GuildMember;
-    
+    let member = interaction.guild?.members.cache.get(user.id) as GuildMember
+
     if (!member || !member.joinedAt) {
       interaction.reply({ content: `Não foi possível ver o perfil de ${user.tag} pois aparentemente ele(a) não está no meu cache de usuários!` })
       return print(`Não foi possível ver o perfil de ${user.tag} pois aparentemente ele(a) não está no meu cache de usuários!`)
@@ -29,9 +29,9 @@ export const cmd: CommandOptions = {
       return print(`Falha ao carregar estatísticas de ${user.tag}`)
     }
 
-    let buffer = bot.graphics.cache.get(user.id);
-    if(!buffer) {
-      buffer = await bot.graphics.fetch(user.id);
+    let buffer = bot.graphics.cache.get(user.id)
+    if (!buffer) {
+      buffer = await bot.graphics.fetch(user.id)
     }
 
     let graphic = new MessageAttachment(buffer, 'graphic.png')
@@ -95,11 +95,11 @@ export const cmd: CommandOptions = {
       )
 
     try {
-      if(!interaction) return;
+      if (!interaction) return
       interaction.reply({
         embeds: [embed, embed2],
         files: [graphic],
-      });
+      })
     } catch {
       //
     }

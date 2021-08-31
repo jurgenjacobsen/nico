@@ -203,6 +203,6 @@ export const data: ApplicationCommandData[] = [
     description: 'Mostra informações do servidor',
     type: 'CHAT_INPUT',
     defaultPermission: true,
-    options: []
-  }
+    options: [],
+  },
 ]

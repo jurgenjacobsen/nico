@@ -9,7 +9,7 @@ export const cmd: CommandOptions = {
   guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let timeout = 6 * 60 * 60 * 1000
-    let user = await bot.eco.ensure(interaction.user.id, interaction.guild?.id);
+    let user = await bot.eco.ensure(interaction.user.id, interaction.guild?.id)
     let response = await bot.eco.work(interaction.user.id, interaction.guild?.id, {
       timeout: timeout,
       money: {

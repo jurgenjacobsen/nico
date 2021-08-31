@@ -6,7 +6,7 @@ import path from 'path'
 import logs from 'discord-logs'
 import colors from 'colors'
 import { Levels } from 'dsc.levels'
-import { Economy, Item } from 'dsc.eco'
+import { Economy } from 'dsc.eco'
 import { GuildStats, UserStats } from 'dsc.stats'
 import { User } from 'dsc.levels/lib/Levels'
 import { print } from './utils/utils'
@@ -23,8 +23,8 @@ export class Bot extends Client {
   public eco: Economy
   public birthdays: BirthdaysManager
   public voiceIntervals: Collection<string, NodeJS.Timer | null>
-  public graphics: GraphicsManager;
-  public topfeed: FeedManager;
+  public graphics: GraphicsManager
+  public topfeed: FeedManager
   public giveaways!: GiveawaysManager
   public stats: {
     users: UserStats
@@ -66,22 +66,16 @@ export class Bot extends Client {
         ...mongo,
         collection: 'economy',
       },
-      items: [
-
-      ],
+      items: [],
     })
 
-    this.voiceIntervals = new Collection();
-  
+    this.voiceIntervals = new Collection()
+
     this.topfeed = new FeedManager({
       db: new Database({ ...mongo, collection: 'topfeed' }),
       accounts: [
-        {
-          twitter: 'jurgenjacobsen',
-          roleID: '1',
-          channelID: '1',
-        }
-      ]
+        // Coming soon
+      ],
     })
 
     try {
@@ -103,7 +97,7 @@ export class Bot extends Client {
       guild: new GuildStats({ db: mongo, dateFormat: 'DD/MM/YYYY' }),
     }
 
-    this.graphics = new GraphicsManager(this.stats.users);
+    this.graphics = new GraphicsManager(this.stats.users)
 
     this.db = {
       members: new Database({ ...mongo, collection: 'members' }),
@@ -142,11 +136,11 @@ export const bot = new Bot({
       },
     ],
   },
-});
+})
 
 bot.levels.on('textLevelUp', (user: User) => {
-  let guild = bot.guilds.cache.get(bot.config.guild) as Guild;
-  let member = guild.members.cache.get(user.userID) as GuildMember;
+  let guild = bot.guilds.cache.get(bot.config.guild) as Guild
+  let member = guild.members.cache.get(user.userID) as GuildMember
 
   /*
   let role = guild.roles.cache.find((r) => r.name.includes(`nível ${user.textLevel}`));
@@ -159,15 +153,15 @@ bot.levels.on('textLevelUp', (user: User) => {
 })
 
 bot.levels.on('voiceLevelUp', (user: User) => {
-  let guild = bot.guilds.cache.get(bot.config.guild) as Guild;
-  let member = guild.members.cache.get(user.userID) as GuildMember;
+  let guild = bot.guilds.cache.get(bot.config.guild) as Guild
+  let member = guild.members.cache.get(user.userID) as GuildMember
 
-  let roles: {[key: string]: Snowflake} = {
+  let roles: { [key: string]: Snowflake } = {
     10: '861635332436918345',
     20: '861635578859749437',
     30: '795706003412746260',
     40: '795703589300994058',
-    50: '861637124021026857'
+    50: '861637124021026857',
   }
 
   /*
@@ -177,8 +171,7 @@ bot.levels.on('voiceLevelUp', (user: User) => {
   }*/
 
   print(`${colors.gray('[VOZ]')} ${member.user.tag} subiu para o nível ${user.voiceLevel}!`)
-});
-
+})
 
 bot.birthdays.on('BDAY', (user) => {
   /*
