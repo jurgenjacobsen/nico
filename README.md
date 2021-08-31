@@ -53,7 +53,7 @@ ___
 
 Here are some of the contributors to the project, *bughunters* and *developers* that helped improving the project with their knowledge and feedback.
 
-| Tag                        	| ID                 	| Contribuição 	|
+| Tag                        	| ID                 	| Contribution 	|
 |----------------------------	|--------------------	|--------------	|
 | Jürgen#0001                	| 292065674338107393 	|              	|
 | /samuel#0001               	| 404253084584378389 	|              	|
