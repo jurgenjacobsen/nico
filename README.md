@@ -53,23 +53,24 @@ ___
 
 Here are some of the contributors to the project, *bughunters* and *developers* that helped improving the project with their knowledge and feedback.
 
-| Tag                        	| ID                 	| Contribution 	|
-|----------------------------	|--------------------	|--------------	|
-| Jürgen#0001                	| 292065674338107393 	|              	|
-| /samuel#0001               	| 404253084584378389 	|              	|
-| /Júlia#6613                	| 693602776919572522 	|              	|
-| thay#3333                  	| 584504791577657401 	|              	|
-| roswhapa#6545              	| 575495033877299200 	|              	|
-| Fubukigor#5754             	| 334506127658319873 	|              	|
-| NørmalBødy#2640            	| 416933253312806912 	|              	|
-| Zuko#9241                  	| 274958924946604032 	|              	|
-| luabrandao#9546            	| 485940849218420757 	|              	|
-| tamyyyy#4444               	| 771556378522288158 	|              	|
-| gabs#5884                  	| 701218990118273155 	|              	|
-| McGregør#6841              	| 450359098488258570 	|              	|
-| gabriela#0005              	| 534861412636295169 	|              	|
-| lovelyjo#9700              	| 546743739255881729 	|              	|
-| Adenyson#7245              	| 265887286795829249 	|              	|
-| !ka1qux está vacinado#0901 	| 279715754641850388 	|              	|
-| Luiz&.#4720                	| 729856897334771717 	|              	|
-| vishKK#2299                	| 401447536566730764 	|              	|
+
+| Tag                        	| ID                 	| Contribution         	           	      |
+|----------------------------	|--------------------	|---------------------------------------	|
+| Jürgen#0001                	| 292065674338107393 	| Developer             	                |
+| /samuel#0001               	| 404253084584378389 	| Bughunter             	                |
+| /Júlia#6613                	| 693602776919572522 	| Bughunter             	                |
+| thay#3333                  	| 584504791577657401 	| Bughunter             	                |
+| roswhapa#6545              	| 575495033877299200 	| Suggestions and Bughunter             	|
+| Fubukigor#5754             	| 334506127658319873 	| Bughunter             	                |
+| NørmalBødy#2640            	| 416933253312806912 	| Suggestions, Bughunter & Devhelp     	  |
+| Zuko#9241                  	| 274958924946604032 	| Bughunter             	                |
+| tamyyyy#4444               	| 771556378522288158 	| Suggestions and Bughunter             	|
+| gabs#5884                  	| 701218990118273155 	| Suggestions and Bughunter               |
+| McGregør#6841              	| 450359098488258570 	| Suggestions, Bughunter & Devhelp        |
+| gabriela#0005              	| 534861412636295169 	| Suggestions and Bughunter             	|
+| lovelyjo#9700              	| 546743739255881729 	| Suggestions and Bughunter             	|
+| Adenyson#7245              	| 265887286795829249 	| Bughunter                     	        |
+| !ka1qux está vacinado#0901 	| 279715754641850388 	| Suggestions and Bughunter       	      |
+| vishKK#2299                	| 401447536566730764 	| Bughunter             	          	    |
+
+> **DISCLAIMER**: People included here had at least 3 bugs reported or done relevant suggestions to improve the project. If you are not included here and have the requirements to do so, create open a issue on the **Issues** page and attach or describe your proofs.

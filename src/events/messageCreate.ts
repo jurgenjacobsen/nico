@@ -90,7 +90,7 @@ export const event: EventOptions = {
     /**
      * The bot will answer or react to the message when he's mentioned, just for fun. :D
      */
-    if(message.mentions.members?.has(bot.user?.id as string)) {
+    if(message.mentions.members?.has(bot.user?.id as string) || message.content.toLowerCase().includes('nico')) {
       message.react(`👀`);
     }
 
