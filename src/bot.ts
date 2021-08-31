@@ -12,6 +12,7 @@ import { print } from './utils/utils'
 import { Database } from 'dsc.db'
 import { BirthdaysManager } from './utils/birthdays'
 import { GiveawaysManager } from 'discord-giveaways'
+import { FeedManager } from './utils/topfeed'
 export class Bot extends Client {
   public config: Config
   public commands: Commands
@@ -20,6 +21,7 @@ export class Bot extends Client {
   public eco: Economy
   public birthdays: BirthdaysManager
   public voiceIntervals: Collection<string, NodeJS.Timer | null>
+  public topfeed: FeedManager;
   public giveaways!: GiveawaysManager
   public stats: {
     users: UserStats
@@ -66,7 +68,18 @@ export class Bot extends Client {
       ],
     })
 
-    this.voiceIntervals = new Collection()
+    this.voiceIntervals = new Collection();
+
+    this.topfeed = new FeedManager({
+      db: new Database({ ...mongo, collection: 'topfeed' }),
+      accounts: [
+        {
+          twitter: 'jurgenjacobsen',
+          roleID: '1',
+          channelID: '1',
+        }
+      ]
+    })
 
     try {
       this.giveaways = new GiveawaysManager(this, {
