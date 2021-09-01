@@ -11,7 +11,7 @@ It is a project that is taking me some months to develop with feedback of great 
 > **DISCLAIMER**: **DO NOT** use this project for personal neither comercial use. Only with permission from the project developers!
 
 ___
-### Todo List (17/21)
+### Todo List (17/27)
 #### Cosméticos
 
 - [X] - Sistema de sugestões
@@ -21,6 +21,7 @@ ___
 - [X] - Cargos de call de vento
 - [X] - Cargos de categorias
 - [X] - Sistema de cargos e mensagem de aniversariantes
+- [ ] - Painel de aniversariantes no #aniversariantes, com mensagens divididas por mês e atualizando com dados do banco de dados a cada 24hrs
 - [X] - Comando de informações de cada usuário (Economia, Níveis, Estatísticas, etc)
 - [X] - Comando para sorteios
 - [ ] - Topfeed
