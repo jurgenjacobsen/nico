@@ -45,7 +45,7 @@ export const cmd: CommandOptions = {
         break
     }
 
-    let buffer = await card.build()
+    let buffer = await (card as any).build()
     let file = new MessageAttachment(buffer, 'card.png')
 
     return interaction.reply({

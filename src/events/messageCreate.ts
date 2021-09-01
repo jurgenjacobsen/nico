@@ -5,7 +5,7 @@ import { Bot } from '../bot'
 import { data } from '../utils/commands'
 import { AntiInvite, print, suggestion } from '../utils/utils'
 
-let cmdregex = /^[%*!?$-+]/
+let cmdregex = /^[%*!?$-+.]/
 let cooldowns = new Set()
 
 export const event: EventOptions = {
