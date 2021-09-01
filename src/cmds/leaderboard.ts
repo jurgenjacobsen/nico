@@ -24,10 +24,10 @@ export const cmd: CommandOptions = {
         break
       case 'TEXT_LEVEL':
         {
-          let data = await bot.levels.leaderboard({ type: 'TEXT', guildID: interaction.guild?.id })
+          let data = await bot.levels.leaderboard({ type: 'TEXT', guildID: interaction.guild?.id, limit: 20 })
           if (!data) return interaction.reply({ content: `Não foi possível encontrar dados para o leaderboard.` })
           let content = ``
-          for (let set of data) {
+          for (let set of data.slice(0, 20)) {
             content += `\n${set.userID === interaction.user.id ? `**#${set.pos}**` : `#${set.pos}`} - <@${set.userID}> - \`${set.textXp}\``
           }
           embed.setDescription(content)
@@ -36,7 +36,7 @@ export const cmd: CommandOptions = {
         break
       case 'VOICE_LEVEL':
         {
-          let data = await bot.levels.leaderboard({ type: 'VOICE', guildID: interaction.guild?.id })
+          let data = await bot.levels.leaderboard({ type: 'VOICE', guildID: interaction.guild?.id, limit: 20 })
           if (!data) return interaction.reply({ content: `Não foi possível encontrar dados para o leaderboard.` })
           let content = ``
           for (let set of data) {
