@@ -64,7 +64,7 @@ export const config: Config = {
   },
   logs: {
     invites: '840045583028715541',
-    tracker: '840045583028715541'
+    tracker: '840045583028715541',
   },
 }
 

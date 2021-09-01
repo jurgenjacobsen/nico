@@ -2,7 +2,7 @@ import { CommandInteraction, ContextMenuInteraction, MessageEmbed, Snowflake, We
 import { CommandOptions } from 'dsc.cmds'
 import { Bot } from '../bot'
 
-let mentionReg = /<M (\d+)>$/;
+let mentionReg = /<M (\d+)>$/
 
 export const cmd: CommandOptions = {
   name: 'Notas',
@@ -19,24 +19,22 @@ export const cmd: CommandOptions = {
       })
     }
 
-    let content = message.content;
-    let mention;
-    
-    if(mentionReg.test(content)) {
-      let matches = content.match(mentionReg);
-      if(matches) {
-        let role = message.guild?.roles.cache.get(matches[1] as Snowflake);
-        let user = message.guild?.members.cache.get(matches[1] as Snowflake);
+    let content = message.content
+    let mention
 
-        mention = role ? role.toString() : (user ? user.toString() : null);
+    if (mentionReg.test(content)) {
+      let matches = content.match(mentionReg)
+      if (matches) {
+        let role = message.guild?.roles.cache.get(matches[1] as Snowflake)
+        let user = message.guild?.members.cache.get(matches[1] as Snowflake)
+
+        mention = role ? role.toString() : user ? user.toString() : null
       }
 
-      content = content.replace(mentionReg, '');
+      content = content.replace(mentionReg, '')
     }
 
-    let embed = new MessageEmbed()
-    .setColor(bot.config.color)
-    .setDescription(content)
+    let embed = new MessageEmbed().setColor(bot.config.color).setDescription(content)
 
     let attachment = message.attachments.first()
     if (attachment) {
@@ -47,11 +45,11 @@ export const cmd: CommandOptions = {
 
     let payload: any = {
       embeds: [embed],
-    };
+    }
 
-    if(mention) payload.content = mention;
+    if (mention) payload.content = mention
 
-    webhook.send(payload);
+    webhook.send(payload)
 
     return interaction.reply({
       ephemeral: true,

@@ -15,7 +15,7 @@ import { BirthdaysManager } from './utils/birthdays'
 import { GiveawaysManager } from 'discord-giveaways'
 import { FeedManager } from './utils/topfeed'
 import { GraphicsManager } from './utils/graphics'
-import InvitesTracker from '@androz2091/discord-invites-tracker';
+import InvitesTracker from '@androz2091/discord-invites-tracker'
 import moment from 'moment'
 export class Bot extends Client {
   public config: Config
@@ -143,19 +143,16 @@ export const bot = new Bot({
 let tracker = InvitesTracker.init(bot, {
   fetchGuilds: true,
   fetchVanity: true,
-  fetchAuditLogs: true
-});
+  fetchAuditLogs: true,
+})
 
 tracker.on('guildMemberAdd', (member, type, invite) => {
+  let logs = bot.channels.cache.get(bot.config.logs.tracker) as TextChannel
+  if (!logs) return
 
-  let logs = bot.channels.cache.get(bot.config.logs.tracker) as TextChannel;
-  if(!logs) return;
-  
-  let embed = new MessageEmbed()
-  .setColor(bot.config.color)
-  .setAuthor(member.user.username, member.user.displayAvatarURL({dynamic: true, size: 256}))
+  let embed = new MessageEmbed().setColor(bot.config.color).setAuthor(member.user.username, member.user.displayAvatarURL({ dynamic: true, size: 256 }))
 
-  if(type === 'normal' && invite) {
+  if (type === 'normal' && invite) {
     embed.setDescription(`
     Este membro entrou através do convite ${invite?.url}!
 
@@ -163,9 +160,9 @@ tracker.on('guildMemberAdd', (member, type, invite) => {
     Criado em: ${moment(invite.createdAt).format('DD/MM/YYYY [às] hh:mm:ss')}
     Usos: ${invite.uses ?? 1}
     `)
-  } else if(type === 'permissions' || type === 'unknown') {
+  } else if (type === 'permissions' || type === 'unknown') {
     embed.setDescription(`Não foi possível identificar através de qual convite este membro entrou.`)
-  } else if(type === 'vanity') {
+  } else if (type === 'vanity') {
     embed.setDescription(`Entrou através de https://discord.gg/${member.guild.vanityURLCode}`)
   }
 
