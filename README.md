@@ -11,7 +11,7 @@ It is a project that is taking me some months to develop with feedback of great 
 > **DISCLAIMER**: **DO NOT** use this project for personal neither comercial use. Only with permission from the project developers!
 
 ___
-### Todo List (18/28)
+### Todo List (20/28)
 #### Cosméticos
 
 - [X] - Sistema de sugestões
