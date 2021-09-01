@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/jurgenjacobsen/nico#readme",
   "dependencies": {
+    "@androz2091/discord-invites-tracker": "^0.1.2",
     "@discordjs/builders": "^0.6.0",
     "@discordjs/voice": "^0.6.0",
     "axios": "^0.21.1",

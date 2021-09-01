@@ -11,7 +11,7 @@ It is a project that is taking me some months to develop with feedback of great 
 > **DISCLAIMER**: **DO NOT** use this project for personal neither comercial use. Only with permission from the project developers!
 
 ___
-### Todo List (17/27)
+### Todo List (18/28)
 #### Cosméticos
 
 - [X] - Sistema de sugestões
@@ -53,7 +53,8 @@ ___
 #### Segurança & Moderação
 - [X] - Anti-Invite
 - [ ] - Banco de dados para configurar o bot através de comandos
-- [ ] - Comando de mensagem que quando clicar com o direito haverá a opção de publicar o conteúdo da mensagem no #notas através de um Webhook.
+- [X] - Comando de mensagem que quando clicar com o direito haverá a opção de publicar o conteúdo da mensagem no #notas através de um Webhook.
+- [X] - Invite tracker
 ___
 
 ### Credits

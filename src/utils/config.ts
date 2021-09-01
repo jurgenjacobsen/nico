@@ -47,21 +47,13 @@ export const config: Config = {
   },
   text: {
     /** ID dos canais que é permitido receber XP */
-    allowedXPChannels: [
-      '698317201106534460', '466242504824717315', '728003393561428008', '678318474614800404', '754550960923344916'
-    ],
+    allowedXPChannels: ['698317201106534460', '466242504824717315', '728003393561428008', '678318474614800404', '754550960923344916'],
     /** ID dos canais que é permitido contar estatísticas para o usuário */
-    allowedStatsChannels: [
-      '698317201106534460', '466242504824717315', '728003393561428008'
-    ],
+    allowedStatsChannels: ['698317201106534460', '466242504824717315', '728003393561428008'],
     /** ID das categorias que é permitido contar estatísticas para o usuário */
-    allowedStatsCats: [
-      '503284079991717938', '503282445815250946', '827932086626680882', '503297913850560523'
-    ],
+    allowedStatsCats: ['503284079991717938', '503282445815250946', '827932086626680882', '503297913850560523'],
     /** ID das categorias que é permitido ao usuário receber XP */
-    allowedXPCats: [
-      '503284079991717938', '503282445815250946', '827932086626680882', '503297913850560523'
-    ],
+    allowedXPCats: ['503284079991717938', '503282445815250946', '827932086626680882', '503297913850560523'],
     /** ID dos cargos que receberão o dobro de XP */
     DXPRoles: [],
     /** ID dos canais que receberão o dobro de XP */
@@ -72,6 +64,7 @@ export const config: Config = {
   },
   logs: {
     invites: '840045583028715541',
+    tracker: '840045583028715541'
   },
 }
 
@@ -119,6 +112,7 @@ export interface Config {
   }
   logs: {
     invites: Snowflake
+    tracker: Snowflake
   }
 }
 

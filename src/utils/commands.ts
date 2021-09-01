@@ -229,4 +229,9 @@ export const data: ApplicationCommandData[] = [
       },
     ],
   },
+  {
+    name: 'Notas',
+    type: 'MESSAGE',
+    defaultPermission: false,
+  },
 ]

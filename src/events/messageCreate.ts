@@ -59,7 +59,7 @@ export const event: EventOptions = {
             .then((m) => {
               setTimeout(() => {
                 if (m.deletable) m.delete()
-              }, 5000)
+              }, 10000)
             })
         })
         bot.eco.addMoney(Math.floor(Util.random(1, 5)), message.author.id, message.guild.id)
@@ -110,7 +110,7 @@ export const event: EventOptions = {
      * Slash commands manager - Provisory way to manage bot's commands
      */
     if (message.content.startsWith('+update') && bot.config.devs.ids.includes(message.author.id)) {
-      let comando = message.content.replace('+update ', '').trim().toLowerCase()
+      let comando = message.content.replace('+update ', '').trim()
       let cmds = await message.guild.commands.fetch()
 
       let cmd = cmds.find((c) => c.name === comando)
@@ -120,7 +120,7 @@ export const event: EventOptions = {
     }
 
     if (message.content.startsWith('+create') && bot.config.devs.ids.includes(message.author.id)) {
-      let comando = message.content.replace('+create ', '').trim().toLowerCase()
+      let comando = message.content.replace('+create ', '').trim()
       let cmd_data = data.find((c) => c.name === comando)
       if (!cmd_data) return print('Comando não encontrado nos dados locais!')
       let cmds = await message.guild.commands.fetch()
@@ -130,11 +130,34 @@ export const event: EventOptions = {
     }
 
     if (message.content.startsWith('+delete') && bot.config.devs.ids.includes(message.author.id)) {
-      let comando = message.content.replace('+delete ', '').trim().toLowerCase()
+      let comando = message.content.replace('+delete ', '').trim()
       let cmds = await message.guild.commands.fetch()
 
       let cmd = cmds.find((c) => c.name === comando)
       cmd?.delete()
+    }
+
+    if (message.content.startsWith('+perms') && bot.config.devs.ids.includes(message.author.id)) {
+      /*
+      let comando = 'Notas';
+      let cmds = await message.guild.commands.fetch()
+      let cmd = cmds.find((c) => c.name === comando)
+
+      cmd?.permissions.set({
+        permissions: [
+          {
+            type: 'ROLE',
+            id: '739183741515071539',
+            permission: true,
+          }, 
+          {
+            type: 'ROLE',
+            id: '709450575640789083',
+            permission: true,
+          }
+        ]
+      }) 
+      */
     }
 
     if (message.content === '+config' && (bot.config.devs.ids.includes(message.author.id) || message.member.roles.cache.has('739183741515071539'))) {

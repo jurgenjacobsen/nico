@@ -192,7 +192,7 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
 
   bot.voiceIntervals.delete(member.id)
 
-  if(!state) return;
+  if (!state) return
 
   let interval = setInterval(() => {
     bot.stats.guild.update(guild.id, 'voice', 10)
@@ -204,7 +204,7 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
     ) {
       bot.stats.users.update(member.id, 'voice', 10)
     }
-    
+
     let xp = Math.floor(Util.random(50, 100))
     if (bot.config.voice.DXPChannels.includes(channel.id)) {
       xp = xp * 2
@@ -216,13 +216,12 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
       bot.config.voice.allowedXPChannels.includes(channel.id) ||
       (bot.config.voice.allowedXPCats.includes(channel.parent?.id as string) && channel.id !== channel.guild.afkChannelId)
     ) {
-
-      if(state?.selfDeaf) {
+      if (state?.selfDeaf) {
         // None
-      } else if(state?.selfMute) {
+      } else if (state?.selfMute) {
         bot.levels.update(member.id, 'VOICE', Math.floor(xp / 3), guild.id)
       } else {
-        bot.levels.update(member.id, 'VOICE', xp, guild.id);
+        bot.levels.update(member.id, 'VOICE', xp, guild.id)
       }
     }
   }, 10 * 60 * 1000)
