@@ -90,10 +90,21 @@ export const event: EventOptions = {
     /**
      * The bot will answer or react to the message when he's mentioned, just for fun. :D
      */
-    if(message.mentions.members?.has(bot.user?.id as string) || message.content.toLowerCase().includes('nico')) {
-      message.react(`👀`);
+    if (message.mentions.members?.has(bot.user?.id as string) || message.content.toLowerCase().includes('nico')) {
+      message.react(`👀`)
     }
 
+    if (message.author.id === '404253084584378389' && message.channel.id === '714634320115138621') {
+      let today = new Date()
+      let year = today.getFullYear()
+      let month = today.getMonth() + 1 > 9 ? today.getMonth() + 1 : `0${today.getMonth() + 1}`
+      let day = today.getDate() > 9 ? today.getDate() : `0${today.getDate()}`
+
+      message.startThread({
+        name: `${day}-${month}-${year}`,
+        autoArchiveDuration: 'MAX',
+      })
+    }
 
     /**
      * Slash commands manager - Provisory way to manage bot's commands
@@ -138,13 +149,16 @@ export const event: EventOptions = {
       - Canais de voz que darão cargos de call ao entrar (${voice.vcRoleChannels.length})
       ${voice.vcRoleChannels.map((c) => `<#${c}>`).join(`, `)}
 
+      - Categorias que darão cargos de call (${voice.vcRolesCats.length})
+      ${voice.vcRolesCats.map((c) => `<#${c}>`).join(', ')}
+
       - Cargos que serão adicionados quando o membro entrar em um canal de evento (${voice.eventRoles.length})
       ${voice.eventRoles.map((r) => `<@&${r}>`).join(', ')}
 
       - Canais de evento (${voice.eventChannels.length})
       ${voice.eventChannels.map((c) => `<#${c}>`).join(', ')}
 
-      - Os canais que é permitido contar estatísticas para o usuário (${voice.allowedXPChannels.length})
+      - Os canais que é permitido contar XP para o usuário (${voice.allowedXPChannels.length})
       ${voice.allowedXPChannels.map((c) => `<#${c}>`).join(', ')}
 
       - Os canais que é permitido contar estatísticas para o usuário (${voice.allowedStatsChannels.length})
@@ -184,10 +198,16 @@ export const event: EventOptions = {
       ${text.DXPChannels.map((c) => `<#${c}>`).join(', ')}
       `
 
-      let content = VOICE_FIELD + '\n' + TEXT_FIELD
+      message.reply({
+        content: VOICE_FIELD,
+        allowedMentions: {
+          parse: [],
+          repliedUser: false,
+        },
+      })
 
-      return message.reply({
-        content: content,
+      message.channel.send({
+        content: TEXT_FIELD,
         allowedMentions: {
           parse: [],
           repliedUser: false,

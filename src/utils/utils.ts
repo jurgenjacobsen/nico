@@ -137,8 +137,12 @@ export const epoch = (time: Date | string | number) => {
 export const VoiceRoles = (bot: Bot, member: GuildMember, channel: VoiceChannel | { id: Snowflake }) => {
   let vconfig = bot.config.voice
   let roles = member.roles.cache.map((r) => r.id)
+  let ch = member.guild.channels.cache.get(channel.id)
 
-  if (vconfig.vcRoleChannels.includes(channel.id) && roles.filter((r) => vconfig.vcRoles.includes(r)).length === 0) {
+  if (
+    (vconfig.vcRoleChannels.includes(channel.id) || vconfig.vcRolesCats.includes(ch?.parent?.id as string)) &&
+    roles.filter((r) => vconfig.vcRoles.includes(r)).length === 0
+  ) {
     member.roles
       .add(vconfig.vcRoles)
       .then(() => print(`Cargos de call adicionados em ${member.user.tag}`))
@@ -148,7 +152,10 @@ export const VoiceRoles = (bot: Bot, member: GuildMember, channel: VoiceChannel 
       })
   }
 
-  if (!vconfig.vcRoleChannels.includes(channel.id) && roles.filter((r) => vconfig.vcRoles.includes(r)).length > 0) {
+  if (
+    (!vconfig.vcRoleChannels.includes(channel.id) || !vconfig.vcRolesCats.includes(ch?.parent?.id as string)) &&
+    roles.filter((r) => vconfig.vcRoles.includes(r)).length > 0
+  ) {
     member.roles
       .remove(vconfig.vcRoles)
       .then(() => print(`Cargos de call removido de ${member.user.tag}`))
@@ -182,13 +189,17 @@ export const VoiceRoles = (bot: Bot, member: GuildMember, channel: VoiceChannel 
 export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChannel) => {
   let guild = member.guild
   let state = guild.voiceStates.cache.get(member.id)
-  
+
   bot.voiceIntervals.delete(member.id)
 
   let interval = setInterval(() => {
     bot.stats.guild.update(guild.id, 'voice', 10)
 
-    if (bot.config.voice.allowedStatsChannels.includes(channel.id) && (bot.config.voice.allowedStatsCats.includes(channel.parent?.id as string) && channel.id !== channel.guild.afkChannelId)) {
+    if (
+      bot.config.voice.allowedStatsChannels.includes(channel.id) &&
+      bot.config.voice.allowedStatsCats.includes(channel.parent?.id as string) &&
+      channel.id !== channel.guild.afkChannelId
+    ) {
       bot.stats.users.update(member.id, 'voice', 10)
     }
 
@@ -199,7 +210,10 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
       xp = xp * 2
     }
 
-    if (bot.config.voice.allowedXPChannels.includes(channel.id) || (bot.config.voice.allowedXPCats.includes(channel.parent?.id as string) && channel.id !== channel.guild.afkChannelId)) {
+    if (
+      bot.config.voice.allowedXPChannels.includes(channel.id) ||
+      (bot.config.voice.allowedXPCats.includes(channel.parent?.id as string) && channel.id !== channel.guild.afkChannelId)
+    ) {
       if ((state?.selfDeaf || state?.selfMute) && !state.streaming && !state.selfVideo) {
         bot.levels.update(member.id, 'VOICE', xp / 2, guild.id)
       } else {

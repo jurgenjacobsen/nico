@@ -205,4 +205,28 @@ export const data: ApplicationCommandData[] = [
     defaultPermission: true,
     options: [],
   },
+  {
+    name: 'card',
+    description: 'O card de nível de voz ou texto de um membro',
+    type: 'CHAT_INPUT',
+    defaultPermission: true,
+    options: [
+      {
+        name: 'tipo',
+        description: 'Qual dos cards você deseja ver',
+        type: 'STRING',
+        required: true,
+        choices: [
+          { name: 'voz', value: 'VOICE' },
+          { name: 'texto', value: 'TEXT' },
+        ],
+      },
+      {
+        name: 'membro',
+        description: 'Qual membro você deseja buscar',
+        type: 'USER',
+        required: false,
+      },
+    ],
+  },
 ]

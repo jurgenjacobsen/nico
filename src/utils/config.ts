@@ -34,6 +34,8 @@ export const config: Config = {
       '872253338534682664',
       '698251644516958358',
     ],
+    /** Categorias que darão cargos de call */
+    vcRolesCats: ['698244358796869682'],
     /** Cargos que serão adicionados quando o membro entrar em um canal de evento */
     eventRoles: ['842597067187683338'],
     /** Canais de evento */
@@ -59,13 +61,9 @@ export const config: Config = {
       '698251644516958358',
     ],
     /** ID das categorias que é permitido contar estatísticas para o usuário */
-    allowedStatsCats: [
-      '698244358796869682'
-    ],
+    allowedStatsCats: ['698244358796869682'],
     /** ID das categorias que é permitido ao usuário receber XP */
-    allowedXPCats: [
-      '698244358796869682'
-    ],
+    allowedXPCats: ['698244358796869682'],
     /** ID dos cargos que receberão o dobro de XP */
     DXPRoles: [],
     /** ID dos canais que receberão o dobro de XP */
@@ -114,6 +112,7 @@ export interface Config {
   voice: {
     vcRoles: Snowflake[]
     vcRoleChannels: Snowflake[]
+    vcRolesCats: Snowflake[]
     eventRoles: Snowflake[]
     eventChannels: Snowflake[]
     allowedXPChannels: Snowflake[]
