@@ -1,10 +1,10 @@
 import { createCanvas, loadImage, CanvasRenderingContext2D as ctx2D, Canvas, Image, registerFont } from 'canvas'
 import { join } from 'path'
 
-registerFont(join(__dirname, '../../assets') + '/Busorama.ttf', {
+registerFont(join(__dirname, '../../../assets') + '/Busorama.ttf', {
   family: 'Busorama',
 })
-registerFont(join(__dirname, '../../assets') + '/Bebas_Neue.otf', {
+registerFont(join(__dirname, '../../../assets') + '/Bebas_Neue.otf', {
   family: 'Bebas Neue',
 })
 

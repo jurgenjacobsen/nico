@@ -21,44 +21,28 @@ export const config: Config = {
     approve: '678281143396859962',
     minLength: 1,
   },
-  voice: {
-    /** Cargos que serão dados ao usuário quando um membro entrar em call */
-    vcRoles: ['793123005555146782'],
-    /** Canais de voz que darão cargos de call ao entrar */
-    vcRoleChannels: [],
-    /** Categorias que darão cargos de call */
-    vcRolesCats: ['698244358796869682'],
-    /** Cargos que serão adicionados quando o membro entrar em um canal de evento */
-    eventRoles: ['842597067187683338'],
-    /** Canais de evento */
-    eventChannels: ['828323204099080212'],
-    /** ID dos canais que é permitido contar estatísticas para o usuário */
-    allowedXPChannels: [],
-    /** ID dos canais que é permitido contar estatísticas para o usuário */
-    allowedStatsChannels: [],
-    /** ID das categorias que é permitido contar estatísticas para o usuário */
-    allowedStatsCats: ['698244358796869682', '677321323571314709'],
-    /** ID das categorias que é permitido ao usuário receber XP */
-    allowedXPCats: ['698244358796869682'],
-    /** ID dos cargos que receberão o dobro de XP */
-    DXPRoles: [],
-    /** ID dos canais que receberão o dobro de XP */
-    DXPChannels: [],
-  },
-  text: {
-    /** ID dos canais que é permitido receber XP */
-    allowedXPChannels: ['698317201106534460', '466242504824717315', '728003393561428008', '678318474614800404', '754550960923344916'],
-    /** ID dos canais que é permitido contar estatísticas para o usuário */
-    allowedStatsChannels: ['698317201106534460', '466242504824717315', '728003393561428008'],
-    /** ID das categorias que é permitido contar estatísticas para o usuário */
-    allowedStatsCats: ['503284079991717938', '503282445815250946', '827932086626680882', '503297913850560523'],
-    /** ID das categorias que é permitido ao usuário receber XP */
-    allowedXPCats: ['503284079991717938', '503282445815250946', '827932086626680882', '503297913850560523'],
-    /** ID dos cargos que receberão o dobro de XP */
-    DXPRoles: [],
-    /** ID dos canais que receberão o dobro de XP */
-    DXPChannels: [],
-  },
+  /** Cargos que serão dados ao usuário quando um membro entrar em call */
+  vcRoles: [],
+  /** Canais de voz que darão cargos de call ao entrar */
+  vcRoleChannels: [],
+  /** Categorias que darão cargos de call */
+  vcRolesCats: [],
+  /** Cargos que serão adicionados quando o membro entrar em um canal de evento */
+  eventRoles: [],
+  /** Canais de evento */
+  eventChannels: [],
+  /** ID dos canais que é permitido receber XP */
+  allowedXPChannels: [],
+  /** ID dos canais que é permitido contar estatísticas para o usuário */
+  allowedStatsChannels: [],
+  /** ID das categorias que é permitido contar estatísticas para o usuário */
+  allowedStatsCats: [],
+  /** ID das categorias que é permitido ao usuário receber XP */
+  allowedXPCats: [],
+  /** ID dos cargos que receberão o dobro de XP */
+  DXPRoles: [],
+  /** ID dos canais que receberão o dobro de XP */
+  DXPChannels: [],
   economy: {
     resetDate: new Date('11/10/2021'),
   },
@@ -86,27 +70,17 @@ export interface Config {
     approve: Snowflake
     minLength: number
   }
-  voice: {
-    vcRoles: Snowflake[]
-    vcRoleChannels: Snowflake[]
-    vcRolesCats: Snowflake[]
-    eventRoles: Snowflake[]
-    eventChannels: Snowflake[]
-    allowedXPChannels: Snowflake[]
-    allowedStatsChannels: Snowflake[]
-    allowedStatsCats: Snowflake[]
-    allowedXPCats: Snowflake[]
-    DXPRoles: Snowflake[]
-    DXPChannels: Snowflake[]
-  }
-  text: {
-    allowedXPChannels: Snowflake[]
-    allowedStatsChannels: Snowflake[]
-    allowedStatsCats: Snowflake[]
-    allowedXPCats: Snowflake[]
-    DXPRoles: Snowflake[]
-    DXPChannels: Snowflake[]
-  }
+  vcRoles: Snowflake[]
+  vcRoleChannels: Snowflake[]
+  vcRolesCats: Snowflake[]
+  eventRoles: Snowflake[]
+  eventChannels: Snowflake[]
+  allowedXPChannels: Snowflake[]
+  allowedStatsChannels: Snowflake[]
+  allowedStatsCats: Snowflake[]
+  allowedXPCats: Snowflake[]
+  DXPRoles: Snowflake[]
+  DXPChannels: Snowflake[]
   economy: {
     resetDate: Date
   }

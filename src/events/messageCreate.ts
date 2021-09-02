@@ -2,7 +2,7 @@ import { Message, MessageEmbed, Role } from 'discord.js'
 import { EventOptions } from 'dsc.events'
 import { Util } from 'dsc.levels'
 import { Bot } from '../bot'
-import { data } from '../utils/commands'
+import { data } from '../utils/Structures/commands'
 import { AntiInvite, print, suggestion } from '../utils/utils'
 
 let cmdregex = /^[%*!?$-+.]/
@@ -37,7 +37,7 @@ export const event: EventOptions = {
      * Adds XP and a random small amount of money to the user
      */
     if (
-      (bot.config.text.allowedXPChannels.includes(message.channelId) || bot.config.text.allowedXPCats.includes(category?.id as string)) &&
+      (bot.config.allowedXPChannels.includes(message.channelId) || bot.config.allowedXPCats.includes(category?.id as string)) &&
       !cmdregex.test(message.content) &&
       (voiceState ? voiceState.selfMute : true)
     ) {
@@ -45,9 +45,9 @@ export const event: EventOptions = {
       if (!cooldowns.has(ckey)) {
         cooldowns.add(ckey)
         let xp = Math.floor(Util.random(10, 20))
-        if (bot.config.text.DXPChannels.includes(message.channelId)) {
+        if (bot.config.DXPChannels.includes(message.channelId)) {
           xp = xp * 2
-        } else if (message.member.roles.cache.find((r) => bot.config.text.DXPRoles.includes(r.id))) {
+        } else if (message.member.roles.cache.find((r) => bot.config.DXPRoles.includes(r.id))) {
           xp = xp * 2
         }
         bot.levels.update(message.author.id, 'TEXT', xp, message.guild.id, (user) => {
@@ -70,7 +70,7 @@ export const event: EventOptions = {
     /**
      *  Adds stats to the user
      */
-    if (bot.config.text.allowedStatsChannels.includes(message.channelId) || bot.config.text.allowedStatsCats.includes(category?.id as string)) {
+    if (bot.config.allowedStatsChannels.includes(message.channelId) || bot.config.allowedStatsCats.includes(category?.id as string)) {
       if (cmdregex.test(message.content)) {
         bot.stats.users.update(message.author.id, 'commands', 1)
       } else {
@@ -138,8 +138,7 @@ export const event: EventOptions = {
     }
 
     if (message.content.startsWith('+perms') && bot.config.devs.ids.includes(message.author.id)) {
-      /*
-      let comando = 'Notas';
+      /*let comando = 'config';
       let cmds = await message.guild.commands.fetch()
       let cmd = cmds.find((c) => c.name === comando)
 
@@ -156,11 +155,11 @@ export const event: EventOptions = {
             permission: true,
           }
         ]
-      }) 
-      */
+      })*/
     }
 
     if (message.content === '+config' && (bot.config.devs.ids.includes(message.author.id) || message.member.roles.cache.has('739183741515071539'))) {
+      /*
       let voice = bot.config.voice
       let text = bot.config.text
 
@@ -219,8 +218,8 @@ export const event: EventOptions = {
 
       - Os canais que receberão o dobro de XP (${text.DXPChannels.length})
       ${text.DXPChannels.map((c) => `<#${c}>`).join(', ')}
-      `
-
+      `*/
+      /*
       message.reply({
         content: VOICE_FIELD,
         allowedMentions: {
@@ -235,7 +234,7 @@ export const event: EventOptions = {
           parse: [],
           repliedUser: false,
         },
-      })
+      })*/
     }
   },
 }

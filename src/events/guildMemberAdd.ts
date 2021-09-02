@@ -1,7 +1,7 @@
 import { GuildMember, MessageAttachment, TextChannel } from 'discord.js'
 import { EventOptions } from 'dsc.events'
 import { Bot } from '../bot'
-import { DrawCard } from '../utils/card'
+import { DrawCard } from '../utils/Structures/card'
 import { MemberCounter, print } from '../utils/utils'
 
 export const event: EventOptions = {

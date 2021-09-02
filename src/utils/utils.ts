@@ -135,7 +135,7 @@ export const epoch = (time: Date | string | number) => {
 }
 
 export const VoiceRoles = (bot: Bot, member: GuildMember, channel: VoiceChannel | { id: Snowflake }) => {
-  let vconfig = bot.config.voice
+  let vconfig = bot.config
   let roles = member.roles.cache.map((r) => r.id)
   let ch = member.guild.channels.cache.get(channel.id)
 
@@ -198,23 +198,23 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
     bot.stats.guild.update(guild.id, 'voice', 10)
 
     if (
-      bot.config.voice.allowedStatsChannels.includes(channel.id) &&
-      bot.config.voice.allowedStatsCats.includes(channel.parent?.id as string) &&
+      bot.config.allowedStatsChannels.includes(channel.id) &&
+      bot.config.allowedStatsCats.includes(channel.parent?.id as string) &&
       channel.id !== channel.guild.afkChannelId
     ) {
       bot.stats.users.update(member.id, 'voice', 10)
     }
 
     let xp = Math.floor(Util.random(50, 100))
-    if (bot.config.voice.DXPChannels.includes(channel.id)) {
+    if (bot.config.DXPChannels.includes(channel.id)) {
       xp = xp * 2
-    } else if (member.roles.cache.find((r) => bot.config.voice.DXPRoles.includes(r.id))) {
+    } else if (member.roles.cache.find((r) => bot.config.DXPRoles.includes(r.id))) {
       xp = xp * 2
     }
 
     if (
-      bot.config.voice.allowedXPChannels.includes(channel.id) ||
-      (bot.config.voice.allowedXPCats.includes(channel.parent?.id as string) && channel.id !== channel.guild.afkChannelId)
+      bot.config.allowedXPChannels.includes(channel.id) ||
+      (bot.config.allowedXPCats.includes(channel.parent?.id as string) && channel.id !== channel.guild.afkChannelId)
     ) {
       if (state?.selfDeaf) {
         // None

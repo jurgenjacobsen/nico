@@ -11,14 +11,16 @@ import { GuildStats, UserStats } from 'dsc.stats'
 import { User } from 'dsc.levels/lib/Levels'
 import { print } from './utils/utils'
 import { Database } from 'dsc.db'
-import { BirthdaysManager } from './utils/birthdays'
+import { BirthdaysManager } from './utils/Managers/BirthdaysManager'
 import { GiveawaysManager } from 'discord-giveaways'
-import { FeedManager } from './utils/topfeed'
-import { GraphicsManager } from './utils/graphics'
+import { FeedManager } from './utils/Managers/TopfeedManager'
+import { GraphicsManager } from './utils/Managers/GraphicsManager'
 import InvitesTracker from '@androz2091/discord-invites-tracker'
 import moment from 'moment'
+import { ConfigManager } from './utils/Managers/ConfigManager'
 export class Bot extends Client {
   public config: Config
+  public configManager: ConfigManager
   public commands: Commands
   public events: EventHandler
   public levels: Levels
@@ -34,6 +36,7 @@ export class Bot extends Client {
   }
   public db: {
     members: Database
+    this: Database
   }
   constructor(options: ClientOptions) {
     super(options)
@@ -103,7 +106,10 @@ export class Bot extends Client {
 
     this.db = {
       members: new Database({ ...mongo, collection: 'members' }),
+      this: new Database({ ...mongo, collection: 'bots' }),
     }
+
+    this.configManager = new ConfigManager(this.db.this, '831653654426550293', this)
 
     this.birthdays = new BirthdaysManager(this.db.members)
 
@@ -146,13 +152,13 @@ bot.on('ready', () => {
     fetchVanity: false,
     fetchAuditLogs: true,
   })
-  
+
   tracker.on('guildMemberAdd', (member, type, invite) => {
     let logs = bot.channels.cache.get(bot.config.logs.tracker) as TextChannel
     if (!logs) return
-  
+
     let embed = new MessageEmbed().setColor(bot.config.color).setAuthor(member.user.username, member.user.displayAvatarURL({ dynamic: true, size: 256 }))
-  
+
     if (type === 'normal' && invite) {
       embed.setDescription(`
       Este membro entrou através do convite ${invite?.url}!
@@ -166,7 +172,7 @@ bot.on('ready', () => {
     } else if (type === 'vanity') {
       embed.setDescription(`Entrou através de https://discord.gg/${member.guild.vanityURLCode}`)
     }
-  
+
     return logs.send({
       embeds: [embed],
     })

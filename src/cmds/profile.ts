@@ -2,7 +2,7 @@ import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { CommandOptions } from 'dsc.cmds'
 import moment from 'moment'
 import { Bot } from '../bot'
-import { badges } from '../utils/badges'
+import { badges } from '../utils/Structures/badges'
 import { NicoUser } from '../utils/utils'
 
 export const cmd: CommandOptions = {
