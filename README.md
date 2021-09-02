@@ -32,7 +32,6 @@ ___
 - [X] - /work
 - [X] - /fabric
 - [ ] - /daily
-- [ ] - /weekly
 - [X] - Receber dinheiro por mensagem enviada a cada minuto
 - [X] - Comando de informações sobre a economia do servidor
 - [X] - Cor do embed e banner customizável através da compra de itens na loja.
