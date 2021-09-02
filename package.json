@@ -41,7 +41,7 @@
     "dotenv": "^10.0.0",
     "dsc.cmds": "^2.0.5",
     "dsc.db": "^3.0.4",
-    "dsc.eco": "^2.0.4",
+    "dsc.eco": "^2.0.6",
     "dsc.events": "^2.0.0",
     "dsc.levels": "^2.0.6",
     "dsc.stats": "^3.0.3",

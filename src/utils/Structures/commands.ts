@@ -323,4 +323,35 @@ export const data: ApplicationCommandData[] = [
       },
     ],
   },
+  {
+    name: 'customize',
+    description: 'Customizações do usuário',
+    type: 'CHAT_INPUT',
+    defaultPermission: true,
+    options: [
+      {
+        name: 'profile',
+        type: 'SUB_COMMAND',
+        description: 'Customize seu perfil',
+        options: [
+          {
+            name: 'key',
+            description: 'Qual opção você deseja editar',
+            type: 'STRING',
+            required: true,
+            choices: [
+              { name: 'Banner de perfil (URL do Imgur.com)', value: 'bannerURL' },
+              { name: 'Cor do perfil Ex.: (#1c1c1c)', value: 'color' },
+            ],
+          },
+          {
+            name: 'data',
+            description: 'A informação que você deseja salvar',
+            type: 'STRING',
+            required: true,
+          },
+        ],
+      },
+    ],
+  },
 ]

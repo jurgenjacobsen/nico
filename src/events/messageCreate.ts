@@ -1,4 +1,4 @@
-import { Message, MessageEmbed, Role } from 'discord.js'
+import { Message, MessageEmbed, Role, TextChannel } from 'discord.js'
 import { EventOptions } from 'dsc.events'
 import { Util } from 'dsc.levels'
 import { Bot } from '../bot'
@@ -90,7 +90,7 @@ export const event: EventOptions = {
     /**
      * The bot will answer or react to the message when he's mentioned, just for fun. :D
      */
-    if (message.mentions.members?.has(bot.user?.id as string) || message.content.toLowerCase().includes('nico')) {
+    if (message.mentions.members?.has(bot.user?.id as string) || message.content.toLowerCase().includes(' nico ') || message.content.toLowerCase() === 'nico') {
       message.react(`👀`)
     }
 
@@ -158,83 +158,28 @@ export const event: EventOptions = {
       })*/
     }
 
-    if (message.content === '+config' && (bot.config.devs.ids.includes(message.author.id) || message.member.roles.cache.has('739183741515071539'))) {
-      /*
-      let voice = bot.config.voice
-      let text = bot.config.text
-
-      let VOICE_FIELD = `ㅤ
-      **VOZ**
-      - Cargos que serão dados ao usuário quando um membro entrar em call (${voice.vcRoles.length})
-      ${voice.vcRoles.map((r) => `<@&${r}>`).join(`, `)}
-
-      - Canais de voz que darão cargos de call ao entrar (${voice.vcRoleChannels.length})
-      ${voice.vcRoleChannels.map((c) => `<#${c}>`).join(`, `)}
-
-      - Categorias que darão cargos de call (${voice.vcRolesCats.length})
-      ${voice.vcRolesCats.map((c) => `<#${c}>`).join(', ')}
-
-      - Cargos que serão adicionados quando o membro entrar em um canal de evento (${voice.eventRoles.length})
-      ${voice.eventRoles.map((r) => `<@&${r}>`).join(', ')}
-
-      - Canais de evento (${voice.eventChannels.length})
-      ${voice.eventChannels.map((c) => `<#${c}>`).join(', ')}
-
-      - Os canais que é permitido contar XP para o usuário (${voice.allowedXPChannels.length})
-      ${voice.allowedXPChannels.map((c) => `<#${c}>`).join(', ')}
-
-      - Os canais que é permitido contar estatísticas para o usuário (${voice.allowedStatsChannels.length})
-      ${voice.allowedStatsChannels.map((c) => `<#${c}>`).join(', ')}
-      
-      - As categorias que é permitido contar estatísticas para o usuário (${voice.allowedStatsCats.length})
-      ${voice.allowedStatsCats.map((c) => `<#${c}>`).join(', ')}
-
-      - As categorias que é permitido ao usuário receber XP (${voice.allowedXPCats.length})
-      ${voice.allowedXPCats.map((c) => `<#${c}>`).join(', ')}
-
-      - Os cargos que receberão o dobro de XP (${voice.DXPRoles.length})
-      ${voice.DXPRoles.map((r) => `<@&${r}>`).join(', ')}
-
-      - Os canais que receberão o dobro de XP (${voice.DXPChannels.length})
-      ${voice.DXPChannels.map((c) => `<#${c}>`).join(', ')}
-      `
-
-      let TEXT_FIELD = `ㅤ
-      **TEXTO**
-      - Os canais que é permitido receber XP (${text.allowedXPChannels.length})
-      ${text.allowedXPChannels.map((c) => `<#${c}>`).join(', ')}
-
-      - Os canais que é permitido contar estatísticas para o usuário (${text.allowedStatsChannels.length})
-      ${text.allowedStatsChannels.map((c) => `<#${c}>`).join(`, `)}
-
-      - As categorias que é permitido contar estatísticas para o usuário (${text.allowedStatsCats.length})
-      ${text.allowedStatsCats.map((c) => `<#${c}>`).join(', ')}
-
-      - As categorias que é permitido ao usuário receber XP (${text.allowedXPCats.length})
-      ${text.allowedXPCats.map((c) => `<#${c}>`).join(', ')}
-      
-      - Os cargos que receberão o dobro de XP (${text.DXPRoles.length})
-      ${text.DXPRoles.map((r) => `<@&${r}>`).join(', ')}
-
-      - Os canais que receberão o dobro de XP (${text.DXPChannels.length})
-      ${text.DXPChannels.map((c) => `<#${c}>`).join(', ')}
-      `*/
-      /*
-      message.reply({
-        content: VOICE_FIELD,
-        allowedMentions: {
-          parse: [],
-          repliedUser: false,
+    /*if(message.content === '+pub') {
+      let payload = await bot.eco.store.publish('883038238275682344', {
+        labels: {
+          buy: 'Comprar',
+          price: 'Preço'
         },
+        color: bot.config.color,
       })
 
-      message.channel.send({
-        content: TEXT_FIELD,
-        allowedMentions: {
-          parse: [],
-          repliedUser: false,
-        },
-      })*/
-    }
+      let channel = message.guild.channels.cache.get('852216501046214696') as TextChannel;
+      if(!payload) return;
+      channel.send(payload)
+    }*/
   },
 }
+/*
+{
+    labels?: {
+        buy?: string;
+        price?: string;
+    };
+    banner?: string;
+    color: ColorResolvable;
+}
+*/

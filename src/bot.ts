@@ -18,6 +18,7 @@ import { GraphicsManager } from './utils/Managers/GraphicsManager'
 import InvitesTracker from '@androz2091/discord-invites-tracker'
 import moment from 'moment'
 import { ConfigManager } from './utils/Managers/ConfigManager'
+import { items } from './utils/Structures/items'
 export class Bot extends Client {
   public config: Config
   public configManager: ConfigManager
@@ -71,7 +72,7 @@ export class Bot extends Client {
         ...mongo,
         collection: 'economy',
       },
-      items: [],
+      items: items,
     })
 
     this.voiceIntervals = new Collection()
@@ -91,7 +92,7 @@ export class Bot extends Client {
           embedColorEnd: '#5865F2',
           reaction: '🎉',
         },
-        storage: path.join(__dirname, './utils/giveaways.json'),
+        storage: path.join(__dirname, './utils/Structures/giveaways.json'),
       })
     } catch {
       print('Erro ao carregar os sorteios')
@@ -139,7 +140,7 @@ export const bot = new Bot({
   presence: {
     activities: [
       {
-        name: 'Dema City',
+        name: 'dema city',
         type: 'WATCHING',
       },
     ],

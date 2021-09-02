@@ -25,7 +25,7 @@ export const cmd: CommandOptions = {
     let levels = await bot.levels.ensure(user.id, interaction.guild?.id)
 
     if (!stats) {
-      interaction.reply({ content: `Falha ao carregar estatísticas de ${user.tag}` })
+      interaction.reply({ content: `Falha ao carregar estatísticas de ${user.tag}` }).catch(() => {})
       return print(`Falha ao carregar estatísticas de ${user.tag}`)
     }
 
@@ -82,7 +82,7 @@ export const cmd: CommandOptions = {
         `
     Carteira: $${eco.wallet}
     Banco: $${eco.bank}
-    Inventário: ${eco.inventory.length > 0 ? eco.inventory.map((i) => i.name).join(', ') : `*Vazio*`}
+    Inventário: ${eco.inventory.length > 0 ? eco.inventory.map((i) => bot.eco.store.items.find((item) => item.id === i)?.name).join(', ') : `*Vazio*`}
     \n
     `,
       )
@@ -96,10 +96,12 @@ export const cmd: CommandOptions = {
 
     try {
       if (!interaction) return
-      interaction.reply({
-        embeds: [embed, embed2],
-        files: [graphic],
-      })
+      interaction
+        .reply({
+          embeds: [embed, embed2],
+          files: [graphic],
+        })
+        .catch(() => {})
     } catch {
       //
     }

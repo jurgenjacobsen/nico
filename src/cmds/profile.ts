@@ -18,9 +18,11 @@ export const cmd: CommandOptions = {
 
           let u = await bot.db.members.fetch(user.id)
           if (!u)
-            return interaction.reply({
-              content: `Não foi possível encontrar o perfil de ${user.tag}! Utilize **/profile create**, para criar um novo perfil!`,
-            })
+            return interaction
+              .reply({
+                content: `Não foi possível encontrar o perfil de ${user.tag}! Utilize **/profile create**, para criar um novo perfil!`,
+              })
+              .catch(() => {})
 
           let data: NicoUser = u.data
           let inline = true
@@ -39,7 +41,7 @@ export const cmd: CommandOptions = {
                 name: 'Badges',
                 value: `${badges.LIST.filter((b) => data.badges.includes(b.id))
                   .map((b) => b.emoji)
-                  .join(' - ')}ㅤ`,
+                  .join(' ')}ㅤ`,
               },
             ])
             .setDescription(
@@ -48,9 +50,13 @@ export const cmd: CommandOptions = {
         `,
             )
             .setImage(`${data.bannerURL !== null ? data.bannerURL : ''}`)
-          return interaction.reply({
-            embeds: [embed],
-          })
+
+          if (data.verified) embed.setFooter(`Verificado`)
+          return interaction
+            .reply({
+              embeds: [embed],
+            })
+            .catch(() => {})
         }
         break
 
@@ -84,9 +90,11 @@ export const cmd: CommandOptions = {
 
           await bot.db.members.set(interaction.user.id, newData)
 
-          return interaction.reply({
-            content: `Seu perfil foi editado com sucesso!`,
-          })
+          return interaction
+            .reply({
+              content: `Seu perfil foi editado com sucesso!`,
+            })
+            .catch(() => {})
         }
         break
 
@@ -119,9 +127,11 @@ export const cmd: CommandOptions = {
 
           await bot.db.members.set(interaction.user.id, newData)
 
-          return interaction.reply({
-            content: `Perfil criado com sucesso! Qualquer dúvia contate o suporte.`,
-          })
+          return interaction
+            .reply({
+              content: `Perfil criado com sucesso! Qualquer dúvia contate o suporte.`,
+            })
+            .catch(() => {})
         }
         break
     }

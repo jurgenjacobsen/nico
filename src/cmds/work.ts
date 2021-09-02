@@ -1,6 +1,6 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { CommandOptions } from 'dsc.cmds'
-import { EcoUser, User } from 'dsc.eco'
+import { User } from 'dsc.eco'
 import { Bot } from '../bot'
 
 export const cmd: CommandOptions = {

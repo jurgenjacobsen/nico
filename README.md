@@ -11,7 +11,7 @@ It is a project that is taking me some months to develop with feedback of great 
 > **DISCLAIMER**: **DO NOT** use this project for personal neither comercial use. Only with permission from the project developers!
 
 ___
-### Todo List (20/28)
+### Todo List (21/28)
 #### Cosméticos
 
 - [X] - Sistema de sugestões
@@ -35,12 +35,12 @@ ___
 - [ ] - /weekly
 - [X] - Receber dinheiro por mensagem enviada a cada minuto
 - [X] - Comando de informações sobre a economia do servidor
-- [ ] - Adicionar item que permitirão a customização de: Opacidade do card, o banner do card e profile, a cor da barra de progresso e nivel do card, cor do embed do profile.
+- [ ] - Cor do embed e banner customizável através da compra de itens na loja.
 
 #### Níveis
 
 - [X] - Dar XP por mensagens 
-- [ ] - Cargos por nível de texto e voz
+- [X] - Cargos por nível de texto e voz *(Resta ser ativado)*
 - [X] - Opções de cargos e canais que darão XP em dobro
 - [ ] - Customização do card de níveis
 
