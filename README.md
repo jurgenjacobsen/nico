@@ -35,7 +35,7 @@ ___
 - [ ] - /weekly
 - [X] - Receber dinheiro por mensagem enviada a cada minuto
 - [X] - Comando de informações sobre a economia do servidor
-- [ ] - Cor do embed e banner customizável através da compra de itens na loja.
+- [X] - Cor do embed e banner customizável através da compra de itens na loja.
 
 #### Níveis
 
