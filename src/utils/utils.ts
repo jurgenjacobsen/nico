@@ -134,55 +134,50 @@ export const epoch = (time: Date | string | number) => {
   return (new Date(time).getTime() / 1000 + 900 + 330 * 60).toString().split('.')[0]
 }
 
-export const VoiceRoles = (bot: Bot, member: GuildMember, channel: VoiceChannel | { id: Snowflake }) => {
-  let vconfig = bot.config
-  let roles = member.roles.cache.map((r) => r.id)
-  let ch = member.guild.channels.cache.get(channel.id)
+export const VoiceRoles = (bot: Bot, member: GuildMember, channel: VoiceChannel | { id: Snowflake, parentId: Snowflake | null }) => {
+  let config = bot.config
+  let roles = member.roles.cache.map((r) => r.id);
 
-  if (
-    (vconfig.vcRoleChannels.includes(channel.id) || vconfig.vcRolesCats.includes(ch?.parent?.id as string)) &&
-    roles.filter((r) => vconfig.vcRoles.includes(r)).length === 0
-  ) {
-    member.roles
-      .add(vconfig.vcRoles)
-      .then(() => print(`Cargos de call adicionados em ${member.user.tag}`))
-      .catch((err) => {
-        print(`Erro ao adicionar cargos de call em ${member.user.tag}`)
-        console.error(err)
-      })
+  if(member.user.bot) return;
+
+  if(config.vcRoleChannels.includes(channel.id) || (config.vcRolesCats.includes(channel.parentId as string) && channel.id !== member.guild.afkChannelId)) {
+    config.vcRoles.forEach((id) => {
+      if(!member.roles.cache.has(id)) {
+        member.roles.add(id)
+        .then(() => print(`Cargos de call adicionados em ${member.user.tag}`))
+        .catch((err) => {
+          print(`Erro ao adicionar cargos de call em ${member.user.tag}`)
+          console.error(err)
+        });
+      }
+    })
+  } else if(roles.find((r) => config.vcRoles.includes(r))) {
+    member.roles.remove(config.vcRoles)
+    .then(() => print(`Cargos de call removido de ${member.user.tag}`))
+    .catch((err) => {
+      print(`Erro ao remover cargos de call de ${member.user.tag}`)
+      console.error(err)
+    })
   }
 
-  if (
-    (!vconfig.vcRoleChannels.includes(channel.id) || !vconfig.vcRolesCats.includes(ch?.parent?.id as string)) &&
-    roles.filter((r) => vconfig.vcRoles.includes(r)).length > 0
-  ) {
-    member.roles
-      .remove(vconfig.vcRoles)
-      .then(() => print(`Cargos de call removido de ${member.user.tag}`))
-      .catch((err) => {
-        print(`Erro ao remover cargos de call de ${member.user.tag}`)
-        console.error(err)
-      })
-  }
-
-  if (vconfig.eventChannels.includes(channel.id) && roles.filter((r) => vconfig.eventRoles.includes(r)).length === 0) {
-    member.roles
-      .add(vconfig.eventRoles)
-      .then(() => print(`Cargos de call adicionados em ${member.user.tag}`))
-      .catch((err) => {
-        print(`Erro ao adicionar cargos de evento em ${member.user.tag}`)
-        console.error(err)
-      })
-  }
-
-  if (!vconfig.eventChannels.includes(channel.id) && roles.filter((r) => vconfig.eventRoles.includes(r)).length !== 0) {
-    member.roles
-      .remove(vconfig.eventRoles)
-      .then(() => print(`Cargos de evento removido de ${member.user.tag}`))
-      .catch((err) => {
-        print(`Erro ao remover cargos de eventos de ${member.user.tag}`)
-        console.error(err)
-      })
+  if(config.eventChannels.includes(channel.id)) {
+    config.eventRoles.forEach((id) => {
+      if(!member.roles.cache.has(id)) {
+        member.roles.add(id)
+        .then(() => print(`Cargos de call adicionados em ${member.user.tag}`))
+        .catch((err) => {
+          print(`Erro ao adicionar cargos de evento em ${member.user.tag}`)
+          console.error(err)
+        })
+      }
+    })
+  } else if(roles.find((r) => config.eventRoles.includes(r))) {
+    member.roles.remove(config.eventRoles)
+    .then(() => print(`Cargos de evento removido de ${member.user.tag}`))
+    .catch((err) => {
+      print(`Erro ao remover cargos de eventos de ${member.user.tag}`)
+      console.error(err)
+    }) 
   }
 }
 
@@ -192,16 +187,15 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
 
   bot.voiceIntervals.delete(member.id)
 
-  if (!state) return
+  if(member.user.bot) return;
+  if (!state) return;
+  if (channel.id === member.guild.afkChannelId) return;
 
   let interval = setInterval(() => {
+
     bot.stats.guild.update(guild.id, 'voice', 10)
 
-    if (
-      bot.config.allowedStatsChannels.includes(channel.id) &&
-      bot.config.allowedStatsCats.includes(channel.parent?.id as string) &&
-      channel.id !== channel.guild.afkChannelId
-    ) {
+    if (bot.config.allowedStatsChannels.includes(channel.id) || bot.config.allowedStatsCats.includes(channel.parent?.id as string)) {
       bot.stats.users.update(member.id, 'voice', 10)
     }
 
@@ -212,13 +206,8 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
       xp = xp * 2
     }
 
-    if (
-      bot.config.allowedXPChannels.includes(channel.id) ||
-      (bot.config.allowedXPCats.includes(channel.parent?.id as string) && channel.id !== channel.guild.afkChannelId)
-    ) {
-      if (state?.selfDeaf) {
-        // None
-      } else if (state?.selfMute) {
+    if(bot.config.allowedXPChannels.includes(channel.id) || bot.config.allowedXPCats.includes(channel.parent?.id as string)) {
+      if (state?.selfMute) {
         bot.levels.update(member.id, 'VOICE', Math.floor(xp / 3), guild.id)
       } else {
         bot.levels.update(member.id, 'VOICE', xp, guild.id)

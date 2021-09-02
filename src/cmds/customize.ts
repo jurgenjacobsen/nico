@@ -7,7 +7,7 @@ let hex_re = /^#(?:[0-9a-fA-F]{3}){1,2}$/
 
 export const cmd: CommandOptions = {
   name: 'customize',
-  devOnly: true,
+  devOnly: false,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let subcmd = interaction.options.getSubcommand() as 'profile'
     let key = interaction.options.getString('key', true)

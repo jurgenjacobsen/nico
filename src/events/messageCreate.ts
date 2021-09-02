@@ -138,7 +138,7 @@ export const event: EventOptions = {
     }
 
     if (message.content.startsWith('+perms') && bot.config.devs.ids.includes(message.author.id)) {
-      /*let comando = 'config';
+      /*let comando = 'reroll';
       let cmds = await message.guild.commands.fetch()
       let cmd = cmds.find((c) => c.name === comando)
 
@@ -171,15 +171,16 @@ export const event: EventOptions = {
       if(!payload) return;
       channel.send(payload)
     }*/
+
+    if(message.content === '+auxilio') {
+      let eco = await bot.eco.fetch(message.author.id, message.guild.id);
+      if(!eco) return;
+      if(eco.bank < 1950) {
+        await bot.eco.addMoney(1950, message.author.id, message.guild.id)
+        message.reply({
+          content: 'A Caixa Federal liberou seu auxilio!'
+        })
+      }
+    }
   },
 }
-/*
-{
-    labels?: {
-        buy?: string;
-        price?: string;
-    };
-    banner?: string;
-    color: ColorResolvable;
-}
-*/

@@ -1,4 +1,4 @@
-import { CommandInteraction, TextChannel } from 'discord.js'
+import { CommandInteraction, StageChannel, TextChannel, ThreadChannel, VoiceChannel } from 'discord.js'
 import { CommandOptions } from 'dsc.cmds'
 import { Bot } from '../bot'
 import ms from 'ms'
@@ -15,7 +15,7 @@ export const cmd: CommandOptions = {
 
     let channel = interaction.guild?.channels.cache.get(ch.id) as TextChannel
 
-    if (!channel || !(channel instanceof TextChannel))
+    if (!channel || channel instanceof VoiceChannel || channel instanceof StageChannel)
       return interaction.reply({
         content: `Canal inválido!`,
         ephemeral: true,
@@ -38,7 +38,7 @@ export const cmd: CommandOptions = {
           endedAt: 'Encerrado em',
           hostedBy: 'Patrocinado por: ${this.hostedBy}',
         },
-      })
+      }).catch(() => { })
     } catch {
       return interaction.reply({
         content: `Erro ao criar sorteio!`,

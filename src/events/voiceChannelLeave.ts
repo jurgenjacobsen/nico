@@ -7,7 +7,7 @@ export const event: EventOptions = {
   name: 'voiceChannelLeave',
   once: false,
   run: (bot: Bot, member: GuildMember, channel: VoiceChannel) => {
-    VoiceRoles(bot, member, { id: '1' })
+    VoiceRoles(bot, member, { id: '1', parentId: '1' })
 
     bot.voiceIntervals.delete(member.id)
   },

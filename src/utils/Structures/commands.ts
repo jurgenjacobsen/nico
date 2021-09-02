@@ -354,4 +354,24 @@ export const data: ApplicationCommandData[] = [
       },
     ],
   },
+  {
+    name: 'badges',
+    description: 'Lista de todas as bagdes disponíveis no servidor',
+    type: 'CHAT_INPUT',
+    defaultPermission: true,
+  },
+  {
+    name: 'reroll',
+    description: 'Resorteia um sorteio',
+    type: 'CHAT_INPUT',
+    defaultPermission: false,
+    options: [
+      { 
+        name: 'id',
+        description: 'O id da mensagem do sorteio',
+        required: true,
+        type: 'STRING'
+      }
+    ]
+  }
 ]

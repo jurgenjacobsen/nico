@@ -40,7 +40,6 @@ export const cmd: CommandOptions = {
           if (!data) return interaction.reply({ content: `Não foi possível encontrar dados para o leaderboard.` })
           let content = ``
           for (let set of data) {
-            console.log(set)
             content += `\n${set.userID === interaction.user.id ? `**#${set.pos}**` : `#${set.pos}`} - <@${set.userID}> - \`${set.voiceXp}\``
           }
           embed.setDescription(content)
