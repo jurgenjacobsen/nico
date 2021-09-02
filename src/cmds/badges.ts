@@ -16,7 +16,7 @@ export const cmd: CommandOptions = {
     São ícones que serão mostrados no seu perfil simbolizando lembranças ou conquistas dentro do servidor.
 
     ${badges.LIST.map((b) => {
-      return `${b.emoji} - **${b.name}** - *${moment(b.date).format('DD/MM/YYYY')}*\n${b.description}`
+      return `${b.emoji} - **${b.name}** - *${moment(b.date).format('DD/MM/YYYY')}*\n${b.description}\n`
     }).join('\n')}
     `)
 
