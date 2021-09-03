@@ -1,4 +1,4 @@
-import { ApplicationCommandData } from 'discord.js'
+import { ApplicationCommandData } from 'discord.js';
 
 export const data: ApplicationCommandData[] = [
   {
@@ -392,13 +392,13 @@ export const data: ApplicationCommandData[] = [
     type: 'CHAT_INPUT',
     defaultPermission: false,
     options: [
-      { 
+      {
         name: 'id',
         description: 'O id da mensagem do sorteio',
         required: true,
-        type: 'STRING'
-      }
-    ]
+        type: 'STRING',
+      },
+    ],
   },
   {
     name: 'daily',
@@ -434,9 +434,9 @@ export const data: ApplicationCommandData[] = [
             description: 'Banner do item',
             type: 'STRING',
             required: false,
-          }
-        ]
-      }
-    ]
-  }
-]
+          },
+        ],
+      },
+    ],
+  },
+];

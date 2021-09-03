@@ -1,23 +1,23 @@
-import { CanvasRenderService } from 'chartjs-node-canvas'
-import { Collection, GuildMember, Snowflake } from 'discord.js'
-import { GuildStats, UserStats } from 'dsc.stats'
+import { CanvasRenderService } from 'chartjs-node-canvas';
+import { Collection, GuildMember, Snowflake } from 'discord.js';
+import { GuildStats, UserStats } from 'dsc.stats';
 
-export type Members = Collection<string, GuildMember>
+export type Members = Collection<string, GuildMember>;
 
 export class GraphicsManager {
-  public cache: Collection<Snowflake, Buffer>
-  private stats: UserStats | GuildStats
+  public cache: Collection<Snowflake, Buffer>;
+  private stats: UserStats | GuildStats;
 
   constructor(stats: UserStats | GuildStats) {
-    this.cache = new Collection()
+    this.cache = new Collection();
 
-    this.stats = stats
+    this.stats = stats;
   }
 
   public fetch(id: string): Promise<Buffer> {
     return new Promise(async (resolve) => {
-      let stats = await this.stats.graphicFormatData(id, 15)
-      let canvas = new CanvasRenderService(1080, 720, chartCB)
+      let stats = await this.stats.graphicFormatData(id, 15);
+      let canvas = new CanvasRenderService(1080, 720, chartCB);
       let buffer = await canvas.renderToBuffer({
         type: 'line',
         options: {
@@ -72,25 +72,25 @@ export class GraphicsManager {
             },
           ],
         },
-      })
-      this.timecache(id, buffer)
-      return resolve(buffer)
-    })
+      });
+      this.timecache(id, buffer);
+      return resolve(buffer);
+    });
   }
 
   public timecache(id: string, buffer: Buffer): void {
-    this.cache.set(id, buffer)
-    setTimeout(() => {}, 30 * 60 * 1000)
+    this.cache.set(id, buffer);
+    setTimeout(() => {}, 30 * 60 * 1000);
   }
 }
 
 function chartCB(ChartJS: any) {
   ChartJS.plugins.register({
     beforeDraw: (chartInstance: any) => {
-      const { chart } = chartInstance
-      const { ctx } = chart
-      ctx.fillStyle = '#23272A'
-      ctx.fillRect(0, 0, chart.width, chart.height)
+      const { chart } = chartInstance;
+      const { ctx } = chart;
+      ctx.fillStyle = '#23272A';
+      ctx.fillRect(0, 0, chart.width, chart.height);
     },
-  })
+  });
 }

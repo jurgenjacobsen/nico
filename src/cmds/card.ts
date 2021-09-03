@@ -1,27 +1,28 @@
-import { CommandInteraction, MessageAttachment } from 'discord.js'
-import { CommandOptions } from 'dsc.cmds'
-import { Bot } from '../bot'
-import { Rank } from 'canvacord'
-import { NicoUser } from '../utils/utils'
+import { CommandInteraction, MessageAttachment } from 'discord.js';
+import { CommandOptions } from 'dsc.cmds';
+import { Bot } from '../bot';
+import { Rank } from 'canvacord';
+import { NicoUser } from '../utils/utils';
 
 export const cmd: CommandOptions = {
   name: 'card',
   guildOnly: true,
   devOnly: false,
   run: async (bot: Bot, interaction: CommandInteraction) => {
-    let tipo = interaction.options.getString('tipo', true) as 'TEXT' | 'VOICE'
-    let user = interaction.options.getUser('membro', false) ?? interaction.user
+    let tipo = interaction.options.getString('tipo', true) as 'TEXT' | 'VOICE';
+    let user = interaction.options.getUser('membro', false) ?? interaction.user;
 
-    let data = await bot.levels.fetch(user.id, interaction.guild?.id)
-    let leaderboard = await bot.levels.leaderboard({ type: tipo, guildID: interaction.guild?.id })
+    let data = await bot.levels.fetch(user.id, interaction.guild?.id);
+    let leaderboard = await bot.levels.leaderboard({ type: tipo, guildID: interaction.guild?.id });
 
     let raw = await bot.db.members.fetch(interaction.user.id);
 
-    if (!raw) return interaction.reply({
-        content: `Não foi possível encontrar o perfil de ${user.tag}! Utilize **/profile create**, para criar um novo perfil!`,
-    }).catch(() => {
-
-    });
+    if (!raw)
+      return interaction
+        .reply({
+          content: `Não foi possível encontrar o perfil de ${user.tag}! Utilize **/profile create**, para criar um novo perfil!`,
+        })
+        .catch(() => {});
 
     let profile = raw.data as NicoUser;
 
@@ -38,30 +39,32 @@ export const cmd: CommandOptions = {
       .setCustomStatusColor('#1c1c1c')
       .setLevelColor('#FFFFFF', profile.card.levelColor)
       .setRankColor('#FFFFFF', profile.card.rankColor)
-      .setProgressBar(profile.card.progressBarColor)
+      .setProgressBar(profile.card.progressBarColor);
 
     switch (tipo) {
       case 'TEXT':
         {
-          card.setCurrentXP(data.textXp)
-          card.setRequiredXP(bot.levels.getTotalXPToLevelUp(data.textLevel, data.textXp))
-          card.setLevel(data.textLevel, 'Nível')
+          card.setCurrentXP(data.textXp);
+          card.setRequiredXP(bot.levels.getTotalXPToLevelUp(data.textLevel, data.textXp));
+          card.setLevel(data.textLevel, 'Nível');
         }
-        break
+        break;
       case 'VOICE':
         {
-          card.setCurrentXP(data.voiceXp)
-          card.setRequiredXP(bot.levels.getTotalXPToLevelUp(data.voiceLevel, data.voiceXp))
-          card.setLevel(data.voiceLevel, 'Nível')
+          card.setCurrentXP(data.voiceXp);
+          card.setRequiredXP(bot.levels.getTotalXPToLevelUp(data.voiceLevel, data.voiceXp));
+          card.setLevel(data.voiceLevel, 'Nível');
         }
-        break
+        break;
     }
 
-    let buffer = await (card as any).build()
-    let file = new MessageAttachment(buffer, 'card.png')
+    let buffer = await (card as any).build();
+    let file = new MessageAttachment(buffer, 'card.png');
 
-    return interaction.reply({
-      files: [file],
-    }).catch(() => { })
+    return interaction
+      .reply({
+        files: [file],
+      })
+      .catch(() => {});
   },
-}
+};

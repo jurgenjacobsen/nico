@@ -1,15 +1,15 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { CommandOptions } from 'dsc.cmds'
-import { Bot } from '../bot'
-import { epoch } from '../utils/utils'
+import { CommandInteraction, MessageEmbed } from 'discord.js';
+import { CommandOptions } from 'dsc.cmds';
+import { Bot } from '../bot';
+import { epoch } from '../utils/utils';
 
 export const cmd: CommandOptions = {
   name: 'economy',
   devOnly: false,
   guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
-    let users = await bot.eco.list(interaction.guild?.id)
-    let items = bot.eco.store.items.sort((a, b) => b.price - a.price)
+    let users = await bot.eco.list(interaction.guild?.id);
+    let items = bot.eco.store.items.sort((a, b) => b.price - a.price);
     let e1 = new MessageEmbed().setColor(bot.config.color).setDescription(`
     **Economia**\n
     Usuários: ${users?.length}
@@ -19,10 +19,10 @@ export const cmd: CommandOptions = {
     **Itens disponíveis (${items.length})**: ${
       items.length > 12 ? items.map((i) => i.name).join(', ') : `\n` + items.map((i) => `> ${i.name} - $${i.price}`).join('\n')
     }
-    `)
+    `);
 
     interaction.reply({
       embeds: [e1],
-    })
+    });
   },
-}
+};

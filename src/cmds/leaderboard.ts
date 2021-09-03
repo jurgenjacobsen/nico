@@ -1,54 +1,54 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { CommandOptions } from 'dsc.cmds'
-import { Bot } from '../bot'
+import { CommandInteraction, MessageEmbed } from 'discord.js';
+import { CommandOptions } from 'dsc.cmds';
+import { Bot } from '../bot';
 
 export const cmd: CommandOptions = {
   name: 'leaderboard',
   devOnly: false,
   guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
-    let type = interaction.options.getString('tipo', true) as 'ECONOMY' | 'VOICE_LEVEL' | 'TEXT_LEVEL'
-    let embed = new MessageEmbed().setColor(bot.config.color)
+    let type = interaction.options.getString('tipo', true) as 'ECONOMY' | 'VOICE_LEVEL' | 'TEXT_LEVEL';
+    let embed = new MessageEmbed().setColor(bot.config.color);
     switch (type) {
       case 'ECONOMY':
         {
-          let data = await bot.eco.leaderboard({ guildID: interaction.guild?.id, limit: 10 })
-          if (!data) return interaction.reply({ content: `Não foi possível encontrar dados para o leaderboard.` })
-          let content = ``
+          let data = await bot.eco.leaderboard({ guildID: interaction.guild?.id, limit: 10 });
+          if (!data) return interaction.reply({ content: `Não foi possível encontrar dados para o leaderboard.` });
+          let content = ``;
           for (let set of data) {
-            content += `\n${set.userID === interaction.user.id ? `**#${set.pos}**` : `#${set.pos}`} - <@${set.userID}> - $${set.bank}`
+            content += `\n${set.userID === interaction.user.id ? `**#${set.pos}**` : `#${set.pos}`} - <@${set.userID}> - $${set.bank}`;
           }
-          embed.setDescription(content)
-          embed.setFooter(`Economia`)
+          embed.setDescription(content);
+          embed.setFooter(`Economia`);
         }
-        break
+        break;
       case 'TEXT_LEVEL':
         {
-          let data = await bot.levels.leaderboard({ type: 'TEXT', guildID: interaction.guild?.id, limit: 20 })
-          if (!data) return interaction.reply({ content: `Não foi possível encontrar dados para o leaderboard.` })
-          let content = ``
+          let data = await bot.levels.leaderboard({ type: 'TEXT', guildID: interaction.guild?.id, limit: 20 });
+          if (!data) return interaction.reply({ content: `Não foi possível encontrar dados para o leaderboard.` });
+          let content = ``;
           for (let set of data.slice(0, 20)) {
-            content += `\n${set.userID === interaction.user.id ? `**#${set.pos}**` : `#${set.pos}`} - <@${set.userID}> - \`${set.textXp}\``
+            content += `\n${set.userID === interaction.user.id ? `**#${set.pos}**` : `#${set.pos}`} - <@${set.userID}> - \`${set.textXp}\``;
           }
-          embed.setDescription(content)
-          embed.setFooter(`Níveis de texto`)
+          embed.setDescription(content);
+          embed.setFooter(`Níveis de texto`);
         }
-        break
+        break;
       case 'VOICE_LEVEL':
         {
-          let data = await bot.levels.leaderboard({ type: 'VOICE', guildID: interaction.guild?.id, limit: 20 })
-          if (!data) return interaction.reply({ content: `Não foi possível encontrar dados para o leaderboard.` })
-          let content = ``
+          let data = await bot.levels.leaderboard({ type: 'VOICE', guildID: interaction.guild?.id, limit: 20 });
+          if (!data) return interaction.reply({ content: `Não foi possível encontrar dados para o leaderboard.` });
+          let content = ``;
           for (let set of data) {
-            content += `\n${set.userID === interaction.user.id ? `**#${set.pos}**` : `#${set.pos}`} - <@${set.userID}> - \`${set.voiceXp}\``
+            content += `\n${set.userID === interaction.user.id ? `**#${set.pos}**` : `#${set.pos}`} - <@${set.userID}> - \`${set.voiceXp}\``;
           }
-          embed.setDescription(content)
-          embed.setFooter(`Níveis de voz`)
+          embed.setDescription(content);
+          embed.setFooter(`Níveis de voz`);
         }
-        break
+        break;
     }
     return interaction.reply({
       embeds: [embed],
-    })
+    });
   },
-}
+};

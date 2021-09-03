@@ -1,7 +1,7 @@
-import { ColorResolvable, Snowflake } from 'discord.js'
-import dotenv from 'dotenv'
+import { ColorResolvable, Snowflake } from 'discord.js';
+import dotenv from 'dotenv';
 
-dotenv.config()
+dotenv.config();
 
 export const config: Config = {
   token: process.env.DISCORD_TOKEN,
@@ -51,45 +51,45 @@ export const config: Config = {
     invites: '840045583028715541',
     tracker: '840045583028715541',
   },
-}
+};
 
 export interface Config {
-  token: string | undefined
-  welcomeChannel: Snowflake
-  color: ColorResolvable
-  guild: Snowflake
-  memberCounterChannels: Snowflake[]
-  memberCounterText: string
+  token: string | undefined;
+  welcomeChannel: Snowflake;
+  color: ColorResolvable;
+  guild: Snowflake;
+  memberCounterChannels: Snowflake[];
+  memberCounterText: string;
   devs: {
-    ids: Snowflake[]
-  }
+    ids: Snowflake[];
+  };
   suggestion: {
-    perms: Snowflake[]
-    channelIds: Snowflake[]
-    up: Snowflake
-    down: Snowflake
-    approve: Snowflake
-    minLength: number
-  }
-  storeChannel: Snowflake
-  vcRoles: Snowflake[]
-  vcRoleChannels: Snowflake[]
-  vcRolesCats: Snowflake[]
-  eventRoles: Snowflake[]
-  eventChannels: Snowflake[]
-  allowedXPChannels: Snowflake[]
-  allowedStatsChannels: Snowflake[]
-  allowedStatsCats: Snowflake[]
-  allowedXPCats: Snowflake[]
-  DXPRoles: Snowflake[]
-  DXPChannels: Snowflake[]
+    perms: Snowflake[];
+    channelIds: Snowflake[];
+    up: Snowflake;
+    down: Snowflake;
+    approve: Snowflake;
+    minLength: number;
+  };
+  storeChannel: Snowflake;
+  vcRoles: Snowflake[];
+  vcRoleChannels: Snowflake[];
+  vcRolesCats: Snowflake[];
+  eventRoles: Snowflake[];
+  eventChannels: Snowflake[];
+  allowedXPChannels: Snowflake[];
+  allowedStatsChannels: Snowflake[];
+  allowedStatsCats: Snowflake[];
+  allowedXPCats: Snowflake[];
+  DXPRoles: Snowflake[];
+  DXPChannels: Snowflake[];
   economy: {
-    resetDate: Date
-  }
+    resetDate: Date;
+  };
   logs: {
-    invites: Snowflake
-    tracker: Snowflake
-  }
+    invites: Snowflake;
+    tracker: Snowflake;
+  };
 }
 
 export const mongo = {
@@ -97,4 +97,4 @@ export const mongo = {
   name: process.env.MONGO_DB as string,
   user: process.env.MONGO_USER as string,
   pass: process.env.MONGO_PASS as string,
-}
+};

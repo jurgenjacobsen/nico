@@ -1,17 +1,17 @@
-import { EmojiResolvable } from 'discord.js'
+import { EmojiResolvable } from 'discord.js';
 
 export interface BadgeManager {
-  LIST: Badge[],
+  LIST: Badge[];
   get: (id: string) => Badge | undefined;
 }
 
 export class Badge {
-  public name: string
-  public description: string
-  public date: Date
-  public emoji: EmojiResolvable
-  public id: string
-  constructor(data: {name: string, description: string, date: Date, emoji: EmojiResolvable, id: string}) {
+  public name: string;
+  public description: string;
+  public date: Date;
+  public emoji: EmojiResolvable;
+  public id: string;
+  constructor(data: { name: string; description: string; date: Date; emoji: EmojiResolvable; id: string }) {
     this.name = data.name;
     this.description = data.description;
     this.date = data.date;
@@ -41,7 +41,7 @@ export const badges: BadgeManager = {
       description: 'Dado ao organizar um evento ou forma de entreterimento com mais de vinte participantes.',
       date: new Date('September 2, 2021'),
       emoji: '<:events:859188901753913344>',
-      id: '3'
+      id: '3',
     }),
     new Badge({
       name: 'Golden Bughunter',
@@ -49,9 +49,9 @@ export const badges: BadgeManager = {
       date: new Date('September 2, 2021'),
       emoji: '<:goldenhunter:857781575219544065>',
       id: '4',
-    })
+    }),
   ],
   get: (id: string) => {
     return badges.LIST.find((b) => b.id === id);
   },
-}
+};

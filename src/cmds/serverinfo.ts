@@ -1,19 +1,19 @@
-import { CanvasRenderService } from 'chartjs-node-canvas'
-import { CommandInteraction, MessageActionRow, MessageAttachment, MessageButton, MessageComponentInteraction, MessageEmbed } from 'discord.js'
-import { CommandOptions } from 'dsc.cmds'
-import { Bot } from '../bot'
+import { CanvasRenderService } from 'chartjs-node-canvas';
+import { CommandInteraction, MessageActionRow, MessageAttachment, MessageButton, MessageComponentInteraction, MessageEmbed } from 'discord.js';
+import { CommandOptions } from 'dsc.cmds';
+import { Bot } from '../bot';
 
 export const cmd: CommandOptions = {
   name: 'serverinfo',
   guildOnly: true,
   cooldown: 10,
   run: async (bot: Bot, interaction: CommandInteraction) => {
-    if (!interaction.guild) return
+    if (!interaction.guild) return;
 
-    let stats = await bot.stats.guild.graphicFormatData(interaction.guild.id, 15)
+    let stats = await bot.stats.guild.graphicFormatData(interaction.guild.id, 15);
 
     async function pageUp(members?: boolean) {
-      if (!interaction.guild) return
+      if (!interaction.guild) return;
 
       let options = {
         legend: {
@@ -40,7 +40,7 @@ export const cmd: CommandOptions = {
             },
           ],
         },
-      }
+      };
 
       let config = {
         type: 'line',
@@ -78,7 +78,7 @@ export const cmd: CommandOptions = {
             },
           ],
         },
-      }
+      };
 
       if (members) {
         config.data = {
@@ -99,43 +99,43 @@ export const cmd: CommandOptions = {
               fill: false,
             },
           ],
-        }
+        };
       }
 
-      let canvas = new CanvasRenderService(1080, 720, chartCB)
-      let graphic = new MessageAttachment(await canvas.renderToBuffer(config), `graphic${members ? '' : 1}.png`)
+      let canvas = new CanvasRenderService(1080, 720, chartCB);
+      let graphic = new MessageAttachment(await canvas.renderToBuffer(config), `graphic${members ? '' : 1}.png`);
 
-      let embed = new MessageEmbed().setColor(bot.config.color).setImage(`attachment://graphic${members ? '' : 1}.png`)
+      let embed = new MessageEmbed().setColor(bot.config.color).setImage(`attachment://graphic${members ? '' : 1}.png`);
 
       if (!members) {
-        embed.setAuthor(`Estatísticas`)
+        embed.setAuthor(`Estatísticas`);
       }
 
       return {
         embed: embed,
         file: graphic,
-      }
+      };
     }
 
-    let data = await pageUp()
-    let data2 = await pageUp(true)
-    if (!data) return
-    if (!data2) return
+    let data = await pageUp();
+    let data2 = await pageUp(true);
+    if (!data) return;
+    if (!data2) return;
 
     interaction.reply({
       embeds: [data.embed, data2.embed],
       files: [data.file, data2.file],
-    })
+    });
   },
-}
+};
 
 function chartCB(ChartJS: any) {
   ChartJS.plugins.register({
     beforeDraw: (chartInstance: any) => {
-      const { chart } = chartInstance
-      const { ctx } = chart
-      ctx.fillStyle = '#23272A'
-      ctx.fillRect(0, 0, chart.width, chart.height)
+      const { chart } = chartInstance;
+      const { ctx } = chart;
+      ctx.fillStyle = '#23272A';
+      ctx.fillRect(0, 0, chart.width, chart.height);
     },
-  })
+  });
 }

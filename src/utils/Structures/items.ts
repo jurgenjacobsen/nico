@@ -1,4 +1,4 @@
-import { Item } from 'dsc.eco'
+import { Item } from 'dsc.eco';
 
 export const items: Item[] = [
   new Item({
@@ -17,6 +17,6 @@ export const items: Item[] = [
     id: '883461295091879946',
     price: 1500,
     name: 'Customização - Card',
-    description: 'Permite você customizar seu card de níveis'
-  })
-]
+    description: 'Permite você customizar seu card de níveis',
+  }),
+];
