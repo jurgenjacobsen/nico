@@ -12,7 +12,7 @@ export const cmd: CommandOptions = {
     switch (type) {
       case 'ECONOMY':
         {
-          let data = await bot.eco.leaderboard({ guildID: interaction.guild?.id, limit: 10 });
+          let data = await bot.eco.leaderboard({ guildID: interaction.guild?.id, limit: 20 });
           if (!data) return interaction.reply({ content: `Não foi possível encontrar dados para o leaderboard.` });
           let content = ``;
           for (let set of data) {

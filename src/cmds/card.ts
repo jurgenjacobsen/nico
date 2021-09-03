@@ -15,12 +15,17 @@ export const cmd: CommandOptions = {
     let data = await bot.levels.fetch(user.id, interaction.guild?.id);
     let leaderboard = await bot.levels.leaderboard({ type: tipo, guildID: interaction.guild?.id });
 
-    let raw = await bot.db.members.fetch(interaction.user.id);
+    let raw = await bot.db.members.fetch(user.id);
 
     if (!raw)
       return interaction
         .reply({
-          content: `Não foi possível encontrar o perfil de ${user.tag}! Utilize **/profile create**, para criar um novo perfil!`,
+          content: `
+          ${
+            user.id === interaction.user.id
+              ? `Não foi possível encontrar o seu perfil! Utilize \`/profile create\`, para criar um novo perfil!`
+              : `${user.tag} não possue um perfil!`
+          }`,
         })
         .catch(() => {});
 
