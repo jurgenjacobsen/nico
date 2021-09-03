@@ -2,6 +2,7 @@ import { CommandInteraction, MessageAttachment } from 'discord.js'
 import { CommandOptions } from 'dsc.cmds'
 import { Bot } from '../bot'
 import { Rank } from 'canvacord'
+import { NicoUser } from '../utils/utils'
 
 export const cmd: CommandOptions = {
   name: 'card',
@@ -14,7 +15,17 @@ export const cmd: CommandOptions = {
     let data = await bot.levels.fetch(user.id, interaction.guild?.id)
     let leaderboard = await bot.levels.leaderboard({ type: tipo, guildID: interaction.guild?.id })
 
-    if (!data) return
+    let raw = await bot.db.members.fetch(interaction.user.id);
+
+    if (!raw) return interaction.reply({
+        content: `Não foi possível encontrar o perfil de ${user.tag}! Utilize **/profile create**, para criar um novo perfil!`,
+    }).catch(() => {
+
+    });
+
+    let profile = raw.data as NicoUser;
+
+    if (!data) return;
 
     let card = new Rank()
       .setAvatar(user.displayAvatarURL({ dynamic: false, size: 256, format: 'png' }))
@@ -22,11 +33,12 @@ export const cmd: CommandOptions = {
       .setDiscriminator(user.discriminator)
       .renderEmojis(true)
       .setRank(leaderboard.find((l) => l.userID === user.id)?.pos ?? 0, 'Rank')
-      .setBackground('IMAGE', 'https://i.imgur.com/0zdgXGO.png')
-      .setOverlay('#1c1c1c', 0.6)
+      .setBackground(profile.card.backgroundType, profile.card.background)
+      .setOverlay('#1c1c1c', profile.card.overlayOpacity)
       .setCustomStatusColor('#1c1c1c')
-      .setLevelColor('#FFFFFF', '#6e6e6e')
-      .setRankColor('#FFFFFF', '#6e6e6e')
+      .setLevelColor('#FFFFFF', profile.card.levelColor)
+      .setRankColor('#FFFFFF', profile.card.rankColor)
+      .setProgressBar(profile.card.progressBarColor)
 
     switch (tipo) {
       case 'TEXT':
@@ -50,6 +62,6 @@ export const cmd: CommandOptions = {
 
     return interaction.reply({
       files: [file],
-    })
+    }).catch(() => { })
   },
 }

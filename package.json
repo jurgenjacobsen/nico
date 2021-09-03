@@ -54,7 +54,7 @@
   },
   "prettier": {
     "trailingComma": "all",
-    "semi": false,
+    "semi": true,
     "singleQuote": true,
     "printWidth": 160
   },

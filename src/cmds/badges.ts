@@ -22,6 +22,6 @@ export const cmd: CommandOptions = {
 
     return interaction.reply({
       embeds: [ embed ],
-    })
+    }).catch(() => { })
   }
 }

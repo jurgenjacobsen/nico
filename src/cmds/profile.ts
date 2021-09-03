@@ -71,6 +71,7 @@ export const cmd: CommandOptions = {
           let user: NicoUser = data.data
 
           let newData: NicoUser = {
+            id: user.id,
             name: interaction.options.getString('nome') ?? user.name,
             about: interaction.options.getString('sobre') ?? user.about,
             location: interaction.options.getString('localização') ?? user.location,
@@ -78,8 +79,14 @@ export const cmd: CommandOptions = {
             gender: interaction.options.getString('gênero') ?? user.gender,
             orientation: interaction.options.getString('orientação') ?? user.orientation,
             birthday: parseDate(interaction.options.getString('aniversário')) ?? user.birthday,
-
-            id: user.id,
+            card: {
+              overlayOpacity: user.card.overlayOpacity,
+              levelColor: user.card.levelColor,
+              rankColor: user.card.rankColor,
+              progressBarColor: user.card.progressBarColor,
+              backgroundType: user.card.backgroundType,
+              background: user.card.background,
+            },
             bdaynotified: user.bdaynotified,
             verified: user.verified,
             badges: user.badges,
@@ -115,6 +122,15 @@ export const cmd: CommandOptions = {
             gender: interaction.options.getString('gênero'),
             orientation: interaction.options.getString('orientação'),
             birthday: bday,
+
+            card: {
+              overlayOpacity: 0.6,
+              levelColor: '#6e6e6e',
+              rankColor: '#6e6e6e',
+              progressBarColor: '#FFFFFF',
+              backgroundType: 'IMAGE',
+              background: 'https://i.imgur.com/0zdgXGO.png',
+            },
 
             id: interaction.user.id,
             bdaynotified: null,

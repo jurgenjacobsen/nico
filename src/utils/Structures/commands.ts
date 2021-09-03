@@ -352,6 +352,32 @@ export const data: ApplicationCommandData[] = [
           },
         ],
       },
+      {
+        name: 'card',
+        type: 'SUB_COMMAND',
+        description: 'Customize seu card de níveis',
+        options: [
+          {
+            name: 'key',
+            description: 'Qual opção você deseja editar',
+            type: 'STRING',
+            required: true,
+            choices: [
+              { name: 'Opacidade da sobreposição', value: 'card.overlayOpacity' },
+              { name: 'Cor do seu nível', value: 'card.levelColor' },
+              { name: 'Cor do rank', value: 'card.rankColor' },
+              { name: 'Cor da barra de progresso', value: 'card.progressBarColor' },
+              { name: 'Plano de fundo (URL do imgur.com ou cor HEX)', value: 'card.background' },
+            ],
+          },
+          {
+            name: 'data',
+            description: 'A informação que você deseja salvar',
+            type: 'STRING',
+            required: true,
+          },
+        ],
+      },
     ],
   },
   {
@@ -379,5 +405,38 @@ export const data: ApplicationCommandData[] = [
     description: 'Coleta o dinheiro diário',
     type: 'CHAT_INPUT',
     defaultPermission: true,
+  },
+  {
+    name: 'store',
+    description: 'Loja do servidor',
+    type: 'CHAT_INPUT',
+    defaultPermission: true,
+    options: [
+      {
+        name: 'publish',
+        description: 'Publica um item na loja',
+        type: 'SUB_COMMAND',
+        options: [
+          {
+            name: 'id',
+            description: 'ID do item',
+            type: 'STRING',
+            required: true,
+          },
+          {
+            name: 'cor',
+            description: 'Cor do embed',
+            type: 'STRING',
+            required: true,
+          },
+          {
+            name: 'banner',
+            description: 'Banner do item',
+            type: 'STRING',
+            required: false,
+          }
+        ]
+      }
+    ]
   }
 ]

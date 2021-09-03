@@ -21,7 +21,7 @@ export const event: EventOptions = {
       if(!interaction.channel) return;
       if(!interaction.guild) return;
 
-      if(!bot.config.storeChannels.includes(interaction.channel.id)) return;
+      if(bot.config.storeChannel !== interaction.channel.id) return;
 
       let rawId = interaction.customId;
 

@@ -21,7 +21,7 @@ export const config: Config = {
     approve: '678281143396859962',
     minLength: 1,
   },
-  storeChannels: ['852216501046214696'],
+  storeChannel: '852216501046214696',
   /** Cargos que serão dados ao usuário quando um membro entrar em call */
   vcRoles: [],
   /** Canais de voz que darão cargos de call ao entrar */
@@ -71,7 +71,7 @@ export interface Config {
     approve: Snowflake
     minLength: number
   }
-  storeChannels: Snowflake[]
+  storeChannel: Snowflake
   vcRoles: Snowflake[]
   vcRoleChannels: Snowflake[]
   vcRolesCats: Snowflake[]

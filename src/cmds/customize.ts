@@ -1,15 +1,13 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 import { CommandOptions } from 'dsc.cmds'
 import { Bot } from '../bot'
-
-let imgur_re = /^(https?:)?\/\/(\w+\.)?imgur\.com\/(\S*)(\.[a-zA-Z]{3})$/
-let hex_re = /^#(?:[0-9a-fA-F]{3}){1,2}$/
+import { hex_re, imgur_re } from '../utils/utils'
 
 export const cmd: CommandOptions = {
   name: 'customize',
-  devOnly: false,
+  devOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
-    let subcmd = interaction.options.getSubcommand() as 'profile'
+    let subcmd = interaction.options.getSubcommand() as 'profile' | 'card'
     let key = interaction.options.getString('key', true)
     let data = interaction.options.getString('data', true)
 
@@ -67,7 +65,64 @@ export const cmd: CommandOptions = {
             embeds: [new MessageEmbed().setColor(bot.config.color).setDescription(`Alteração efetuada com sucesso!`)],
           })
         }
-        break
+        break;
+        case 'card': {
+
+          if(!inventory.includes('883461295091879946')) {
+            return interaction.reply({embeds: [
+                new MessageEmbed()
+                  .setColor(bot.config.color)
+                  .setDescription(`Você deve comprar o item ${bot.eco.store.items.find((i) => i.id === '883461295091879946')?.name} para esta ação.`),
+              ],
+            })
+          }
+
+          if(key === 'card.overlayOpacity') {
+            if(!(Number(data) >= 0.0 && Number(data) <= 1.0)) {
+              return interaction.reply({
+                content: 'O opacidade da sobreposição deve ser entre 0.0 e 1.0'
+              });
+            }
+          } else if(key === 'card.levelColor') {
+            if(!hex_re.test(data)) {
+              return interaction.reply({
+                content: 'A cor deve estar em formato HEX!Ex.: #1c1c1c'
+              });
+            }
+          } else if(key === 'card.rankColor') {
+            if(!hex_re.test(data)) {
+              return interaction.reply({
+                content: 'A cor deve estar em formato HEX!Ex.: #1c1c1c'
+              });
+            }
+          } else if(key === 'card.progressBarColor') {
+            if(!hex_re.test(data)) {
+              return interaction.reply({
+                content: 'A cor deve estar em formato HEX!Ex.: #1c1c1c'
+              });
+            }
+          } else if(key === 'card.background') {
+            if(hex_re.test(data)) {
+              await bot.db.members.set(`${interaction.user.id}.card.backgroundType`, 'COLOR');
+            } else if(imgur_re.test(data)) {
+              await bot.db.members.set(`${interaction.user.id}.card.backgroundType`, 'IMAGE');
+            } else {
+              return interaction.reply({
+                content: 'O plano de fundo deve estar em formato HEX de cor ou deve ser um link válido do Imgur!',
+              });
+            }
+          } else {
+            return;
+          }
+
+          await bot.db.members.set(`${interaction.user.id}.${key}`, data)
+
+          interaction.reply({
+            embeds: [new MessageEmbed().setColor(bot.config.color).setDescription(`Alteração efetuada com sucesso!`)],
+          });
+
+        };
+        break;
     }
   },
 }

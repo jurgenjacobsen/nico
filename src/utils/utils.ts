@@ -4,6 +4,10 @@ import { Bot } from '../bot'
 import axios from 'axios'
 import { Util } from 'dsc.levels'
 
+export let imgur_re = /^(https?:)?\/\/(\w+\.)?imgur\.com\/(\S*)(\.[a-zA-Z]{3})$/
+export let hex_re = /^#(?:[0-9a-fA-F]{3}){1,2}$/
+
+
 /** Prints as in the console but if the time */
 export function print(value: string | number) {
   let d = new Date()
@@ -226,6 +230,15 @@ export interface NicoUser {
   gender: string | null
   orientation: string | null
 
+  card: {
+    overlayOpacity: number
+    levelColor: HEX
+    rankColor: HEX
+    progressBarColor: HEX
+    backgroundType: 'IMAGE' | 'COLOR'
+    background: string
+  }
+
   id: string
   bdaynotified: Date | null
   verified: boolean
@@ -234,3 +247,5 @@ export interface NicoUser {
   color: ColorResolvable | string | null
   createdAt: Date
 }
+
+export type HEX = `#${string}`;
