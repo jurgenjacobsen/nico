@@ -203,7 +203,7 @@ export const event: EventOptions = {
       let blocks = discordjs.Util.splitMessage(content);
 
       msg.edit({
-        content: `${blocks[0].length > 0 ? blocks[0] : '+frensload'}`,
+        content: `${blocks[0]}\nㅤ`,
       });
 
       if(blocks.length > 1) {
