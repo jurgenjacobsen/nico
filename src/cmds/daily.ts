@@ -1,21 +1,18 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js'
-import { CommandOptions } from 'dsc.cmds'
-import { User } from 'dsc.eco'
-import { Bot } from '../bot'
+import { CommandInteraction, MessageEmbed } from "discord.js";
+import { CommandOptions } from "dsc.cmds";
+import { Bot } from "../bot";
 
 export const cmd: CommandOptions = {
-  name: 'work',
-  devOnly: false,
-  guildOnly: true,
+  name: 'daily',
   run: async (bot: Bot, interaction: CommandInteraction) => {
-    let timeout = 5 * 60 * 60 * 1000
+
     let user = await bot.eco.ensure(interaction.user.id, interaction.guild?.id)
-    let response = await bot.eco.work(interaction.user.id, interaction.guild?.id, {
-      timeout: timeout,
+    let response = await bot.eco.daily(interaction.user.id, interaction.guild?.id, {
+      timeout: 20 * 60 * 60 * 1000,
       money: {
-        min: 100,
-        max: 250,
-      },
+        max: 400,
+        min: 150,
+      }
     })
 
     if (response?.err) {
@@ -36,7 +33,7 @@ export const cmd: CommandOptions = {
               }
             }
 
-            let embed = new MessageEmbed().setColor(bot.config.color).setDescription(`Você deve esperar${remaining}para trabalhar novamente!`)
+            let embed = new MessageEmbed().setColor(bot.config.color).setDescription(`Você deve esperar${remaining}para coletar o \`daily\` novamente!`)
 
             return interaction.reply({
               embeds: [embed],
@@ -45,7 +42,7 @@ export const cmd: CommandOptions = {
           break
         default: {
           return interaction.reply({
-            content: `Houve um erro ao coletar o \`/work\`.`,
+            content: `Houve um erro ao coletar o \`/daily\`.`,
           })
         }
       }
@@ -53,12 +50,12 @@ export const cmd: CommandOptions = {
 
     if (!response) {
       return interaction.reply({
-        content: `Houve um erro ao coletar o \`/work\`.`,
+        content: `Houve um erro ao coletar o \`/daily\`.`,
       })
     }
 
     if (!user) {
-      user = (await bot.eco.ensure(interaction.user.id, interaction.guild?.id)) as User
+      user = await bot.eco.ensure(interaction.user.id, interaction.guild?.id);
     }
 
     let embed = new MessageEmbed()
@@ -66,12 +63,13 @@ export const cmd: CommandOptions = {
       .setDescription(
         `Você recebeu **$${
           user.wallet > response.user.wallet ? user.wallet - response.user.wallet : response.user.wallet - user.wallet
-        }** por trabalhar para Dema!`,
+        }** por coletar sua diária de Dema!`,
       )
       .setFooter(`Você têm um total de $${response.user.bank + response.user.wallet}!`)
 
     return interaction.reply({
       embeds: [embed],
     })
-  },
+
+  }
 }

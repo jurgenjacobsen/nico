@@ -11,7 +11,7 @@ It is a project that is taking me some months to develop with feedback of great 
 > **DISCLAIMER**: **DO NOT** use this project for personal neither comercial use. Only with permission from the project developers!
 
 ___
-### Todo List (24/29)
+### Todo List (25/29)
 #### Cosméticos
 
 - [X] - Sistema de sugestões
@@ -31,7 +31,7 @@ ___
 - [ ] - Loja
 - [X] - /work
 - [X] - /fabric
-- [ ] - /daily
+- [X] - /daily
 - [X] - Receber dinheiro por mensagem enviada a cada minuto
 - [X] - Comando de informações sobre a economia do servidor
 - [X] - Cor do embed e banner customizável através da compra de itens na loja.

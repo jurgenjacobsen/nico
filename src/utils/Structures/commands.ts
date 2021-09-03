@@ -373,5 +373,11 @@ export const data: ApplicationCommandData[] = [
         type: 'STRING'
       }
     ]
+  },
+  {
+    name: 'daily',
+    description: 'Coleta o dinheiro diário',
+    type: 'CHAT_INPUT',
+    defaultPermission: true,
   }
 ]

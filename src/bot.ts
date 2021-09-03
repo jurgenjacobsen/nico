@@ -138,6 +138,7 @@ export const bot = new Bot({
     Intents.FLAGS.GUILD_WEBHOOKS,
   ],
   presence: {
+    status: 'dnd',
     activities: [
       {
         name: 'dema city',
