@@ -57,8 +57,8 @@ export const cmd: CommandOptions = {
         }
       }
 
-      let data = await bot.eco.ensure(interaction.user.id, interaction.guild?.id)
-      fabric = (await bot.eco.fabrics.fetch(interaction.user.id, interaction.guild?.id)) as Fabric
+      let data = await bot.eco.ensure(user.id, interaction.guild?.id)
+      fabric = (await bot.eco.fabrics.fetch(user.id, interaction.guild?.id)) as Fabric
 
       if (!fabric) {
         return interaction.reply({
