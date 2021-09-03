@@ -1,4 +1,4 @@
-import { Message, MessageEmbed, Role, TextChannel } from 'discord.js'
+import discordjs, { Message, MessageEmbed, Collection } from 'discord.js'
 import { EventOptions } from 'dsc.events'
 import { Util } from 'dsc.levels'
 import { Bot } from '../bot'
@@ -7,6 +7,19 @@ import { AntiInvite, print, suggestion } from '../utils/utils'
 
 let cmdregex = /^[%*!?$-+.]/
 let cooldowns = new Set()
+
+let frenscache = new Collection<string, {
+  userId: string,
+  tag: string,
+  media: {
+    msgs: number,
+    voice: number,
+  },
+  checks: {
+    msgs: boolean,
+    voice: boolean,
+  }
+}>();
 
 export const event: EventOptions = {
   name: 'messageCreate',
@@ -173,15 +186,70 @@ export const event: EventOptions = {
       channel.send(payload)
     }*/
 
-    if(message.content === '+auxilio') {
-      let eco = await bot.eco.fetch(message.author.id, message.guild.id);
-      if(!eco) return;
-      if(eco.bank < 1950) {
-        await bot.eco.addMoney(1950, message.author.id, message.guild.id)
-        message.reply({
-          content: 'A Caixa Federal liberou seu auxilio!'
+    if(message.content === '+frenslist' && (message.member.roles.cache.has('739183741515071539') || message.member.roles.cache.has('709450575640789083'))) {
+      
+      let msg = await message.channel.send({
+        content: `Carregando... (${frenscache.size})`,
+      });
+
+      let content = `
+        ${frenscache.map((f) => {
+          let voice = String(f.media.voice).includes(`.`) ? String(f.media.voice).split('.')[0] + '.' + String(f.media.voice).split('.')[1].slice(0, 1) : f.media.voice;
+
+          return `\`${f.userId}\` | **${f.tag}** | MSGS ${f.media.msgs}/dia | VOZ ${voice}hr`;
+        }).join('\n')}
+      `;
+
+      let blocks = discordjs.Util.splitMessage(content);
+
+      msg.edit({
+        content: `${blocks[0].length > 0 ? blocks[0] : '+frensload'}`,
+      });
+
+      if(blocks.length > 1) {
+        blocks.slice(1).forEach((b) => {
+          msg.reply({
+            content: `${b}`
+          })
         })
       }
+    }
+
+    if(message.content === '+frensload' && (message.member.roles.cache.has('739183741515071539') || message.member.roles.cache.has('709450575640789083'))) {
+      
+      let members = message.guild.members.cache.filter((m) => (new Date().getTime() - (m.joinedAt as Date).getTime()) >= 3 * 30 * 24 * 60 * 60 * 1000);
+
+      members.forEach(async (m) => {
+
+        let stats = await bot.stats.users.graphicFormatData(m.id, 15);
+        if(stats) {
+
+          let requirements = {
+            messages: 60,
+            voice: 2.5,
+          }
+      
+          let medias = {
+            messages: stats.messages.reduce((a, b) => a + b) / 15,
+            voice: stats.voice.reduce((a, b) => a + b) / 60,
+          }
+
+          if(medias.messages > requirements.messages || medias.voice > requirements.voice) {
+            frenscache.set(m.id, {
+              userId: m.id,
+              tag: m.user.tag,
+              media: {
+                msgs: Math.floor(medias.messages),
+                voice: medias.voice,
+              },
+              checks: {
+                msgs: medias.messages > requirements.messages,
+                voice: medias.voice > requirements.voice,
+              }
+            })
+          }
+        }
+      });
     }
   },
 }
