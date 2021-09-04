@@ -39,7 +39,7 @@ export const cmd: CommandOptions = {
               { name: 'Aniversário', value: `${data.birthday ? moment(data.birthday).format('DD/MM/YYYY') : 'ㅤ'}`, inline },
               {
                 name: 'Badges',
-                value: `${badges.LIST.filter((b) => data.badges.includes(b.id))
+                value: `${badges.parseUser(data.badges)
                   .map((b) => b.emoji)
                   .join(' ')}ㅤ`,
               },
@@ -135,7 +135,7 @@ export const cmd: CommandOptions = {
             id: interaction.user.id,
             bdaynotified: null,
             verified: false,
-            badges: ['2'],
+            badges: [],
             bannerURL: 'https://i.imgur.com/EbCa9W7.png',
             color: bot.config.color,
             createdAt: new Date(),

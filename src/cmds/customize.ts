@@ -5,7 +5,7 @@ import { hex_re, imgur_re } from '../utils/utils';
 
 export const cmd: CommandOptions = {
   name: 'customize',
-  devOnly: true,
+  devOnly: false,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let subcmd = interaction.options.getSubcommand() as 'profile' | 'card';
     let key = interaction.options.getString('key', true);
