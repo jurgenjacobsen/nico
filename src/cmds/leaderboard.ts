@@ -28,7 +28,7 @@ export const cmd: CommandOptions = {
           if (!data) return interaction.reply({ content: `Não foi possível encontrar dados para o leaderboard.` });
           let content = ``;
           for (let set of data.slice(0, 20)) {
-            content += `\n${set.userID === interaction.user.id ? `**#${set.pos}**` : `#${set.pos}`} - <@${set.userID}> - \`${set.textXp}\``;
+            content += `\n${set.userID === interaction.user.id ? `**#${set.pos}**` : `#${set.pos}`} - <@${set.userID}> - ${set.textXp}xp`;
           }
           embed.setDescription(content);
           embed.setFooter(`Níveis de texto`);
@@ -40,7 +40,7 @@ export const cmd: CommandOptions = {
           if (!data) return interaction.reply({ content: `Não foi possível encontrar dados para o leaderboard.` });
           let content = ``;
           for (let set of data) {
-            content += `\n${set.userID === interaction.user.id ? `**#${set.pos}**` : `#${set.pos}`} - <@${set.userID}> - \`${set.voiceXp}\``;
+            content += `\n${set.userID === interaction.user.id ? `**#${set.pos}**` : `#${set.pos}`} - <@${set.userID}> - ${set.voiceXp}xp`;
           }
           embed.setDescription(content);
           embed.setFooter(`Níveis de voz`);

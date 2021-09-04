@@ -2,7 +2,6 @@ import { CommandInteraction, MessageEmbed } from 'discord.js';
 import { CommandOptions } from 'dsc.cmds';
 import moment from 'moment';
 import { Bot } from '../bot';
-import { badges } from '../utils/Structures/badges';
 import { NicoUser } from '../utils/utils';
 
 export const cmd: CommandOptions = {
@@ -39,7 +38,8 @@ export const cmd: CommandOptions = {
               { name: 'Aniversário', value: `${data.birthday ? moment(data.birthday).format('DD/MM/YYYY') : 'ㅤ'}`, inline },
               {
                 name: 'Badges',
-                value: `${badges.parseUser(data.badges)
+                value: `${bot.badges
+                  .parseUser(data.badges)
                   .map((b) => b.emoji)
                   .join(' ')}ㅤ`,
               },

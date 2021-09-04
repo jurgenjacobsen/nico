@@ -53,7 +53,7 @@ ___
 - [X] - Anti-Invite
 - [X] - Banco de dados para configurar o bot através de comandos
 - [X] - Comando de mensagem que quando clicar com o direito haverá a opção de publicar o conteúdo da mensagem no #notas através de um Webhook.
-- [X] - Invite tracker
+- [ ] - Invite tracker
 ___
 
 ### Credits

@@ -15,10 +15,10 @@ import { BirthdaysManager } from './utils/Managers/BirthdaysManager';
 import { GiveawaysManager } from 'discord-giveaways';
 import { FeedManager } from './utils/Managers/TopfeedManager';
 import { GraphicsManager } from './utils/Managers/GraphicsManager';
-import InvitesTracker from '@androz2091/discord-invites-tracker';
-import moment from 'moment';
 import { ConfigManager } from './utils/Managers/ConfigManager';
 import { items } from './utils/Structures/items';
+import { InvitesManager } from './utils/Managers/InviteManager';
+import { BadgesManager } from './utils/Structures/badges';
 export class Bot extends Client {
   public config: Config;
   public configManager: ConfigManager;
@@ -30,6 +30,7 @@ export class Bot extends Client {
   public voiceIntervals: Collection<string, NodeJS.Timer | null>;
   public graphics: GraphicsManager;
   public topfeed: FeedManager;
+  public invites: InvitesManager;
   public giveaways!: GiveawaysManager;
   public stats: {
     users: UserStats;
@@ -39,6 +40,7 @@ export class Bot extends Client {
     members: Database;
     this: Database;
   };
+  public badges: BadgesManager;
   constructor(options: ClientOptions) {
     super(options);
     this.login(config.token);
@@ -98,6 +100,8 @@ export class Bot extends Client {
       print('Erro ao carregar os sorteios');
     }
 
+    this.invites = new InvitesManager(this);
+
     this.stats = {
       users: new UserStats({ db: mongo, dateFormat: 'DD/MM/YYYY' }),
       guild: new GuildStats({ db: mongo, dateFormat: 'DD/MM/YYYY' }),
@@ -113,6 +117,8 @@ export class Bot extends Client {
     this.configManager = new ConfigManager(this.db.this, '831653654426550293', this);
 
     this.birthdays = new BirthdaysManager(this.db.members);
+
+    this.badges = new BadgesManager(this.db.members);
 
     logs(this);
   }
@@ -146,39 +152,6 @@ export const bot = new Bot({
       },
     ],
   },
-});
-
-bot.on('ready', () => {
-  let tracker = InvitesTracker.init(bot, {
-    fetchGuilds: false,
-    fetchVanity: false,
-    fetchAuditLogs: true,
-  });
-
-  tracker.on('guildMemberAdd', (member, type, invite) => {
-    let logs = bot.channels.cache.get(bot.config.logs.tracker) as TextChannel;
-    if (!logs) return;
-
-    let embed = new MessageEmbed().setColor(bot.config.color).setAuthor(member.user.username, member.user.displayAvatarURL({ dynamic: true, size: 256 }));
-
-    if (type === 'normal' && invite) {
-      embed.setDescription(`
-      Este membro entrou através do convite ${invite?.url}!
-  
-      Criado por: ${member.toString()}
-      Criado em: ${moment(invite.createdAt).format('DD/MM/YYYY [às] hh:mm:ss')}
-      Usos: ${invite.uses ?? 1}
-      `);
-    } else if (type === 'permissions' || type === 'unknown') {
-      embed.setDescription(`Não foi possível identificar através de qual convite este membro entrou.`);
-    } else if (type === 'vanity') {
-      embed.setDescription(`Entrou através de https://discord.gg/${member.guild.vanityURLCode}`);
-    }
-
-    return logs.send({
-      embeds: [embed],
-    });
-  });
 });
 
 bot.levels.on('textLevelUp', (user: User) => {
