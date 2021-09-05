@@ -89,6 +89,9 @@ export const event: EventOptions = {
               setTimeout(() => {
                 if (m.deletable) m.delete();
               }, 10000);
+            })
+            .catch((err) => {
+              console.log(err);
             });
         });
         bot.eco.addMoney(Math.floor(Util.random(1, 5)), message.author.id, message.guild.id);
@@ -192,8 +195,9 @@ export const event: EventOptions = {
     if (message.content === '+frenslist' && (message.member.roles.cache.has('739183741515071539') || message.member.roles.cache.has('709450575640789083'))) {
       let msg = await message.channel.send({
         content: `Carregando... (${frenscache.size})`,
-      });
+      })
 
+      let pos = 1;
       let content = `
         ${frenscache
           .map((f) => {
@@ -201,7 +205,7 @@ export const event: EventOptions = {
               ? String(f.media.voice).split('.')[0] + '.' + String(f.media.voice).split('.')[1].slice(0, 1)
               : f.media.voice;
 
-            return `\`${f.userId}\` | **${f.tag}** | MSGS ${f.media.msgs}/dia | VOZ ${voice}hr`;
+            return `**${pos++}.** \` ${f.userId}\` | **${f.tag}** | MSGS ${f.media.msgs}/dia | VOZ ${voice}hr`;
           })
           .join('\n')}
       `;
@@ -223,6 +227,10 @@ export const event: EventOptions = {
 
     if (message.content === '+frensload' && (message.member.roles.cache.has('739183741515071539') || message.member.roles.cache.has('709450575640789083'))) {
       let members = message.guild.members.cache.filter((m) => new Date().getTime() - (m.joinedAt as Date).getTime() >= 3 * 30 * 24 * 60 * 60 * 1000);
+
+      message.channel.send({
+        content: `Carregando...`,
+      })
 
       members.forEach(async (m) => {
         let stats = await bot.stats.users.graphicFormatData(m.id, 15);
@@ -250,13 +258,15 @@ export const event: EventOptions = {
                 voice: medias.voice > requirements.voice,
               },
             });
+          } else {
+            frenscache.delete(m.id)
           }
         }
       });
     }
 
     if (message.content === '+test') {
-      bot.emit('guildMemberAdd', message.member);
+      
     }
   },
 };

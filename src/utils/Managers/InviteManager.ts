@@ -32,15 +32,17 @@ export class InvitesManager {
       let guild = this.bot.guilds.cache.get(this.bot.config.guild) as Guild;
       let invites = await guild.invites.fetch();
 
+      let invite: Invite | null = null;
+
       invites.forEach((now) => {
         let before = this.cache.get(now.code);
         if (before?.uses && now.uses && now.uses > before.uses) {
-          return resolve(now);
+          invite = now;
         }
       });
-
+      
       this.__update__();
-      return resolve(null);
+      return resolve(invite);
     });
   }
 }
