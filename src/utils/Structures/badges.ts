@@ -94,15 +94,15 @@ export class BadgesManager {
   public give(userId: string, badgeId: string): Promise<Badge | undefined> {
     return new Promise(async (resolve) => {
       let badge = this.get(badgeId);
-      if(!badge) return resolve(undefined);
+      if (!badge) return resolve(undefined);
 
       let user = await this.members.fetch(userId);
-      if(!user) return resolve(undefined);
+      if (!user) return resolve(undefined);
 
-      if(user.data.badges.includes(badgeId)) return undefined;
+      if (user.data.badges.includes(badgeId)) return undefined;
 
       this.members.push(`${userId}.badges`, badgeId).then((response) => {
-        if(!response) return resolve(undefined);
+        if (!response) return resolve(undefined);
         return resolve(badge);
       });
     });

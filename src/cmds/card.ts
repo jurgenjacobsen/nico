@@ -40,7 +40,7 @@ export const cmd: CommandOptions = {
       .renderEmojis(true)
       .setRank(leaderboard.find((l) => l.userID === user.id)?.pos ?? 0, 'Rank')
       .setBackground(profile.card.backgroundType, profile.card.background)
-      .setOverlay('#1c1c1c', profile.card.overlayOpacity)
+      .setOverlay('#1c1c1c', typeof profile.card.overlayOpacity === 'string' ? Number(profile.card.overlayOpacity) : profile.card.overlayOpacity)
       .setCustomStatusColor('#1c1c1c')
       .setLevelColor('#FFFFFF', profile.card.levelColor)
       .setRankColor('#FFFFFF', profile.card.rankColor)

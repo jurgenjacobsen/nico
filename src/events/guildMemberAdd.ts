@@ -12,7 +12,8 @@ export const event: EventOptions = {
     let memberCount = guild.memberCount || guild.members.cache.size;
 
     let welcomeChannel = member.guild.channels.cache.get(bot.config.welcomeChannel) as TextChannel;
-    let welcomeText = `Seja bem-vinde ${member} ao **Clique Brasil**!\n\n**Aqui estão alguns canais para você se informar**\n> <#727641717188198523> - *Obtenha informações básicas sobre nossa comunidade.*\n> <#503288296743632896> - *Fique por dentro das regras.*\n> <#466068493142458370> e <#698246223420850227> - *São os principais chats para você interagir no servidor!*\nㅤ`;
+    let welcomeText = `
+    ${member}, seja bem-vinde ao **Clique Brasil**!\n\n**Aqui estão algumas informações para você.**\n> <#727641717188198523> - Obtenha informações básicas sobre nossa comunidade.\n> <#503288296743632896> -Fique por dentro das regras.\n> <#678279785599729695> - Indentifique-se com algumas características.\n> <#466068493142458370> e <#698246223420850227> - São os principais chats para você interagir no servidor!\nㅤ`;
 
     let WelcomeCardBuffer = await DrawCard({
       avatar: member.user.displayAvatarURL({ format: 'png', size: 256 }),

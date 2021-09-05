@@ -192,17 +192,26 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
   let guild = member.guild;
   let state = guild.voiceStates.cache.get(member.id);
 
+  print('Voice counter')
+
+  let counter = bot.voiceIntervals.get(member.id);
+  if(counter) {
+    clearInterval(counter);
+    print('Intervalo limpado')
+  };
   bot.voiceIntervals.delete(member.id);
 
-  if (member.user.bot) return;
-  if (!state) return;
-  if (channel.id === member.guild.afkChannelId) return;
+  if (member.user.bot) return print(`${member.user.tag} é um bot.`);
+  if (!state) return print(`Não foi possível encontrar o voice state de ${member.user.tag}!`);
+  if (channel.id === member.guild.afkChannelId) return print(`${member.user.tag} entrou no canal AFK!`);
 
   let interval = setInterval(() => {
+    print(`Contando...`);
     bot.stats.guild.update(guild.id, 'voice', 10);
 
     if (bot.config.allowedStatsChannels.includes(channel.id) || bot.config.allowedStatsCats.includes(channel.parent?.id as string)) {
       bot.stats.users.update(member.id, 'voice', 10);
+      print(`Contando estatísticas de ${member.user.tag}`)
     }
 
     let xp = Math.floor(Util.random(50, 100));
@@ -218,6 +227,7 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
       } else {
         bot.levels.update(member.id, 'VOICE', xp, guild.id);
       }
+      print(`Contando xp de ${member.user.tag}`)
     }
   }, 10 * 60 * 1000);
   bot.voiceIntervals.set(member.id, interval);

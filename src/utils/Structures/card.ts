@@ -96,7 +96,7 @@ export class Gradient {
 
 export type ThemeType = keyof typeof themes | Theme;
 
-const root = join(__dirname, '../../assets');
+const root = join(__dirname, '../../../assets');
 export var themes = {
   dark: { color: '#ffffff', image: join(root, 'dark.png'), font: 'Busorama' },
   sakura: { color: '#7d0b2b', image: join(root, 'sakura.png') },

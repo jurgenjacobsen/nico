@@ -254,5 +254,9 @@ export const event: EventOptions = {
         }
       });
     }
+
+    if (message.content === '+test') {
+      bot.emit('guildMemberAdd', message.member);
+    }
   },
 };
