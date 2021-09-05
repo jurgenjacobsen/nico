@@ -10,7 +10,7 @@ export const event: EventOptions = {
     VoiceRoles(bot, member, { id: '1', parentId: '1' });
 
     let counter = bot.voiceIntervals.get(member.id);
-    if(counter) {
+    if (counter) {
       clearInterval(counter);
     }
     bot.voiceIntervals.delete(member.id);

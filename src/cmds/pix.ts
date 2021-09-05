@@ -36,12 +36,14 @@ export const cmd: CommandOptions = {
       });
     }
 
-    interaction.reply({
-      embeds: [
-        new MessageEmbed().setColor(bot.config.color).setDescription(`
+    interaction
+      .reply({
+        embeds: [
+          new MessageEmbed().setColor(bot.config.color).setDescription(`
         💳 | ${interaction.user.toString()} transferiu **$${amount}** para ${to.toString()}
         `),
-      ],
-    });
+        ],
+      })
+      .catch(() => {});
   },
 };

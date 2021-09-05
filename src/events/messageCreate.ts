@@ -195,7 +195,7 @@ export const event: EventOptions = {
     if (message.content === '+frenslist' && (message.member.roles.cache.has('739183741515071539') || message.member.roles.cache.has('709450575640789083'))) {
       let msg = await message.channel.send({
         content: `Carregando... (${frenscache.size})`,
-      })
+      });
 
       let pos = 1;
       let content = `
@@ -230,7 +230,7 @@ export const event: EventOptions = {
 
       message.channel.send({
         content: `Carregando...`,
-      })
+      });
 
       members.forEach(async (m) => {
         let stats = await bot.stats.users.graphicFormatData(m.id, 15);
@@ -259,14 +259,16 @@ export const event: EventOptions = {
               },
             });
           } else {
-            frenscache.delete(m.id)
+            frenscache.delete(m.id);
           }
         }
       });
     }
 
     if (message.content === '+test') {
-      
+      message.reply({
+        content: `${Math.floor(Util.random(1, 7200))}`,
+      });
     }
   },
 };

@@ -27,7 +27,7 @@ export const cmd: CommandOptions = {
               : `${user.tag} não possue um perfil!`
           }`,
         })
-        .catch(() => {});
+        .catch((err) => {});
 
     let profile = raw.data as NicoUser;
 
@@ -70,6 +70,6 @@ export const cmd: CommandOptions = {
       .reply({
         files: [file],
       })
-      .catch(() => {});
+      .catch((err) => {});
   },
 };

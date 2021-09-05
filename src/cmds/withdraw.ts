@@ -30,8 +30,10 @@ export const cmd: CommandOptions = {
       });
     }
 
-    return interaction.reply({
-      embeds: [new MessageEmbed().setColor(bot.config.color).setDescription(`💳 | **$${amount}** foi retirada para sua carteira!`)],
-    });
+    return interaction
+      .reply({
+        embeds: [new MessageEmbed().setColor(bot.config.color).setDescription(`💳 | **$${amount}** foi retirada para sua carteira!`)],
+      })
+      .catch(() => {});
   },
 };

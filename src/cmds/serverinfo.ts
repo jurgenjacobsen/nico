@@ -122,10 +122,12 @@ export const cmd: CommandOptions = {
     if (!data) return;
     if (!data2) return;
 
-    interaction.reply({
-      embeds: [data.embed, data2.embed],
-      files: [data.file, data2.file],
-    });
+    interaction
+      .reply({
+        embeds: [data.embed, data2.embed],
+        files: [data.file, data2.file],
+      })
+      .catch(() => {});
   },
 };
 

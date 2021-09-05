@@ -42,15 +42,19 @@ export const cmd: CommandOptions = {
         })
         .catch(() => {});
     } catch {
-      return interaction.reply({
-        content: `Erro ao criar sorteio!`,
-        ephemeral: true,
-      });
+      return interaction
+        .reply({
+          content: `Erro ao criar sorteio!`,
+          ephemeral: true,
+        })
+        .catch(() => {});
     }
 
-    return interaction.reply({
-      content: `Sorteio criado com sucesso!`,
-      ephemeral: true,
-    });
+    return interaction
+      .reply({
+        content: `Sorteio criado com sucesso!`,
+        ephemeral: true,
+      })
+      .catch(() => {});
   },
 };

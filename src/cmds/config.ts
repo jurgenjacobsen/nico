@@ -54,22 +54,24 @@ export const cmd: CommandOptions = {
           ${config.DXPChannels.map((x) => `<#${x}>`).join(`, `)}
           `);
 
-          return interaction.reply({
-            embeds: [embed],
-          });
+          return interaction
+            .reply({
+              embeds: [embed],
+            })
+            .catch((err) => {});
         }
         break;
 
       case 'add':
         {
-          if (!data || !key || !bot.user) return interaction.reply({ content: 'NC 001 | Houve um erro por falta de dados' });
+          if (!data || !key || !bot.user) return interaction.reply({ content: 'NC 001 | Houve um erro por falta de dados' }).catch((err) => {});
           await bot.db.this.push(`${bot.user.id as string}.${key}`, data);
         }
         break;
 
       case 'remove':
         {
-          if (!data || !key || !bot.user) return interaction.reply({ content: 'NC 002 | Houve um erro por falta de dados' });
+          if (!data || !key || !bot.user) return interaction.reply({ content: 'NC 002 | Houve um erro por falta de dados' }).catch((err) => {});
           await bot.db.this.pull(`${bot.user.id as string}.${key}`, data);
         }
         break;
@@ -77,7 +79,7 @@ export const cmd: CommandOptions = {
 
     bot.configManager.update();
 
-    return interaction.reply({ content: 'Alterações salvas com sucesso! Use `/config show`' });
+    return interaction.reply({ content: 'Alterações salvas com sucesso! Use `/config show`' }).catch((err) => {});
   },
 };
 

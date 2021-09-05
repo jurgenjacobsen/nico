@@ -25,9 +25,9 @@ export const cmd: CommandOptions = {
     interaction
       .reply({
         embeds: [embed],
-        components: [row],
+        components: [row, Error as any],
       })
-      .catch(() => {});
+      .catch((err) => {});
 
     let collector = interaction.channel?.createMessageComponentCollector({ filter: (i) => i.user.id === interaction.user.id, time: 10 * 60 * 1000 });
 

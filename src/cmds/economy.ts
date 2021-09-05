@@ -21,8 +21,10 @@ export const cmd: CommandOptions = {
     }
     `);
 
-    interaction.reply({
-      embeds: [e1],
-    });
+    interaction
+      .reply({
+        embeds: [e1],
+      })
+      .catch(() => {});
   },
 };

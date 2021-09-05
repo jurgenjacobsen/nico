@@ -47,8 +47,10 @@ export const cmd: CommandOptions = {
         }
         break;
     }
-    return interaction.reply({
-      embeds: [embed],
-    });
+    return interaction
+      .reply({
+        embeds: [embed],
+      })
+      .catch(() => {});
   },
 };

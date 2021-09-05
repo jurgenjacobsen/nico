@@ -20,8 +20,10 @@ export const cmd: CommandOptions = {
     \n**Bugs**: **[Github](https://github.com/jurgenjacobsen/nico/issues)**
     `);
 
-    interaction.reply({
-      embeds: [embed],
-    });
+    interaction
+      .reply({
+        embeds: [embed],
+      })
+      .catch(() => {});
   },
 };

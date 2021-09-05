@@ -1,5 +1,16 @@
 import colors from 'colors';
-import { ColorResolvable, Guild, GuildMember, Message, MessageAttachment, MessageEmbed, Snowflake, TextChannel, VoiceChannel } from 'discord.js';
+import {
+  ColorResolvable,
+  CommandInteraction,
+  Guild,
+  GuildMember,
+  Message,
+  MessageAttachment,
+  MessageEmbed,
+  Snowflake,
+  TextChannel,
+  VoiceChannel,
+} from 'discord.js';
 import { Bot } from '../bot';
 import axios from 'axios';
 import { Util } from 'dsc.levels';
@@ -193,9 +204,9 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
   let state = guild.voiceStates.cache.get(member.id);
 
   let counter = bot.voiceIntervals.get(member.id);
-  if(counter) {
+  if (counter) {
     clearInterval(counter);
-  };
+  }
   bot.voiceIntervals.delete(member.id);
 
   if (member.user.bot) return print(`${member.user.tag} é um bot.`);
@@ -206,7 +217,7 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
     bot.stats.guild.update(guild.id, 'voice', 10);
 
     if (bot.config.allowedStatsChannels.includes(channel.id) || bot.config.allowedStatsCats.includes(channel.parent?.id as string)) {
-      bot.stats.users.update(member.id, 'voice', 10)
+      bot.stats.users.update(member.id, 'voice', 10);
     }
 
     let xp = Math.floor(Util.random(50, 100));
@@ -226,6 +237,39 @@ export const VoiceCounters = (bot: Bot, member: GuildMember, channel: VoiceChann
   }, 10 * 60 * 1000);
   bot.voiceIntervals.set(member.id, interval);
 };
+
+export class Nic extends Error {
+  public code: string;
+  public message: string;
+  constructor(code: string | number, message: string, extra?: { err?: Error | string; ref: Message | CommandInteraction }) {
+    super();
+    Error.captureStackTrace(this, this.constructor);
+
+    this.code = colors.yellow(`[NIC${code}]`);
+    this.message = message;
+
+    print(`${this.code} ${this.message}`);
+
+    this.name = this.code;
+    this.message = this.message;
+
+    let content = `\`[NIC${code}]\` | Ocorreu um erro, verifique a tabela de erros em <#861743115357388821> para saber mais!`;
+
+    if (extra?.ref && extra.ref instanceof Message) {
+      extra.ref.reply({ content });
+    } else if (extra?.ref && extra.ref instanceof CommandInteraction) {
+      if (extra.ref.replied || extra.ref.deferred) {
+        extra.ref.editReply({ content });
+      } else {
+        extra.ref.reply({ content });
+      }
+    }
+
+    if (extra?.err) {
+      console.error(extra.err);
+    }
+  }
+}
 
 export interface NicoUser {
   name: string | null;

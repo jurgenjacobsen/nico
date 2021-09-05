@@ -14,13 +14,17 @@ export const cmd: CommandOptions = {
 
     if (user.wallet >= amount) {
       user = (await bot.eco.deposit(amount, interaction.user.id, interaction.guild?.id)) as User;
-      return interaction.reply({
-        embeds: [new MessageEmbed().setColor(bot.config.color).setDescription(`💳 | **$${amount}** foi depositado em seu banco!`)],
-      });
+      return interaction
+        .reply({
+          embeds: [new MessageEmbed().setColor(bot.config.color).setDescription(`💳 | **$${amount}** foi depositado em seu banco!`)],
+        })
+        .catch(() => {});
     } else {
-      return interaction.reply({
-        content: `Você não possue dinheiro suficiente na carteira.`,
-      });
+      return interaction
+        .reply({
+          content: `Você não possue dinheiro suficiente na carteira.`,
+        })
+        .catch(() => {});
     }
   },
 };

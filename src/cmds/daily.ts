@@ -34,23 +34,29 @@ export const cmd: CommandOptions = {
 
             let embed = new MessageEmbed().setColor(bot.config.color).setDescription(`Você deve esperar${remaining}para coletar o \`daily\` novamente!`);
 
-            return interaction.reply({
-              embeds: [embed],
-            });
+            return interaction
+              .reply({
+                embeds: [embed],
+              })
+              .catch(() => {});
           }
           break;
         default: {
-          return interaction.reply({
-            content: `Houve um erro ao coletar o \`/daily\`.`,
-          });
+          return interaction
+            .reply({
+              content: `Houve um erro ao coletar o \`/daily\`.`,
+            })
+            .catch(() => {});
         }
       }
     }
 
     if (!response) {
-      return interaction.reply({
-        content: `Houve um erro ao coletar o \`/daily\`.`,
-      });
+      return interaction
+        .reply({
+          content: `Houve um erro ao coletar o \`/daily\`.`,
+        })
+        .catch(() => {});
     }
 
     if (!user) {
@@ -66,8 +72,10 @@ export const cmd: CommandOptions = {
       )
       .setFooter(`Você têm um total de $${response.user.bank + response.user.wallet}!`);
 
-    return interaction.reply({
-      embeds: [embed],
-    });
+    return interaction
+      .reply({
+        embeds: [embed],
+      })
+      .catch(() => {});
   },
 };

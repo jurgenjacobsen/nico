@@ -104,11 +104,14 @@ export const cmd: CommandOptions = {
       }
 
       if (interaction.replied) {
-        interaction.editReply(res).catch(() => {
-          collector?.stop();
-        });
+        interaction
+          .editReply(res)
+          .catch(() => {
+            collector?.stop();
+          })
+          .catch(() => {});
       } else {
-        interaction.reply(res);
+        interaction.reply(res).catch(() => {});
       }
     }
   },

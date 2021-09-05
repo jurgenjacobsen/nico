@@ -40,7 +40,7 @@ export class InvitesManager {
           invite = now;
         }
       });
-      
+
       this.__update__();
       return resolve(invite);
     });

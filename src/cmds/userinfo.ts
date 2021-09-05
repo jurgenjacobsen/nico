@@ -16,7 +16,9 @@ export const cmd: CommandOptions = {
     let member = interaction.guild?.members.cache.get(user.id) as GuildMember;
 
     if (!member || !member.joinedAt) {
-      interaction.reply({ content: `Não foi possível ver o perfil de ${user.tag} pois aparentemente ele(a) não está no meu cache de usuários!` });
+      interaction
+        .reply({ content: `Não foi possível ver o perfil de ${user.tag} pois aparentemente ele(a) não está no meu cache de usuários!` })
+        .catch(() => {});
       return print(`Não foi possível ver o perfil de ${user.tag} pois aparentemente ele(a) não está no meu cache de usuários!`);
     }
 
@@ -95,7 +97,6 @@ export const cmd: CommandOptions = {
       );
 
     try {
-      if (!interaction) return;
       interaction
         .reply({
           embeds: [embed, embed2],

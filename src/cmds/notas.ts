@@ -49,11 +49,13 @@ export const cmd: CommandOptions = {
 
     if (mention) payload.content = mention;
 
-    webhook.send(payload);
+    webhook.send(payload).catch(() => {});
 
-    return interaction.reply({
-      ephemeral: true,
-      content: `Essa mensagem foi públicada com sucesso!`,
-    });
+    return interaction
+      .reply({
+        ephemeral: true,
+        content: `Essa mensagem foi públicada com sucesso!`,
+      })
+      .catch(() => {});
   },
 };

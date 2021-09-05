@@ -20,8 +20,10 @@ export const cmd: CommandOptions = {
     let invite = await together.createTogetherCode(member.voice.channelId, type);
     if (!invite) return interaction.reply({ content: 'Houve um erro ao executar esta ação' });
 
-    interaction.reply({
-      content: `[Entrar](${invite.code})`,
-    });
+    interaction
+      .reply({
+        content: `[Entrar](${invite.code})`,
+      })
+      .catch(() => {});
   },
 };
