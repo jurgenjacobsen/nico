@@ -1,4 +1,4 @@
-import discordjs, { Message, MessageEmbed, Collection } from 'discord.js';
+import discordjs, { Message, MessageEmbed, Collection, TextChannel } from 'discord.js';
 import { EventOptions } from 'dsc.events';
 import { Util } from 'dsc.levels';
 import { Bot } from '../bot';
@@ -32,7 +32,7 @@ export const event: EventOptions = {
      * Checks if the author is a bot and if the message was sent inside a guild or not
      */
     if (message.author.bot) return;
-
+    
     if (message.author.id === '404253084584378389' && message.channel.id === '714634320115138621') {
       let today = new Date();
       let year = today.getFullYear();
@@ -124,6 +124,15 @@ export const event: EventOptions = {
      */
     if (message.mentions.members?.has(bot.user?.id as string) || message.content.toLowerCase().includes(' nico ') || message.content.toLowerCase() === 'nico') {
       message.react(`👀`);
+    }
+    
+    /**
+     * Crossport news posts
+     */
+    if((message.channel as TextChannel).parent?.id === '827932086626680882') {
+      message.crosspost().catch((err) => {
+        console.log(err);
+      });
     }
 
     /**
