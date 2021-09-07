@@ -25,7 +25,7 @@ export const cmd: CommandOptions = {
     interaction
       .reply({
         embeds: [embed],
-        components: [row, Error as any],
+        components: [row],
       })
       .catch((err) => {});
 
