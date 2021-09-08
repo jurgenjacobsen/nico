@@ -18,7 +18,5 @@ export const event: EventOptions = {
         bot.stats.guild.update('465938334791893002', 'totalMembers', guild.memberCount);
       }
     }, 30 * 60 * 1000);
-
-    play(bot);
   },
 };

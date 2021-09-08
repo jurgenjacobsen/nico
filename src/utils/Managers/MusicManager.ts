@@ -1,11 +1,15 @@
 import { Track } from 'discord-player';
 import { MessageActionRow, MessageButton, MessageEmbed, TextChannel, Collection, Snowflake, User, VoiceChannel, Guild } from 'discord.js';
+import { Util } from 'dsc.levels';
 import { Bot } from '../../bot';
 import { dots, print } from '../utils';
 
 let cache = new Set();
 
 export const MusicManager = (bot: Bot) => {
+  // Remover
+  return;
+
   bot.player.on('trackEnd', () => {
     play(bot);
   });
@@ -51,6 +55,8 @@ export const MusicManager = (bot: Bot) => {
       })
       .catch((err) => console.log(err));
   });
+
+  bot.player.on('error', () => {});
 };
 
 export const play = async (bot: Bot) => {
@@ -78,6 +84,10 @@ export const play = async (bot: Bot) => {
     .sort((a, b) => b.lastPlay.getTime() - a.lastPlay.getTime())
     .slice(1)
     .sort((a, b) => a.played - b.played);
+  if(Math.floor(Util.random(1, 11)) <= 2) {
+    data = shuffle(data);
+  }
+
   let rawTrack = data[0];
   if (!rawTrack) return print('Track raw não encontrada');
 
@@ -103,3 +113,13 @@ export const play = async (bot: Bot) => {
   await bot.db.sotw.add(`${rawTrack.id}.played`, 1);
   await bot.db.sotw.set(`${rawTrack.id}.lastPlay`, new Date());
 };
+
+function shuffle(array: any[]): any[] {
+  var currentIndex = array.length,  randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
+  return array;
+}

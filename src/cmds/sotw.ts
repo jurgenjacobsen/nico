@@ -24,14 +24,13 @@ export const cmd: CommandOptions = {
               content: 'Música não encontrada!',
             });
           }
-
-          await interaction.deferReply();
-
+          
           let embed = new MessageEmbed()
           .setColor(bot.config.color)
           .setAuthor(interaction.user.username, interaction.user.displayAvatarURL({ dynamic: true, size: 128 }))
           .setDescription(`
           Título: ${track.title}
+          Autor: ${track.author}
           Duração: ${track.duration}
           ID: ${track.id}
 

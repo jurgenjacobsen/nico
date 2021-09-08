@@ -3,6 +3,15 @@ import { CommandOptions } from 'dsc.cmds';
 import { Fabric } from 'dsc.eco';
 import { Bot } from '../bot';
 
+const images: {[key: number]: string} = {
+  1: 'https://media.discordapp.net/attachments/859164889749389352/885187173979131924/1.png',
+  2: 'https://media.discordapp.net/attachments/859164889749389352/885187174486667274/2.png',
+  3: 'https://media.discordapp.net/attachments/859164889749389352/885187175635910686/3.png',
+  4: 'https://media.discordapp.net/attachments/859164889749389352/885187176365715476/4.png',
+  5: 'https://media.discordapp.net/attachments/859164889749389352/885187178278297702/5.png',
+  6: 'https://media.discordapp.net/attachments/859164889749389352/885187180132188210/6.png',
+}
+
 export const cmd: CommandOptions = {
   name: 'fabric',
   devOnly: false,
@@ -67,7 +76,7 @@ export const cmd: CommandOptions = {
       }
 
       let embed = new MessageEmbed()
-        .setImage(`https://dema.city/assets/images/fabric/${fabric.level}.png`)
+        .setImage(`${images[fabric.level]}`)
         .setColor(bot.config.color)
         .setAuthor(
           user.username,

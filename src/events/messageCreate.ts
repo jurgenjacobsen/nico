@@ -293,6 +293,14 @@ export const event: EventOptions = {
         "8D": !queue.getFiltersEnabled().includes('8D'),
       });
     }
+
+    if(message.content === '+nightcore' && bot.config.devs.ids.includes(message.author.id)) {
+      let queue = bot.player.getQueue(message.guild);
+      if(!queue) return;
+      await queue.setFilters({
+        nightcore: !queue.getFiltersEnabled().includes('nightcore'),
+      });
+    }
     
   },
 };
