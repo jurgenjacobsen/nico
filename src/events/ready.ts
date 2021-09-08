@@ -1,7 +1,7 @@
 import { EventOptions } from 'dsc.events';
 import { print } from '../utils/utils';
 import { Bot } from '../bot';
-import { Guild } from 'discord.js';
+import { play } from '../utils/Managers/MusicManager';
 
 export const event: EventOptions = {
   name: 'ready',
@@ -18,5 +18,7 @@ export const event: EventOptions = {
         bot.stats.guild.update('465938334791893002', 'totalMembers', guild.memberCount);
       }
     }, 30 * 60 * 1000);
+
+    play(bot);
   },
 };

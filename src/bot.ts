@@ -1,4 +1,4 @@
-import { Client, ClientOptions, Collection, Guild, GuildMember, Intents, Invite, MessageEmbed, Role, Snowflake, TextChannel } from 'discord.js';
+import { Client, ClientOptions, Collection, Guild, GuildMember, Intents, Snowflake } from 'discord.js';
 import { Commands } from 'dsc.cmds';
 import { EventHandler } from 'dsc.events';
 import { Config, config, mongo } from './utils/config';
@@ -9,7 +9,7 @@ import { Levels } from 'dsc.levels';
 import { Economy } from 'dsc.eco';
 import { GuildStats, UserStats } from 'dsc.stats';
 import { User } from 'dsc.levels/lib/Levels';
-import { print } from './utils/utils';
+import { NicoUser, print, SongOfTheWeek } from './utils/utils';
 import { Database } from 'dsc.db';
 import { BirthdaysManager } from './utils/Managers/BirthdaysManager';
 import { GiveawaysManager } from 'discord-giveaways';
@@ -19,6 +19,8 @@ import { ConfigManager } from './utils/Managers/ConfigManager';
 import { items } from './utils/Structures/items';
 import { InvitesManager } from './utils/Managers/InviteManager';
 import { BadgesManager } from './utils/Structures/badges';
+import { Player } from 'discord-player';
+import { MusicManager } from './utils/Managers/MusicManager';
 export class Bot extends Client {
   public config: Config;
   public configManager: ConfigManager;
@@ -37,9 +39,11 @@ export class Bot extends Client {
     guild: GuildStats;
   };
   public db: {
-    members: Database;
-    this: Database;
+    members: Database<NicoUser>;
+    sotw: Database<SongOfTheWeek>;
+    this: Database<any>;
   };
+  public player: Player;
   public badges: BadgesManager;
   constructor(options: ClientOptions) {
     super(options);
@@ -111,6 +115,7 @@ export class Bot extends Client {
 
     this.db = {
       members: new Database({ ...mongo, collection: 'members' }),
+      sotw: new Database({ ...mongo, collection: 'sotw' }),
       this: new Database({ ...mongo, collection: 'bots' }),
     };
 
@@ -118,9 +123,11 @@ export class Bot extends Client {
 
     this.birthdays = new BirthdaysManager(this.db.members);
 
+    this.player = new Player(this);
     this.badges = new BadgesManager(this.db.members);
 
     logs(this);
+    MusicManager(this);
   }
 }
 
@@ -157,14 +164,10 @@ export const bot = new Bot({
 bot.levels.on('textLevelUp', (user: User) => {
   let guild = bot.guilds.cache.get(bot.config.guild) as Guild;
   let member = guild.members.cache.get(user.userID) as GuildMember;
-
-  /*
-  let role = guild.roles.cache.find((r) => r.name.includes(`nível ${user.textLevel}`));
+  /*let role = guild.roles.cache.find((r) => r.name.includes(`nível ${user.textLevel}`));
   if(role) {
     member.roles.add(role);
-  }; 
-  */
-
+  };*/
   print(`${colors.gray('[TEXTO]')} ${member.user.tag} subiu para o nível ${user.textLevel}!`);
 });
 
@@ -179,7 +182,6 @@ bot.levels.on('voiceLevelUp', (user: User) => {
     40: '795703589300994058',
     50: '861637124021026857',
   };
-
   /*
   let role: Snowflake | undefined = roles[user.voiceLevel];
   if(role) {
@@ -190,27 +192,21 @@ bot.levels.on('voiceLevelUp', (user: User) => {
 });
 
 bot.birthdays.on('BDAY', (user) => {
-  /*
-  let guild = bot.guilds.cache.get(bot.config.guild) as Guild;
+  /*let guild = bot.guilds.cache.get(bot.config.guild) as Guild;
   let member = guild.members.cache.get(user.id) as GuildMember;
   let bdayRole = guild.roles.cache.find((r) => r.name.includes(`Aniversariante do dia`));
-
   if(bdayRole) {
     member.roles.add(bdayRole);
-  }
-  */
+  }*/
 });
 
 bot.birthdays.on('NON-BDAY', (user) => {
-  /*
-  let guild = bot.guilds.cache.get(bot.config.guild) as Guild;
+  /*let guild = bot.guilds.cache.get(bot.config.guild) as Guild;
   let member = guild.members.cache.get(user.id) as GuildMember;
   let bdayRole = guild.roles.cache.find((r) => r.name.includes(`Aniversariante do dia`));
-
   if(bdayRole) {
     if(member.roles.cache.has(bdayRole.id)) {
       member.roles.remove(bdayRole.id);
     }
-  }
-  */
+  }*/
 });

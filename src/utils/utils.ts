@@ -9,11 +9,13 @@ import {
   MessageEmbed,
   Snowflake,
   TextChannel,
+  User,
   VoiceChannel,
 } from 'discord.js';
 import { Bot } from '../bot';
 import axios from 'axios';
 import { Util } from 'dsc.levels';
+import { Queue, Track } from 'discord-player';
 
 export let imgur_re = /^(https?:)?\/\/(\w+\.)?imgur\.com\/(\S*)(\.[a-zA-Z]{3})$/;
 export let hex_re = /^#(?:[0-9a-fA-F]{3}){1,2}$/;
@@ -271,6 +273,11 @@ export class Nic extends Error {
   }
 }
 
+export function dots(string: string, length: number) {
+  if (string.length > length) return string.substring(0, length) + '...';
+  else return string;
+}
+
 export interface NicoUser {
   name: string | null;
   about: string | null;
@@ -296,6 +303,16 @@ export interface NicoUser {
   bannerURL: string | null;
   color: ColorResolvable | string | null;
   createdAt: Date;
+}
+
+export interface SongOfTheWeek {
+  id: Snowflake;
+  name: string;
+  url: string;
+  played: number;
+  lastPlay: Date;
+  likes: Snowflake[];
+  addedAt: Date;
 }
 
 export type HEX = `#${string}`;

@@ -2,7 +2,7 @@ import { CommandInteraction, MessageEmbed } from 'discord.js';
 import { CommandOptions } from 'dsc.cmds';
 import moment from 'moment';
 import { Bot } from '../bot';
-import { NicoUser } from '../utils/utils';
+import { dots, NicoUser } from '../utils/utils';
 import weather from 'weather-js';
 
 export const cmd: CommandOptions = {
@@ -27,13 +27,13 @@ export const cmd: CommandOptions = {
           let data: NicoUser = u.data;
           let inline = true;
 
-          let skytextEmoji: {[key: string]: string} = {
-            'rain': '🌧️',
-            'sunny': '☀️'
-          }
-          
+          let skytextEmoji: { [key: string]: string } = {
+            rain: '🌧️',
+            sunny: '☀️',
+          };
+
           let weather: any | undefined = undefined;
-          if(data.location) {
+          if (data.location) {
             weather = await Weather(data.location);
           }
 
@@ -42,7 +42,13 @@ export const cmd: CommandOptions = {
             .setAuthor(user.username, user.displayAvatarURL({ dynamic: true, size: 256 }))
             .addFields([
               { name: 'Nome', value: `${data.name ?? 'ㅤ'}`, inline },
-              { name: `Localização`, value: `${data.location ? `${weather ? `${dots(data.location, 18)} - ${weather.temperature}°C` : data.location}` : 'ㅤ'} ${weather && skytextEmoji[weather.skytext.toLowerCase()] ? `${skytextEmoji[weather.skytext.toLowerCase()]}` : ''}`, inline },
+              {
+                name: `Localização`,
+                value: `${data.location ? `${weather ? `${dots(data.location, 18)} - ${weather.temperature}°C` : data.location}` : 'ㅤ'} ${
+                  weather && skytextEmoji[weather.skytext.toLowerCase()] ? `${skytextEmoji[weather.skytext.toLowerCase()]}` : ''
+                }`,
+                inline,
+              },
               { name: 'Pronome', value: `${data.pronoun ?? 'ㅤ'}`, inline },
               { name: 'Gênero', value: `${data.gender ?? 'ㅤ'}`, inline },
               { name: 'Orientação', value: `${data.orientation ?? 'ㅤ'}`, inline },
@@ -179,14 +185,9 @@ function parseDate(str: string | null) {
 
 function Weather(search: string): Promise<any | undefined> {
   return new Promise((resolve) => {
-    weather.find({search , degreeType: 'C'}, function(err: Error, result: any) {
-      if(err) return resolve(undefined);
+    weather.find({ search, degreeType: 'C' }, function (err: Error, result: any) {
+      if (err) return resolve(undefined);
       return resolve(result[0].current);
     });
-  })
+  });
 }
-
-function dots(string: string, length: number) {
-  if (string.length > length) return string.substring(0,length)+'...';
-  else return string;
-};

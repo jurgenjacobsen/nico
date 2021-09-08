@@ -3,10 +3,10 @@ import { Database } from 'dsc.db';
 import { Bot } from '../../bot';
 
 export class ConfigManager {
-  private db: Database;
+  private db: Database<any>;
   private id: string;
   private bot: Bot;
-  constructor(db: Database, id: Snowflake | string, bot: Bot) {
+  constructor(db: Database<any>, id: Snowflake | string, bot: Bot) {
     this.db = db;
     this.id = id;
     this.bot = bot;

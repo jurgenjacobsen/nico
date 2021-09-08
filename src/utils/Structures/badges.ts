@@ -78,8 +78,8 @@ const badges = [
 ];
 
 export class BadgesManager {
-  public members: Database;
-  constructor(members: Database) {
+  public members: Database<any>;
+  constructor(members: Database<any>) {
     this.members = members;
   }
 

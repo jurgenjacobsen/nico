@@ -32,7 +32,7 @@ export const event: EventOptions = {
      * Checks if the author is a bot and if the message was sent inside a guild or not
      */
     if (message.author.bot) return;
-    
+
     if (message.author.id === '404253084584378389' && message.channel.id === '714634320115138621') {
       let today = new Date();
       let year = today.getFullYear();
@@ -125,11 +125,11 @@ export const event: EventOptions = {
     if (message.mentions.members?.has(bot.user?.id as string) || message.content.toLowerCase().includes(' nico ') || message.content.toLowerCase() === 'nico') {
       message.react(`👀`);
     }
-    
+
     /**
      * Crossport news posts
      */
-    if((message.channel as TextChannel).parent?.id === '827932086626680882') {
+    if ((message.channel as TextChannel).parent?.id === '827932086626680882') {
       message.crosspost().catch((err) => {
         console.log(err);
       });
@@ -271,12 +271,6 @@ export const event: EventOptions = {
             frenscache.delete(m.id);
           }
         }
-      });
-    }
-
-    if (message.content === '+test') {
-      message.reply({
-        content: `${Math.floor(Util.random(1, 7200))}`,
       });
     }
   },

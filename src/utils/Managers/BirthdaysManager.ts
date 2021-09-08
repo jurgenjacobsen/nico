@@ -4,10 +4,10 @@ import { NicoUser, print } from '../utils';
 
 export class BirthdaysManager {
   public cache: BirthdaysCache;
-  private members: Database;
+  private members: Database<any>;
   private bcb: BirthdayCallback | undefined;
   private nbcb: BirthdayCallback | undefined;
-  constructor(members: Database) {
+  constructor(members: Database<any>) {
     this.cache = new Collection();
     this.members = members;
 

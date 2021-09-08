@@ -4,7 +4,7 @@ import { EventEmitter } from 'events';
 import Twit, { Params } from 'twit';
 
 export interface FeedManagerOptions {
-  db: Database;
+  db: Database<any>;
   accounts: FeedAccountSettings[];
 }
 
@@ -24,7 +24,7 @@ export type Tweets = Collection<string, Tweet>;
 export type raw = object;
 
 export class FeedManager {
-  public db: Database;
+  public db: Database<any>;
   public accounts: FeedWatcher[];
 
   constructor(options: FeedManagerOptions) {
@@ -40,12 +40,12 @@ export class FeedManager {
 
 export class FeedWatcher extends EventEmitter {
   private options: FeedAccountSettings;
-  private db: Database;
+  private db: Database<any>;
   private T: Twit;
 
   public account!: Account;
 
-  constructor(options: FeedAccountSettings, db: Database) {
+  constructor(options: FeedAccountSettings, db: Database<any>) {
     super();
 
     this.options = options;
