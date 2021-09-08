@@ -78,7 +78,7 @@ export const cmd: CommandOptions = {
         )
         .addField('Nível', `${fabric.level}`, true)
         .addField('XP', `${fabric.xp}`, true)
-        .addField(`Próximo Nível`, `${fabric.levelUpXP - fabric.xp}XP`, true)
+        .addField(`Total para subir de nível`, `${fabric.levelUpXP}XP`, true)
         .addField(`Empregados`, `${fabric.employees}`, true)
         .addField(`Ganho estimado`, `$${fabric.receiveableMoney}/${fabric.level + 1}h`, true)
         .addField(`Status`, `${fabric.latePayment ? 'Pagamento atrasado' : 'Ok!'}`, true)
