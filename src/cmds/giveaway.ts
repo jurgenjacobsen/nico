@@ -4,7 +4,7 @@ import { Bot } from '../bot';
 import ms from 'ms';
 
 export const cmd: CommandOptions = {
-  name: 'sorteio',
+  name: 'giveaway',
   devOnly: false,
   guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {

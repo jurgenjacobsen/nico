@@ -167,7 +167,7 @@ export const data: ApplicationCommandData[] = [
     ],
   },
   {
-    name: 'sorteio',
+    name: 'giveaway',
     description: 'Cria um sorteio',
     type: 'CHAT_INPUT',
     defaultPermission: false,
@@ -196,6 +196,16 @@ export const data: ApplicationCommandData[] = [
         type: 'CHANNEL',
         required: true,
       },
+      {
+        name: 'drop',
+        description: 'Se deve agir em formato de drop ou sorteio',
+        type: 'STRING',
+        required: true,
+        choices: [
+          {name: 'Sim', value: 'true'},
+          {name: 'Não', value: 'false'},
+        ]
+      }
     ],
   },
   {

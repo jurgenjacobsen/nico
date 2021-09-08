@@ -167,7 +167,7 @@ export const event: EventOptions = {
     }
 
     if (message.content.startsWith('+perms') && bot.config.devs.ids.includes(message.author.id)) {
-      /*let comando = 'reroll';
+      let comando = 'giveaway';
       let cmds = await message.guild.commands.fetch()
       let cmd = cmds.find((c) => c.name === comando)
 
@@ -184,7 +184,7 @@ export const event: EventOptions = {
             permission: true,
           }
         ]
-      })*/
+      })
     }
 
     /*if(message.content === '+pub') {
@@ -273,5 +273,26 @@ export const event: EventOptions = {
         }
       });
     }
+
+    if(message.content === '+skip' && bot.config.devs.ids.includes(message.author.id)) {
+      let queue = bot.player.getQueue(message.guild);
+      if(!queue) return;
+      queue.skip();
+    }
+
+    if(message.content === '+volume' && bot.config.devs.ids.includes(message.author.id)) {
+      let queue = bot.player.getQueue(message.guild);
+      if(!queue) return;
+      queue.setVolume(Number(message.content.replace('message.content ', '').trim()));
+    }
+
+    if(message.content === '+8D' && bot.config.devs.ids.includes(message.author.id)) {
+      let queue = bot.player.getQueue(message.guild);
+      if(!queue) return;
+      await queue.setFilters({
+        "8D": !queue.getFiltersEnabled().includes('8D'),
+      });
+    }
+    
   },
 };

@@ -56,7 +56,7 @@ export const MusicManager = (bot: Bot) => {
 export const play = async (bot: Bot) => {
   let guild = bot.guilds.cache.get('465938334791893002') as Guild;
   let channel = guild.channels.cache.get('677321568791167019') as VoiceChannel;
-  let queue = bot.player.createQueue(guild, {
+  let queue = bot.player.createQueue('465938334791893002', {
     leaveOnEnd: false,
     leaveOnStop: false,
     leaveOnEmpty: false,
@@ -67,10 +67,8 @@ export const play = async (bot: Bot) => {
   try {
     if (!queue.connection) await queue.connect(channel);
   } catch {
-    try {
-      queue.destroy();
-      return print('Houve um erro na conexão da lista de reprodução.');
-    } catch {}
+    bot.player.deleteQueue('465938334791893002')
+    return print('Houve um erro na conexão da lista de reprodução.');
   }
 
   let raw = await bot.db.sotw.list();
@@ -97,7 +95,7 @@ export const play = async (bot: Bot) => {
 
   try {
     queue.addTrack(track);
-    queue.play().catch((err) => console.log(err));
+    if(!queue.playing) await queue.play();
   } catch {
     return print(`Houve um erro ao tocar a música.`);
   }
