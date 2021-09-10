@@ -202,10 +202,10 @@ export const data: ApplicationCommandData[] = [
         type: 'STRING',
         required: true,
         choices: [
-          {name: 'Sim', value: 'true'},
-          {name: 'Não', value: 'false'},
-        ]
-      }
+          { name: 'Sim', value: 'true' },
+          { name: 'Não', value: 'false' },
+        ],
+      },
     ],
   },
   {

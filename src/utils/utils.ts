@@ -303,6 +303,7 @@ export interface NicoUser {
   bannerURL: string | null;
   color: ColorResolvable | string | null;
   createdAt: Date;
+  favorites: string[]
 }
 
 export interface SongOfTheWeek {
@@ -312,6 +313,8 @@ export interface SongOfTheWeek {
   played: number;
   lastPlay: Date;
   likes: Snowflake[];
+  dislikes: Snowflake[];
+  favorites: Snowflake[];
   addedAt: Date;
 }
 

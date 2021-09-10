@@ -168,8 +168,8 @@ export const event: EventOptions = {
 
     if (message.content.startsWith('+perms') && bot.config.devs.ids.includes(message.author.id)) {
       let comando = 'giveaway';
-      let cmds = await message.guild.commands.fetch()
-      let cmd = cmds.find((c) => c.name === comando)
+      let cmds = await message.guild.commands.fetch();
+      let cmd = cmds.find((c) => c.name === comando);
 
       cmd?.permissions.set({
         permissions: [
@@ -177,14 +177,14 @@ export const event: EventOptions = {
             type: 'ROLE',
             id: '739183741515071539',
             permission: true,
-          }, 
+          },
           {
             type: 'ROLE',
             id: '709450575640789083',
             permission: true,
-          }
-        ]
-      })
+          },
+        ],
+      });
     }
 
     /*if(message.content === '+pub') {
@@ -273,34 +273,5 @@ export const event: EventOptions = {
         }
       });
     }
-
-    if(message.content === '+skip' && bot.config.devs.ids.includes(message.author.id)) {
-      let queue = bot.player.getQueue(message.guild);
-      if(!queue) return;
-      queue.skip();
-    }
-
-    if(message.content === '+volume' && bot.config.devs.ids.includes(message.author.id)) {
-      let queue = bot.player.getQueue(message.guild);
-      if(!queue) return;
-      queue.setVolume(Number(message.content.replace('message.content ', '').trim()));
-    }
-
-    if(message.content === '+8D' && bot.config.devs.ids.includes(message.author.id)) {
-      let queue = bot.player.getQueue(message.guild);
-      if(!queue) return;
-      await queue.setFilters({
-        "8D": !queue.getFiltersEnabled().includes('8D'),
-      });
-    }
-
-    if(message.content === '+nightcore' && bot.config.devs.ids.includes(message.author.id)) {
-      let queue = bot.player.getQueue(message.guild);
-      if(!queue) return;
-      await queue.setFilters({
-        nightcore: !queue.getFiltersEnabled().includes('nightcore'),
-      });
-    }
-    
   },
 };

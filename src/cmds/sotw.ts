@@ -15,39 +15,43 @@ export const cmd: CommandOptions = {
           let url = interaction.options.getString('url', true);
           let nota = interaction.options.getString('nota', false);
 
-          let track = await bot.player.search(url, {
-            requestedBy: interaction.user.id,
-          }).then((response) => response.tracks[0]);
+          let track = await bot.player
+            .search(url, {
+              requestedBy: interaction.user.id,
+            })
+            .then((response) => response.tracks[0]);
 
-          if(!track) {
+          if (!track) {
             return interaction.reply({
               content: 'Música não encontrada!',
             });
           }
-          
+
           let embed = new MessageEmbed()
-          .setColor(bot.config.color)
-          .setAuthor(interaction.user.username, interaction.user.displayAvatarURL({ dynamic: true, size: 128 }))
-          .setDescription(`
+            .setColor(bot.config.color)
+            .setAuthor(interaction.user.username, interaction.user.displayAvatarURL({ dynamic: true, size: 128 }))
+            .setDescription(
+              `
           Título: ${track.title}
           Autor: ${track.author}
           Duração: ${track.duration}
           ID: ${track.id}
 
-          ${nota ? `Nota: ${nota}`: ''}
-          `)
-          .setThumbnail(track.thumbnail)
-          .setFooter(track.url);
-          
+          ${nota ? `Nota: ${nota}` : ''}
+          `,
+            )
+            .setThumbnail(track.thumbnail)
+            .setFooter(track.url);
+
           let channel = bot.channels.cache.get('840045583028715541') as TextChannel;
           channel.send({
-            embeds: [ embed ],
-            components: [ new MessageActionRow().addComponents(new MessageButton().setCustomId(`ADD_SOTW_${track.id}`).setLabel('Aprovar').setStyle('SUCCESS')) ]
+            embeds: [embed],
+            components: [new MessageActionRow().addComponents(new MessageButton().setCustomId(`ADD_SOTW_${track.id}`).setLabel('Aprovar').setStyle('SUCCESS'))],
           });
 
           return interaction.editReply({
-            content: 'Sugestão efetuada com sucesso!'
-          })
+            content: 'Sugestão efetuada com sucesso!',
+          });
         }
         break;
       case 'show':

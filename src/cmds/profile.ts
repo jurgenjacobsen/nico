@@ -16,10 +16,14 @@ export const cmd: CommandOptions = {
           let user = interaction.options.getUser('membro');
           if (!user) user = interaction.user;
 
+          let sotw = await bot.db.sotw.list().then((r) => r?.map(s => s.data));
+          
+          await interaction.deferReply();
+
           let u = await bot.db.members.fetch(user.id);
           if (!u)
             return interaction
-              .reply({
+              .editReply({
                 content: `Não foi possível encontrar o perfil de ${user.tag}! Utilize **/profile create**, para criar um novo perfil!`,
               })
               .catch(() => {});
@@ -60,6 +64,10 @@ export const cmd: CommandOptions = {
                   .map((b) => b.emoji)
                   .join(' ')}ㅤ`,
               },
+              {
+                name: 'Músicas Favoritas',
+                value: `${(data.favorites?.length ?? 0) > 0 ? sotw?.filter((song) => data.favorites?.includes(song.id)).map((song) => dots(song.name, 32)).slice(0, 32) : '*Vazio*'}`,
+              }
             ])
             .setDescription(
               `
@@ -70,7 +78,7 @@ export const cmd: CommandOptions = {
 
           if (data.verified) embed.setFooter(`Verificado`);
           return interaction
-            .reply({
+            .editReply({
               embeds: [embed],
             })
             .catch(() => {});
@@ -110,6 +118,7 @@ export const cmd: CommandOptions = {
             bannerURL: user.bannerURL,
             color: user.color,
             createdAt: user.createdAt,
+            favorites: user.favorites,
           };
 
           await bot.db.members.set(interaction.user.id, newData);
@@ -156,6 +165,7 @@ export const cmd: CommandOptions = {
             bannerURL: 'https://i.imgur.com/EbCa9W7.png',
             color: bot.config.color,
             createdAt: new Date(),
+            favorites: [],
           };
 
           await bot.db.members.set(interaction.user.id, newData);
