@@ -25,7 +25,6 @@ ___
 - [X] - Comando de informações de cada usuário (Economia, Níveis, Estatísticas, etc)
 - [X] - Comando para sorteios
 - [ ] - Topfeed
-- [ ] - Rádio 24/7 com as músicas da semana do servidor
 
 #### Economia
 

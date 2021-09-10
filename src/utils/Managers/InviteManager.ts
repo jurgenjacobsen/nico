@@ -1,52 +1,75 @@
-import { Guild, Collection, Invite } from 'discord.js';
+import { Guild, Collection, Invite, TextChannel, MessageEmbed } from 'discord.js';
 import { Bot } from '../../bot';
 
-const wait = require('util').promisify(setTimeout);
+export type InvitesCache = Collection<string, Invite>;
 
 export class InvitesManager {
-  public options: InvitesManagerOptions;
   public cache: InvitesCache;
-  private bot: Bot;
+  public guild!: Guild;
+  public channel!: TextChannel;
   constructor(bot: Bot) {
-    this.bot = bot;
+
     this.cache = new Collection();
 
-    this.options = {};
+    bot.on('ready', async () => {
+      let guild = bot.guilds.cache.get(bot.config.guild);
+      if(!guild) return;
+      let channel = bot.channels.cache.get(bot.config.logs.tracker) as TextChannel;
+      if(!channel) return;
 
-    this.__update__(true);
-  }
+      this.guild = guild;
+      this.channel = channel;
 
-  public async __update__(first?: boolean) {
-    if (first) await wait(5000);
+      let invites = await guild.invites.fetch().then((res) => res).catch((err) => console.log(err));
+      if(!invites) return;
 
-    let guild = this.bot.guilds.cache.get(this.bot.config.guild) as Guild;
-    let invites = await guild.invites.fetch();
-
-    invites.forEach((i) => {
-      this.cache.set(i.code, i);
+      this.cache = invites;
     });
-  }
 
-  public check(): Promise<Invite | null> {
-    return new Promise(async (resolve) => {
-      let guild = this.bot.guilds.cache.get(this.bot.config.guild) as Guild;
-      let invites = await guild.invites.fetch();
+    bot.on('inviteCreate', (invite) => {
+      this.cache.set(invite.code, invite);
+    });
 
-      let invite: Invite | null = null;
+    bot.on('inviteDelete', (invite) => {
+      this.cache.delete(invite.code);
+    });
 
-      invites.forEach((now) => {
-        let before = this.cache.get(now.code);
-        if (before?.uses && now.uses && now.uses > before.uses) {
-          invite = now;
-        }
-      });
+    bot.on('guildMemberAdd', async (member) => {
+      
+      let isFake = (new Date().getTime() - member.user.createdAt.getTime()) / (1000 * 60 * 60 * 24) <= 3 ? true : false;
 
-      this.__update__();
-      return resolve(invite);
+      let invites = await this.guild.invites.fetch().then((res) => res).catch((err) => console.log(err));
+      if(!invites) return;
+
+      let invite = invites.find(_i => this.cache.has(_i.code) && (this.cache.get(_i.code)?.uses ?? 0) < (_i.uses ?? 0)) || this.cache.find(_i => !invites?.has(_i.code)) || this.guild.vanityURLCode;
+
+      this.cache = invites;
+
+      let embed = new MessageEmbed().setColor(bot.config.color).setAuthor(member.user.tag, member.user.displayAvatarURL({ dynamic: true, size: 256 }));
+
+      if (typeof invite !== 'string' && invite && invite.inviter) {
+        
+        embed.addField('Código de Convite', invite.code);
+        embed.addField('Usos', `${invite.uses ?? 0}${`${invite.maxUses ? `/${invite.maxUses}` : ''}`}`);
+        embed.addField('Convite criado por', `${invite.inviter.toString()}`);
+        embed.addField('Conta', `${isFake ? 'Considerada *fake*' : 'Regular'}`)
+
+      } else if(invite === this.guild.vanityURLCode) {
+
+        embed.setDescription('Entrou utilizando o convite padrão do servidor.');
+        embed.addField('Conta', `${isFake ? 'Considerada *fake*' : 'Regular'}`);
+        embed.addField('Usos', `${this.guild.vanityURLUses ?? 0}`);
+
+      } else {
+
+        embed.setDescription('Convite não encontrado ou desconhecido.');
+
+      }
+
+      this.channel.send({
+        embeds: [ embed ],
+      }).catch((err) => console.log(err));
+
     });
   }
 }
-
-export interface InvitesManagerOptions {}
-
-export type InvitesCache = Collection<string, Invite>;
