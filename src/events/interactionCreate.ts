@@ -57,7 +57,7 @@ export const event: EventOptions = {
         interaction.deferUpdate();
 
         if(!sotw.likes.includes(interaction.user.id)) {
-          bot.db.sotw.push(`${id}.likes`, interaction.user.id);
+          await bot.db.sotw.push(`${id}.likes`, interaction.user.id);
           let embed = new MessageEmbed(old).setDescription(`
           ${old.description?.replace(oldLikes[0] + '👍', `${Number(oldLikes[0]) + 1} 👍`)}
           `);
@@ -65,7 +65,7 @@ export const event: EventOptions = {
             embeds: [embed],
           });
         } else {
-          bot.db.sotw.pull(`${id}.likes`, interaction.user.id);
+          await bot.db.sotw.pull(`${id}.likes`, interaction.user.id);
           let embed = new MessageEmbed(old).setDescription(`
           ${old.description?.replace(oldLikes[0] + '👍', `${Number(oldLikes[0]) - 1} 👍`)}
           `);
@@ -111,12 +111,18 @@ export const event: EventOptions = {
         });
 
         if(!sotw.favorites) return await bot.db.sotw.set(`${id}.favorites`, [interaction.user.id]);
-        if(!user.favorites) return await bot.db.members.set(`${interaction.user.id}.favorites`, [sotw.id]);
+        if(!Array.isArray(user.favorites)) return await bot.db.members.set(`${interaction.user.id}.favorites`, [id]);
 
         if(!sotw.favorites.includes(interaction.user.id)) {
           bot.db.sotw.push(`${id}.favorites`, interaction.user.id);
         } else {
-          bot.db.sotw.push(`${id}.favorites`, interaction.user.id);
+          bot.db.sotw.pull(`${id}.favorites`, interaction.user.id);
+        }
+
+        if(!user.favorites.includes(id)) {
+          bot.db.members.push(`${interaction.user.id}.favorites`, id);
+        } else {
+          bot.db.members.pull(`${interaction.user.id}.favorites`, id);
         }
         return;
       }

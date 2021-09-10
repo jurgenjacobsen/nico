@@ -16,8 +16,6 @@ export const cmd: CommandOptions = {
           let user = interaction.options.getUser('membro');
           if (!user) user = interaction.user;
 
-          let sotw = await bot.db.sotw.list().then((r) => r?.map(s => s.data));
-          
           await interaction.deferReply();
 
           let u = await bot.db.members.fetch(user.id);
@@ -34,6 +32,7 @@ export const cmd: CommandOptions = {
           let skytextEmoji: { [key: string]: string } = {
             rain: '🌧️',
             sunny: '☀️',
+            mostly_cloudy: '☁️',
           };
 
           let weather: any | undefined = undefined;
@@ -49,7 +48,7 @@ export const cmd: CommandOptions = {
               {
                 name: `Localização`,
                 value: `${data.location ? `${weather ? `${dots(data.location, 18)} - ${weather.temperature}°C` : data.location}` : 'ㅤ'} ${
-                  weather && skytextEmoji[weather.skytext.toLowerCase()] ? `${skytextEmoji[weather.skytext.toLowerCase()]}` : ''
+                  weather && skytextEmoji[weather.skytext.toLowerCase().replace(/ /g, '_')] ? `${skytextEmoji[weather.skytext.toLowerCase().replace(/ /g, '_')]}` : ''
                 }`,
                 inline,
               },
@@ -63,10 +62,6 @@ export const cmd: CommandOptions = {
                   .parseUser(data.badges)
                   .map((b) => b.emoji)
                   .join(' ')}ㅤ`,
-              },
-              {
-                name: 'Músicas Favoritas',
-                value: `${(data.favorites?.length ?? 0) > 0 ? sotw?.filter((song) => data.favorites?.includes(song.id)).map((song) => dots(song.name, 32)).slice(0, 32) : '*Vazio*'}`,
               }
             ])
             .setDescription(

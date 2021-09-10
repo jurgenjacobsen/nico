@@ -15,8 +15,9 @@ import {
 import { Bot } from '../bot';
 import axios from 'axios';
 import { Util } from 'dsc.levels';
-import { Queue, Track } from 'discord-player';
+import { promisify } from 'util';
 
+export let wait = promisify(setTimeout);
 export let imgur_re = /^(https?:)?\/\/(\w+\.)?imgur\.com\/(\S*)(\.[a-zA-Z]{3})$/;
 export let hex_re = /^#(?:[0-9a-fA-F]{3}){1,2}$/;
 

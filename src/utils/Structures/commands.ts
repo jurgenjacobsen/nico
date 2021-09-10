@@ -449,36 +449,4 @@ export const data: ApplicationCommandData[] = [
       },
     ],
   },
-  {
-    name: 'sotw',
-    description: 'As músicas da semana do servidor',
-    type: 'CHAT_INPUT',
-    defaultPermission: true,
-    options: [
-      {
-        name: 'show',
-        description: 'Mostra as principais músicas da semana do servidor',
-        type: 'SUB_COMMAND',
-      },
-      {
-        name: 'recommend',
-        description: 'Recomenda uma música para a próxima playlist de músicas da semana',
-        type: 'SUB_COMMAND',
-        options: [
-          {
-            name: 'url',
-            description: 'URL da música no YT',
-            type: 'STRING',
-            required: true,
-          },
-          {
-            name: 'nota',
-            description: 'Alguma observação que você queira adicionar',
-            type: 'STRING',
-            required: false,
-          },
-        ],
-      },
-    ],
-  },
 ];

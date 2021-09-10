@@ -20,7 +20,6 @@ import { items } from './utils/Structures/items';
 import { InvitesManager } from './utils/Managers/InviteManager';
 import { BadgesManager } from './utils/Structures/badges';
 import { Player } from 'discord-player';
-import { MusicManager } from './utils/Managers/MusicManager';
 export class Bot extends Client {
   public config: Config;
   public configManager: ConfigManager;
@@ -127,7 +126,6 @@ export class Bot extends Client {
     this.badges = new BadgesManager(this.db.members);
 
     logs(this);
-    MusicManager(this);
   }
 }
 
