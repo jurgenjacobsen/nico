@@ -304,7 +304,6 @@ export interface NicoUser {
   bannerURL: string | null;
   color: ColorResolvable | string | null;
   createdAt: Date;
-  favorites: string[]
 }
 
 export interface SongOfTheWeek {

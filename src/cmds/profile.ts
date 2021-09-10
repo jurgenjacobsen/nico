@@ -113,7 +113,6 @@ export const cmd: CommandOptions = {
             bannerURL: user.bannerURL,
             color: user.color,
             createdAt: user.createdAt,
-            favorites: user.favorites,
           };
 
           await bot.db.members.set(interaction.user.id, newData);
@@ -160,7 +159,6 @@ export const cmd: CommandOptions = {
             bannerURL: 'https://i.imgur.com/EbCa9W7.png',
             color: bot.config.color,
             createdAt: new Date(),
-            favorites: [],
           };
 
           await bot.db.members.set(interaction.user.id, newData);
