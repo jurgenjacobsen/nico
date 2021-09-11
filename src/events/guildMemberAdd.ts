@@ -32,22 +32,7 @@ export const event: EventOptions = {
     MemberCounter(bot, member.guild);
 
     bot.stats.guild.update(member.guild.id, 'newMembers', 1);
-
     bot.stats.guild.update(member.guild.id, 'totalMembers' as any, 1);
-
-    bot.invites.check().then((invite) => {
-      if (!invite) return;
-      let channel = member.guild.channels.cache.get(bot.config.logs.tracker) as TextChannel;
-      channel.send({
-        embeds: [
-          new MessageEmbed()
-            .setColor(bot.config.color)
-            .setAuthor(member.user.tag, member.user.displayAvatarURL({ dynamic: true, size: 128 }))
-            .setDescription(`Entrou com o convite de ${invite.inviter?.toString()}.`)
-            .addField('Código', `\`${invite.code}\``),
-        ],
-      });
-    });
 
     print(`Novo membro ${member.user.tag}!`);
   },
