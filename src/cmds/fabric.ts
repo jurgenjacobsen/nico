@@ -91,6 +91,7 @@ export const cmd: CommandOptions = {
         .addField(`Empregados`, `${fabric.employees}`, true)
         .addField(`Ganho estimado`, `$${fabric.receiveableMoney}/${fabric.level + 1}h`, true)
         .addField(`Status`, `${fabric.latePayment ? 'Pagamento atrasado' : 'Ok!'}`, true)
+        .addField(`Valuation`, `$${fabric.valuation}`)
         .setFooter(`Você possue: $${Math.floor(data?.bank)} no banco | $${120 * fabric.level}/empregado`);
 
       let collect = new MessageButton().setCustomId('COLLECT_INCOME_FABRIC').setLabel('Coletar').setStyle('SUCCESS');

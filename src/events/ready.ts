@@ -1,7 +1,6 @@
 import { EventOptions } from 'dsc.events';
 import { print } from '../utils/utils';
 import { Bot } from '../bot';
-import { play } from '../utils/Managers/MusicManager';
 
 export const event: EventOptions = {
   name: 'ready',
