@@ -17,13 +17,19 @@ let sell_row = new MessageActionRow().addComponents([
   new MessageButton().setStyle('SUCCESS').setCustomId('CANCEL_SELL_FABRIC').setLabel('Cancelar')
 ])
 
+function fm(value: number) {
+  return value.toLocaleString().replace(/,/g, '.');
+}
+
 export const cmd: CommandOptions = {
   name: 'fabric',
   devOnly: false,
   guildOnly: true,
   run: async (bot: Bot, interaction: CommandInteraction) => {
     let user = interaction.options.getUser('membro', false) ?? interaction.user;
-    let fabric = (await bot.eco.fabrics.fetch(interaction.user.id, interaction.guild?.id)) as Fabric;
+    let fabric: Fabric;
+
+    await interaction.deferReply();
 
     await update();
 
@@ -92,8 +98,7 @@ export const cmd: CommandOptions = {
         }
       }
 
-      let data = await bot.eco.ensure(user.id, interaction.guild?.id);
-      fabric = (await bot.eco.fabrics.fetch(user.id, interaction.guild?.id)) as Fabric;
+      fabric = await bot.eco.fabrics.ensure(user.id, interaction.guild?.id);
       
       if (!fabric) {
         return interaction.reply({
@@ -120,7 +125,7 @@ export const cmd: CommandOptions = {
         .addField(`Vendido`, `${fabric.sold ? fabric.sold + '%' : 'Não'}`, true)
         .addField(`Status`, `${fabric.latePayment ? 'Pagamento atrasado' : 'Ok!'}`, true)
 
-        .setFooter(`Você possue: $${Math.floor(data?.bank).toLocaleString().replace(/,/g, '.')} no banco | $${fabric.employeePrice}/empregado`);
+        .setFooter(`Você possue: $${fm(Math.floor(fabric.user.bank))} no banco | $${fabric.employeePrice}/empregado ${fabric.latePayment ? `| $${fm(fabric.valueToPay)} à pagar` : ''}`);
 
       let collect = new MessageButton().setCustomId('COLLECT_INCOME_FABRIC').setLabel('Coletar').setStyle('SUCCESS');
       let adde = new MessageButton().setCustomId('ADD_EMPLOYEES_FABRIC').setLabel('Empregados').setStyle('PRIMARY');
@@ -129,7 +134,7 @@ export const cmd: CommandOptions = {
 
       if (!fabric.latePayment) pay.setDisabled(true);
       if((fabric.employees >= (fabric.level * 20))) adde.setDisabled(true);
-      if (!fabric.collectable) collect.setDisabled(true);
+      if (!fabric.collectable || fabric.latePayment) collect.setDisabled(true);
       if(fabric.level < 5) sell.setDisabled(true);
 
       let row;
@@ -144,7 +149,7 @@ export const cmd: CommandOptions = {
         res.components = [row as MessageActionRow];
       }
 
-      if (interaction.replied) {
+      if (interaction.replied || interaction.deferred) {
         interaction
           .editReply(res)
           .catch(() => {

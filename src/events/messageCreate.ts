@@ -73,7 +73,7 @@ export const event: EventOptions = {
       let ckey = `MSG_${message.author.id}`;
       if (!cooldowns.has(ckey)) {
         cooldowns.add(ckey);
-        let xp = Math.floor(Util.random(10, 20));
+        let xp = Math.floor(Util.random(7, 15));
         if (bot.config.DXPChannels.includes(message.channelId)) {
           xp = xp * 2;
         } else if (message.member.roles.cache.find((r) => bot.config.DXPRoles.includes(r.id))) {

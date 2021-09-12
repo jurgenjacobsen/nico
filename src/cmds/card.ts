@@ -12,6 +12,8 @@ export const cmd: CommandOptions = {
     let tipo = interaction.options.getString('tipo', true) as 'TEXT' | 'VOICE';
     let user = interaction.options.getUser('membro', false) ?? interaction.user;
 
+    await interaction.deferReply();
+
     let data = await bot.levels.fetch(user.id, interaction.guild?.id);
     let leaderboard = await bot.levels.leaderboard({ type: tipo, guildID: interaction.guild?.id });
 
@@ -19,7 +21,7 @@ export const cmd: CommandOptions = {
 
     if (!raw)
       return interaction
-        .reply({
+        .editReply({
           content: `
           ${
             user.id === interaction.user.id
@@ -67,7 +69,7 @@ export const cmd: CommandOptions = {
     let file = new MessageAttachment(buffer, 'card.png');
 
     return interaction
-      .reply({
+      .editReply({
         files: [file],
       })
       .catch((err) => {});
