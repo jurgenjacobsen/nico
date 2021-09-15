@@ -1,10 +1,10 @@
 import { createCanvas, loadImage, CanvasRenderingContext2D as ctx2D, Canvas, Image, registerFont } from 'canvas';
 import { join } from 'path';
 
-registerFont(join(__dirname, '../../../assets') + '/Busorama.ttf', {
+registerFont(join(__dirname, '../../assets') + '/Busorama.ttf', {
   family: 'Busorama',
 });
-registerFont(join(__dirname, '../../../assets') + '/Bebas_Neue.otf', {
+registerFont(join(__dirname, '../../assets') + '/Bebas_Neue.otf', {
   family: 'Bebas Neue',
 });
 
@@ -96,7 +96,7 @@ export class Gradient {
 
 export type ThemeType = keyof typeof themes | Theme;
 
-const root = join(__dirname, '../../../assets');
+const root = join(__dirname, '../../assets');
 export var themes = {
   dark: { color: '#ffffff', image: join(root, 'dark.png'), font: 'Busorama' },
   sakura: { color: '#7d0b2b', image: join(root, 'sakura.png') },

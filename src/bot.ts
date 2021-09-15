@@ -1,7 +1,7 @@
 import { Client, ClientOptions, Collection, Guild, GuildMember, Intents, Snowflake } from 'discord.js';
 import { Commands } from 'dsc.cmds';
 import { EventHandler } from 'dsc.events';
-import { Config, config, mongo } from './utils/config';
+import { Config, config, mongo } from './Utils/config';
 import path from 'path';
 import logs from 'discord-logs';
 import colors from 'colors';
@@ -9,16 +9,15 @@ import { Levels } from 'dsc.levels';
 import { Economy } from 'dsc.eco';
 import { GuildStats, UserStats } from 'dsc.stats';
 import { User } from 'dsc.levels/lib/Levels';
-import { NicoUser, print, SongOfTheWeek } from './utils/utils';
+import { NicoUser, print, SongOfTheWeek } from './Utils/utils';
 import { Database } from 'dsc.db';
-import { BirthdaysManager } from './utils/Managers/BirthdaysManager';
+import { BirthdaysManager } from './Managers/BirthdaysManager';
 import { GiveawaysManager } from 'discord-giveaways';
-import { FeedManager } from './utils/Managers/TopfeedManager';
-import { GraphicsManager } from './utils/Managers/GraphicsManager';
-import { ConfigManager } from './utils/Managers/ConfigManager';
-import { items } from './utils/Structures/items';
-import { InvitesManager } from './utils/Managers/InviteManager';
-import { BadgesManager } from './utils/Structures/badges';
+import { FeedManager } from './Managers/TopfeedManager';
+import { GraphicsManager } from './Managers/GraphicsManager';
+import { ConfigManager } from './Managers/ConfigManager';
+import { items } from './Structures/items';
+import { BadgesManager } from './Structures/badges';
 import { Player } from 'discord-player';
 export class Bot extends Client {
   public config: Config;
@@ -31,7 +30,6 @@ export class Bot extends Client {
   public voiceIntervals: Collection<string, NodeJS.Timer | null>;
   public graphics: GraphicsManager;
   public topfeed: FeedManager;
-  public invites: InvitesManager;
   public giveaways!: GiveawaysManager;
   public stats: {
     users: UserStats;
@@ -52,7 +50,7 @@ export class Bot extends Client {
 
     this.commands = new Commands({
       bot: this,
-      dir: path.join(__dirname, './cmds'),
+      dir: path.join(__dirname, './Commands'),
       debug: true,
       devs: this.config.devs.ids,
       msgs: {
@@ -65,7 +63,7 @@ export class Bot extends Client {
 
     this.events = new EventHandler({
       bot: this,
-      dir: path.join(__dirname, './events'),
+      dir: path.join(__dirname, './Events'),
     });
 
     this.levels = new Levels({
@@ -97,13 +95,11 @@ export class Bot extends Client {
           embedColorEnd: '#5865F2',
           reaction: '🎉',
         },
-        storage: path.join(__dirname, './utils/Structures/giveaways.json'),
+        storage: path.join(__dirname, '../data/giveaways.json'),
       });
     } catch {
       print('Erro ao carregar os sorteios');
     }
-
-    this.invites = new InvitesManager(this);
 
     this.stats = {
       users: new UserStats({ db: mongo, dateFormat: 'DD/MM/YYYY' }),
@@ -129,7 +125,7 @@ export class Bot extends Client {
   }
 }
 
-export const bot = new Bot({
+export const clientOptions: ClientOptions = {
   partials: ['CHANNEL', 'GUILD_MEMBER', 'MESSAGE', 'REACTION', 'USER'],
   intents: [
     Intents.FLAGS.DIRECT_MESSAGES,
@@ -157,7 +153,9 @@ export const bot = new Bot({
       },
     ],
   },
-});
+};
+
+export const bot = new Bot(clientOptions);
 
 bot.levels.on('textLevelUp', (user: User) => {
   let guild = bot.guilds.cache.get(bot.config.guild) as Guild;

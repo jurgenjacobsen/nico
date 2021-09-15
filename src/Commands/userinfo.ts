@@ -2,7 +2,7 @@ import { CanvasRenderService } from 'chartjs-node-canvas';
 import { CommandInteraction, GuildMember, MessageAttachment, MessageEmbed } from 'discord.js';
 import { CommandOptions } from 'dsc.cmds';
 import { Bot } from '../bot';
-import { print } from '../utils/utils';
+import { print } from '../Utils/utils';
 
 export const cmd: CommandOptions = {
   name: 'userinfo',

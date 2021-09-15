@@ -1,5 +1,5 @@
 import { EventOptions } from 'dsc.events';
-import { print } from '../utils/utils';
+import { print } from '../Utils/utils';
 import { Bot } from '../bot';
 
 export const event: EventOptions = {

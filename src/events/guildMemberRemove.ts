@@ -1,7 +1,7 @@
 import { GuildMember } from 'discord.js';
 import { EventOptions } from 'dsc.events';
 import { Bot } from '../bot';
-import { MemberCounter, print } from '../utils/utils';
+import { MemberCounter, print } from '../Utils/utils';
 
 export const event: EventOptions = {
   name: 'guildMemberRemove',

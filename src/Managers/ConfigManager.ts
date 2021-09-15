@@ -1,6 +1,6 @@
 import { Snowflake } from 'discord.js';
 import { Database } from 'dsc.db';
-import { Bot } from '../../bot';
+import { Bot } from '../bot';
 
 export class ConfigManager {
   private db: Database<any>;

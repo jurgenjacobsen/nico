@@ -2,7 +2,7 @@ import { CommandInteraction, MessageEmbed } from 'discord.js';
 import { CommandOptions } from 'dsc.cmds';
 import moment from 'moment';
 import { Bot } from '../bot';
-import { dots, NicoUser } from '../utils/utils';
+import { dots, NicoUser } from '../Utils/utils';
 import weather from 'weather-js';
 
 export const cmd: CommandOptions = {

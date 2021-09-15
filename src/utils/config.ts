@@ -47,6 +47,11 @@ export const config: Config = {
   economy: {
     resetDate: new Date('11/10/2021'),
   },
+  starboard: {
+    channelId: '840045583028715541',
+    starCount: 1,
+    price: 5,
+  },
   logs: {
     invites: '840045583028715541',
     tracker: '840045583028715541',
@@ -86,6 +91,11 @@ export interface Config {
   economy: {
     resetDate: Date;
   };
+  starboard: {
+    channelId: Snowflake,
+    starCount: number,
+    price: number,
+  },
   logs: {
     invites: Snowflake;
     tracker: Snowflake;

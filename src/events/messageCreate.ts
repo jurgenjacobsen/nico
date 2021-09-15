@@ -2,8 +2,8 @@ import discordjs, { Message, MessageEmbed, Collection, TextChannel } from 'disco
 import { EventOptions } from 'dsc.events';
 import { Util } from 'dsc.levels';
 import { Bot } from '../bot';
-import { data } from '../utils/Structures/commands';
-import { AntiInvite, print, suggestion } from '../utils/utils';
+import { data } from '../Structures/commands';
+import { AntiInvite, print, suggestion } from '../Utils/utils';
 
 let cmdregex = /^[%*!?$-+.]/;
 let cooldowns = new Set();

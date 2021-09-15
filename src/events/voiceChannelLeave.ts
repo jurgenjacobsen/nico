@@ -1,7 +1,7 @@
 import { GuildMember, VoiceChannel } from 'discord.js';
 import { EventOptions } from 'dsc.events';
 import { Bot } from '../bot';
-import { VoiceRoles } from '../utils/utils';
+import { VoiceRoles } from '../Utils/utils';
 
 export const event: EventOptions = {
   name: 'voiceChannelLeave',

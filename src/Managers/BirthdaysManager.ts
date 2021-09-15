@@ -1,6 +1,6 @@
 import { Collection } from 'discord.js';
 import { Database } from 'dsc.db';
-import { NicoUser, print } from '../utils';
+import { NicoUser, print } from '../Utils/utils';
 
 export class BirthdaysManager {
   public cache: BirthdaysCache;

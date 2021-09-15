@@ -1,7 +1,7 @@
 import { CommandInteraction, MessageEmbed } from 'discord.js';
 import { CommandOptions } from 'dsc.cmds';
 import { Bot } from '../bot';
-import { hex_re, imgur_re } from '../utils/utils';
+import { hex_re, imgur_re } from '../Utils/utils';
 
 export const cmd: CommandOptions = {
   name: 'customize',

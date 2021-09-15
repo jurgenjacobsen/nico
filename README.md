@@ -25,6 +25,7 @@ ___
 - [X] - Comando de informações de cada usuário (Economia, Níveis, Estatísticas, etc)
 - [X] - Comando para sorteios
 - [ ] - Topfeed
+- [ ] - Starboard
 
 #### Economia
 
@@ -53,7 +54,6 @@ ___
 - [X] - Anti-Invite
 - [X] - Banco de dados para configurar o bot através de comandos
 - [X] - Comando de mensagem que quando clicar com o direito haverá a opção de publicar o conteúdo da mensagem no #notas através de um Webhook.
-- [ ] - Invite tracker
 ___
 
 ### Credits

@@ -1,7 +1,7 @@
 import { GuildMember, Interaction, Message, MessageEmbed, TextChannel } from 'discord.js';
 import { EventOptions } from 'dsc.events';
 import { Bot } from '../bot';
-import { print } from '../utils/utils';
+import { print } from '../Utils/utils';
 
 const like_reg = /\d?\d?\d?\d[ 👍]/g;
 

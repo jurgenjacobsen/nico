@@ -1,7 +1,7 @@
 import { GuildMember, Role } from 'discord.js';
 import { EventOptions } from 'dsc.events';
 import { Bot } from '../bot';
-import { print } from '../utils/utils';
+import { print } from '../Utils/utils';
 
 export const event: EventOptions = {
   name: 'guildMemberRoleAdd',

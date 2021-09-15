@@ -2,7 +2,7 @@ import { CommandInteraction, MessageAttachment } from 'discord.js';
 import { CommandOptions } from 'dsc.cmds';
 import { Bot } from '../bot';
 import { Rank } from 'canvacord';
-import { NicoUser } from '../utils/utils';
+import { NicoUser } from '../Utils/utils';
 
 export const cmd: CommandOptions = {
   name: 'card',
