@@ -49,12 +49,9 @@ export const cmd: CommandOptions = {
           break;
         case 'ADD_EMPLOYEES_FABRIC':
           {
-            if (fabric.user.bank >= fabric.employeePrice && fabric.employees >= (fabric.level * 20)) {
-              fabric?.hire().then(() => {
-                update(i);
-              });
-              fabric = (await bot.eco.fabrics.fetch(interaction.user.id, interaction.guild?.id)) as Fabric;
-            }
+            await fabric?.hire();
+            update(i);
+            fabric = (await bot.eco.fabrics.fetch(interaction.user.id, interaction.guild?.id)) as Fabric;
           }
           break;
         case 'PAY_FABRIC':
@@ -119,7 +116,7 @@ export const cmd: CommandOptions = {
         .addField('Nível', `${fabric.level}`, true)
         .addField('XP', `${fabric.xp}`, true)
         .addField(`XP \`⤴️\``, `${fabric.levelUpXP}XP`, true)
-        .addField(`Empregados`, `${fabric.employees}`, true)
+        .addField(`Empregados`, `${fabric.employees}/${20 * fabric.level}`, true)
         .addField(`Ganho estimado`, `$${fabric.receiveableMoney}/${fabric.level + 1}h`, true)
         .addField(`Valuation`, `$${fabric.valuation.toLocaleString().replace(/,/g, '.')}`, true)
         .addField(`Vendido`, `${fabric.sold ? fabric.sold + '%' : 'Não'}`, true)
