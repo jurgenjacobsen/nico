@@ -227,7 +227,7 @@ export const event: EventOptions = {
 
       if (blocks.length > 1) {
         blocks.slice(1).forEach((b) => {
-          msg.reply({
+          msg.channel.send({
             content: `${b}`,
           });
         });
