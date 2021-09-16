@@ -58,12 +58,11 @@ export const event: EventOptions = {
         .setImage(imageURL ? imageURL : '')
         .setAuthor(member.nickname ? member.nickname : author.username, author.displayAvatarURL({ dynamic: true, size: 256 }))
         .addField(`Comprador`, reactions.first()?.toString() ?? 'ㅤ')
+        .addField(`Canal`, message.channel.toString())
 
         .setTimestamp(message.createdAt)
 
-        if(message.content) {
-          embed.setDescription(message.content);
-        }
+        .setDescription(`${message.content}\n[Ir para a mensagem](${message.url})`);
         
         let msg = await starboard.send({
           embeds: [embed]
