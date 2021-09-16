@@ -11,7 +11,7 @@ It is a project that is taking me some months to develop with feedback of great 
 > **DISCLAIMER**: **DO NOT** use this project for personal neither comercial use. Only with permission from the project developers!
 
 ___
-### Todo List (26/29)
+### Todo List (25/29)
 #### Cosméticos
 
 - [X] - Sistema de sugestões
@@ -25,7 +25,7 @@ ___
 - [X] - Comando de informações de cada usuário (Economia, Níveis, Estatísticas, etc)
 - [X] - Comando para sorteios
 - [ ] - Topfeed
-- [ ] - Starboard
+- [X] - Starboard
 
 #### Economia
 
