@@ -14,8 +14,8 @@ const images: { [key: number]: string } = {
 
 let sell_row = new MessageActionRow().addComponents([
   new MessageButton().setStyle('DANGER').setCustomId('CONFIRM_SELL_FABRIC').setLabel('Confirmar'),
-  new MessageButton().setStyle('SUCCESS').setCustomId('CANCEL_SELL_FABRIC').setLabel('Cancelar')
-])
+  new MessageButton().setStyle('SUCCESS').setCustomId('CANCEL_SELL_FABRIC').setLabel('Cancelar'),
+]);
 
 function fm(value: number) {
   return value.toLocaleString().replace(/,/g, '.');
@@ -62,27 +62,34 @@ export const cmd: CommandOptions = {
             fabric = (await bot.eco.fabrics.fetch(interaction.user.id, interaction.guild?.id)) as Fabric;
           }
           break;
-        case 'SELL_FABRIC': 
-          { 
+        case 'SELL_FABRIC':
+          {
             i.deferUpdate();
             (i.message as Message).edit({
-              embeds: [new MessageEmbed().setColor(bot.config.color)
-                .setDescription(`
-                Você tem certeza que deseja vender sua fábrica por 5% do seu valuation equivalente a $${(fabric.valuation * 0.05).toLocaleString().replace(/,/g, '.')}? Você ficará incapaz de coletar dinheiro da fábrica durante ${fabric.sellTimeout} meses e deverá continuar pagamento as contas da sua fábrica, se você não pagar as contas terá de pagar uma multa por dia.
-                `)],
-              components: [sell_row]
-            })
+              embeds: [
+                new MessageEmbed().setColor(bot.config.color).setDescription(`
+                Você tem certeza que deseja vender sua fábrica por 5% do seu valuation equivalente a $${(fabric.valuation * 0.05)
+                  .toLocaleString()
+                  .replace(/,/g, '.')}? Você ficará incapaz de coletar dinheiro da fábrica durante ${
+                  fabric.sellTimeout
+                } meses e deverá continuar pagamento as contas da sua fábrica, se você não pagar as contas terá de pagar uma multa por dia.
+                `),
+              ],
+              components: [sell_row],
+            });
           }
           break;
-        case 'CONFIRM_SELL_FABRIC': {
-          fabric.sell(5);
-          update(i);
-        };
-        break;
-        case 'CANCEL_SELL_FABRIC': {
-          update(i);
-        };
-        break;
+        case 'CONFIRM_SELL_FABRIC':
+          {
+            fabric.sell(5);
+            update(i);
+          }
+          break;
+        case 'CANCEL_SELL_FABRIC':
+          {
+            update(i);
+          }
+          break;
       }
     });
 
@@ -96,7 +103,7 @@ export const cmd: CommandOptions = {
       }
 
       fabric = await bot.eco.fabrics.ensure(user.id, interaction.guild?.id);
-      
+
       if (!fabric) {
         return interaction.reply({
           content: `Houve um erro ao encontrar a fábrica de ${user.toString()}`,
@@ -122,7 +129,11 @@ export const cmd: CommandOptions = {
         .addField(`Vendido`, `${fabric.sold ? fabric.sold + '%' : 'Não'}`, true)
         .addField(`Status`, `${fabric.latePayment ? 'Pagamento atrasado' : 'Ok!'}`, true)
 
-        .setFooter(`Você possue: $${fm(Math.floor(fabric.user.bank))} no banco | $${fabric.employeePrice}/empregado ${fabric.latePayment ? `| $${fm(fabric.valueToPay)} à pagar` : ''}`);
+        .setFooter(
+          `Você possue: $${fm(Math.floor(fabric.user.bank))} no banco | $${fabric.employeePrice}/empregado ${
+            fabric.latePayment ? `| $${fm(fabric.valueToPay)} à pagar` : ''
+          }`,
+        );
 
       let collect = new MessageButton().setCustomId('COLLECT_INCOME_FABRIC').setLabel('Coletar').setStyle('SUCCESS');
       let adde = new MessageButton().setCustomId('ADD_EMPLOYEES_FABRIC').setLabel('Empregados').setStyle('PRIMARY');
@@ -130,9 +141,9 @@ export const cmd: CommandOptions = {
       let sell = new MessageButton().setCustomId('SELL_FABRIC').setLabel('Vender').setStyle('DANGER');
 
       if (!fabric.latePayment) pay.setDisabled(true);
-      if((fabric.employees >= (fabric.level * 20))) adde.setDisabled(true);
+      if (fabric.employees >= fabric.level * 20) adde.setDisabled(true);
       if (!fabric.collectable || fabric.latePayment) collect.setDisabled(true);
-      if(fabric.level < 5) sell.setDisabled(true);
+      if (fabric.level < 5) sell.setDisabled(true);
 
       let row;
 

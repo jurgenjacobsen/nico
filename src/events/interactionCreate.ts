@@ -26,22 +26,22 @@ export const event: EventOptions = {
       if (rawId.startsWith(`ITEM_`) && rawId.endsWith(`_BUY`) && bot.config.storeChannel === interaction.channel.id) {
         let id = rawId.replace(`ITEM_`, '').replace(`_BUY`, ``).trim();
         bot.eco.store
-        .buy(id, interaction.user.id, interaction.guild.id)
-        .then((res) => {
-          if (res.err && res.err === 'NOT_ENOUGH_MONEY') {
+          .buy(id, interaction.user.id, interaction.guild.id)
+          .then((res) => {
+            if (res.err && res.err === 'NOT_ENOUGH_MONEY') {
+              return interaction.reply({
+                ephemeral: true,
+                content: '💳 | Você não tem dinheiro suficiente!',
+              });
+            }
             return interaction.reply({
               ephemeral: true,
-              content: '💳 | Você não tem dinheiro suficiente!',
+              content: '💳 | Compra efetuada com sucesso!',
             });
-          }
-          return interaction.reply({
-            ephemeral: true,
-            content: '💳 | Compra efetuada com sucesso!',
+          })
+          .catch((err) => {
+            console.log(err);
           });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
         return;
       }
     }

@@ -48,7 +48,9 @@ export const cmd: CommandOptions = {
               {
                 name: `Localização`,
                 value: `${data.location ? `${weather ? `${dots(data.location, 18)} - ${weather.temperature}°C` : data.location}` : 'ㅤ'} ${
-                  weather && skytextEmoji[weather.skytext.toLowerCase().replace(/ /g, '_')] ? `${skytextEmoji[weather.skytext.toLowerCase().replace(/ /g, '_')]}` : ''
+                  weather && skytextEmoji[weather.skytext.toLowerCase().replace(/ /g, '_')]
+                    ? `${skytextEmoji[weather.skytext.toLowerCase().replace(/ /g, '_')]}`
+                    : ''
                 }`,
                 inline,
               },
@@ -62,7 +64,7 @@ export const cmd: CommandOptions = {
                   .parseUser(data.badges)
                   .map((b) => b.emoji)
                   .join(' ')}ㅤ`,
-              }
+              },
             ])
             .setDescription(
               `

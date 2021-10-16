@@ -4,6 +4,7 @@ import { Util } from 'dsc.levels';
 import { Bot } from '../bot';
 import { data } from '../Structures/commands';
 import { AntiInvite, print, suggestion } from '../Utils/utils';
+import _ from 'lodash';
 
 let cmdregex = /^[%*!?$-+.]/;
 let cooldowns = new Set();
@@ -221,9 +222,11 @@ export const event: EventOptions = {
 
       let blocks = discordjs.Util.splitMessage(content);
 
-      msg.edit({
-        content: `${blocks[0]}\nㅤ`,
-      });
+      try {
+        msg.edit({
+          content: `${blocks[0]}\nㅤ`,
+        }).catch(err => { });
+      } catch { }
 
       if (blocks.length > 1) {
         blocks.slice(1).forEach((b) => {
@@ -231,6 +234,35 @@ export const event: EventOptions = {
             content: `${b}`,
           });
         });
+      }
+    }
+
+    if (message.content === '+hallo') {
+      if(message.member) {
+        let emojis = ['🎃', '👻', '💀'];
+        let emoji = _.shuffle(emojis)[0];
+        let name = message.member.nickname?.replace(/🎃/g, '')?.replace(/👻/g, '')?.replace(/💀/g, '')?.trim() ?? message.author.username;
+        await message.member.setNickname(`${name} ${emoji}`).catch(async err => {
+          try {
+            if(err.message.includes('Permissions')) return await message.reply({ content: 'Você esta acima de mim, não posso alterar seu nome!' });
+          } catch {
+            
+          }
+        });
+        if(message.deletable) message.delete().catch(() => {});
+      }
+    }
+
+    if (message.content === '+reset') {
+      if(message.member) {
+        await message.member.setNickname(`${message.author.username}`).catch(async err => {
+          try {
+            if(err.message.includes('Permissions')) return await message.reply({ content: 'Você esta acima de mim, não posso alterar seu nome!' });
+          } catch {
+
+          }
+        });
+        if(message.deletable) message.delete().catch(() => {});
       }
     }
 
@@ -273,5 +305,19 @@ export const event: EventOptions = {
         }
       });
     }
+
+    let customRects: Array<{e_n: string, r: string}> = [
+      {e_n: '🥩', r: '🔥'},
+      {e_n: 'churras', r: '🔥'},
+      {e_n: 'ximas', r: '🧉'},
+    ];
+
+    if(customRects.find(r => r.e_n === message.content.toLowerCase())) {
+      let em = customRects.find(r => r.e_n === message.content.toLowerCase())
+      if(em) {
+        message.react(em.r).catch(() => {});
+      }
+    }
+
   },
 };

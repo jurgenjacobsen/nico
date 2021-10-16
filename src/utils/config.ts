@@ -92,10 +92,10 @@ export interface Config {
     resetDate: Date;
   };
   starboard: {
-    channelId: Snowflake,
-    starCount: number,
-    price: number,
-  },
+    channelId: Snowflake;
+    starCount: number;
+    price: number;
+  };
   logs: {
     invites: Snowflake;
     tracker: Snowflake;
