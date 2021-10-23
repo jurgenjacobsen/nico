@@ -17,5 +17,17 @@ export const event: EventOptions = {
         bot.stats.guild.update('465938334791893002', 'totalMembers', guild.memberCount);
       }
     }, 30 * 60 * 1000);
+
+    let bot_config = await bot.db.this.fetch(`${bot.user?.id}`).then((data) => data?.data);
+
+    bot.user?.setPresence({
+      status: bot_config.statusType,
+      activities: [
+        {
+          name: typeof bot_config.playingStatus === 'string' ? bot_config.playingStatus : 'dema.city'
+        }
+      ]
+    });
+
   },
 };

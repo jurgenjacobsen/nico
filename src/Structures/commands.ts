@@ -449,4 +449,38 @@ export const data: ApplicationCommandData[] = [
       },
     ],
   },
+  {
+    name: 'setstatus',
+    description: 'Muda o status do bot',
+    type: 'CHAT_INPUT',
+    defaultPermission: false,
+    options: [
+      {
+        type: 'STRING',
+        name: 'status',
+        description: 'Qual status você deseja setar',
+        required: false,
+        choices: [
+          {
+            name: 'DND',
+            value: 'DND'
+          },
+          {
+            name: 'IDLE',
+            value: 'IDLE'
+          },
+          {
+            name: 'ONLINE',
+            value: 'ONLINE'
+          },
+        ]
+      },
+      {
+        type: 'STRING',
+        name: 'playing',
+        description: 'Qual texto de jogando você deseja setar',
+        required: false,
+      }
+    ]
+  }
 ];

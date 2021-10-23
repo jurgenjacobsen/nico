@@ -19,6 +19,7 @@ import { ConfigManager } from './Managers/ConfigManager';
 import { items } from './Structures/items';
 import { BadgesManager } from './Structures/badges';
 import { Player } from 'discord-player';
+import { app } from './Structures/vote';
 export class Bot extends Client {
   public config: Config;
   public configManager: ConfigManager;
@@ -144,15 +145,6 @@ export const clientOptions: ClientOptions = {
     Intents.FLAGS.GUILD_VOICE_STATES,
     Intents.FLAGS.GUILD_WEBHOOKS,
   ],
-  presence: {
-    status: 'dnd',
-    activities: [
-      {
-        name: 'dema city',
-        type: 'WATCHING',
-      },
-    ],
-  },
 };
 
 export const bot = new Bot(clientOptions);
@@ -206,3 +198,5 @@ bot.birthdays.on('NON-BDAY', (user) => {
     }
   }*/
 });
+
+app.listen(8090);

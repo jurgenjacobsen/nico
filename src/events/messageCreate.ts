@@ -95,7 +95,7 @@ export const event: EventOptions = {
               console.log(err);
             });
         });
-        bot.eco.addMoney(Math.floor(Util.random(1, 5)), message.author.id, message.guild.id);
+        bot.eco.addMoney(Math.floor(Util.random(1, 2)), message.author.id, message.guild.id);
         setTimeout(() => cooldowns.delete(ckey), 60 * 1000);
       }
     }
@@ -168,7 +168,7 @@ export const event: EventOptions = {
     }
 
     if (message.content.startsWith('+perms') && bot.config.devs.ids.includes(message.author.id)) {
-      let comando = 'giveaway';
+      let comando = 'setstatus';
       let cmds = await message.guild.commands.fetch();
       let cmd = cmds.find((c) => c.name === comando);
 

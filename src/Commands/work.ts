@@ -14,7 +14,7 @@ export const cmd: CommandOptions = {
       timeout: timeout,
       money: {
         min: 100,
-        max: 250,
+        max: 250 + (user.fabric.level * 25),
       },
     });
 

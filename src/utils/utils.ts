@@ -58,6 +58,18 @@ export const suggestion = async (bot: Bot, message: Message): Promise<Message | 
   message.channel.send({ embeds }).then((msg) => {
     msg.react(bot.config.suggestion.up).then(() => msg.react(bot.config.suggestion.down));
     if (message.deletable) message.delete();
+
+    msg.startThread({
+      autoArchiveDuration: 'MAX',
+      name: `Discussão`,
+      reason: `Sugestão`
+    }).then((thread) => {
+      thread.send({
+        embeds: [
+          new MessageEmbed().setColor(bot.config.color).setDescription(`Discuta aqui sua opinião sobre esta sugestão ;)`)
+        ]
+      })
+    });
   });
   return message;
 };
