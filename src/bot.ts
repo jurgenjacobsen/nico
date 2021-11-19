@@ -20,6 +20,7 @@ import { items } from './Structures/items';
 import { BadgesManager } from './Structures/badges';
 import { Player } from 'discord-player';
 import { app } from './Structures/vote';
+import ms from 'ms';
 export class Bot extends Client {
   public config: Config;
   public configManager: ConfigManager;
@@ -200,3 +201,7 @@ bot.birthdays.on('NON-BDAY', (user) => {
 });
 
 app.listen(8090);
+
+setTimeout(() => {
+  process.exit(1);
+}, ms('25h'));
